@@ -60,16 +60,26 @@ module.exports = function (grunt) {
     sass: {
       dist: {
         options: {
-          style: 'compact'
+          style: 'nested'
         },
         files: {
           'dist/css/patternfly.css': 'sass/patternfly.scss'
         }
       }
     },
+    cssmin: {
+      minify: {
+        expand: true,
+        cwd: 'dist/css/',
+        src: ['*.css', '!*.min.css'],
+        dest: 'dist/css/',
+        ext: '.min.css'
+      }
+    }
   });
 
   grunt.loadNpmTasks('grunt-contrib-sass');
+  grunt.loadNpmTasks('grunt-contrib-cssmin');
 
   grunt.registerTask('server', [
     'connect:server',
@@ -78,6 +88,7 @@ module.exports = function (grunt) {
 
   grunt.registerTask('build', [
     'sass',
+    'cssmin'
   ]);
 
   grunt.registerTask('default', ['build']);
