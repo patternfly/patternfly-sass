@@ -19,6 +19,7 @@ npm.cmd
 # Ignore generated files
 build
 .sass-cache
+tmp
 
 # RVM files
 .ruby-gemset
