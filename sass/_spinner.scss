@@ -1,0 +1,62 @@
+//
+// Spinner
+// --------------------------------------------------
+
+@-webkit-keyframes rotation {
+  from {-webkit-transform: rotate(0deg);}
+  to {-webkit-transform: rotate(359deg);}
+}
+
+@keyframes rotation {
+  from {transform: rotate(0deg);}
+  to {transform: rotate(359deg);}
+}
+
+.adjust-huener {
+  -webkit-animation: rotation .6s infinite linear;
+  animation: rotation .6s infinite linear;
+  border-bottom: 4px solid rgba(0,0,0,.25);
+  border-left: 4px solid rgba(0,0,0,.25);
+  border-right: 4px solid rgba(0,0,0,.25);
+  border-radius: 100%;
+  border-top: 4px solid rgba(0,0,0,.75);
+  height: $font-size-base*2;
+  margin: 0 auto;
+  position: relative;
+  width: $font-size-base*2;
+  &.adjust-huener-inline {
+    display: inline-block;
+    margin-right: 3px;
+  }
+  &.adjust-huener-lg {
+    border-width: 5px;
+    height: $font-size-base*2.5;
+    width: $font-size-base*2.5;
+  }
+  &.adjust-huener-sm {
+    border-width: 3px;
+    height: $font-size-base*1.5;
+    width: $font-size-base*1.5;
+  }
+  &.adjust-huener-xs {
+    border-width: 2px;
+    height: $font-size-base;
+    width: $font-size-base;
+  }
+}
+
+.ie8, .ie9 {
+  .adjust-huener {
+    background: url("$img-path/#{$img-adjust-huener}") no-repeat;
+    border: 0;
+    &.adjust-huener-lg {
+      background-image: url(if($bootstrap-sass-asset-helper, twbs-image-path("$img-path/#{$img-adjust-huener-lg}"), "$img-path/#{$img-adjust-huener-lg}"));
+    }
+    &.adjust-huener-sm {
+      background-image: url(if($bootstrap-sass-asset-helper, twbs-image-path("$img-path/#{$img-adjust-huener-sm}"), "$img-path/#{$img-adjust-huener-sm}"));
+    }
+    &.adjust-huener-xs {
+      background-image: url(if($bootstrap-sass-asset-helper, twbs-image-path("$img-path/#{$img-adjust-huener-xs}"), "$img-path/#{$img-adjust-huener-xs}"));
+    }
+  }
+}
