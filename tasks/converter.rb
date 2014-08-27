@@ -3,9 +3,12 @@ require "#{bootstrap_sass}/tasks/converter"
 
 module Patternfly
   class Converter < ::Converter
-    def initialize(repo: 'patternfly/patternfly', cache_path: 'tmp/converter-cache-patternfly')
+    # Override
+    def initialize(repo: 'patternfly/patternfly', cache_path: 'tmp/converter-cache-patternfly', branch: 'master', test_dir: 'tests/casperjs/patternfly')
       super(repo: repo, cache_path: cache_path)
       @save_to = { scss: 'sass' }
+      @test_dir = test_dir
+      get_trees('less', 'tests')
     end
 
     def process_patternfly
@@ -21,7 +24,8 @@ module Patternfly
       # process_font_assets
       process_patternfly_less_assets
       # process_javascript_assets
-      # store_version
+      store_version
+      cache_tests
     end
 
     def process_patternfly_less_assets
@@ -40,15 +44,88 @@ module Patternfly
       end
     end
 
-    # Overrides super class method
+    def cache_tests
+      test_files = get_paths_by_directory('tests')
+      test_contents = read_files('tests', test_files)
+      test_contents.each do |name, content|
+        save_file(File.join(@test_dir, name), content)
+      end
+    end
+
+    # Override
     def bootstrap_less_files
       get_paths_by_type('less', /\.less$/)
     end
 
-    def replace_file_imports(less, target_path='')
-      super
-      no_extension = %r([@\$]import ["|']([\w\-/]+)["|'];)
-      less.gsub(no_extension, %Q(@import "#{target_path}\\1";))
+    def store_version
+      path = "package.json"
+      content = File.read(path)
+      # TODO read JSON and set correct version
+      File.open(path, 'w') { |f| f.write(content) }
+    end
+
+    protected
+    # Override
+    def get_trees(*args)
+      root = get_tree(@branch_sha)
+      @tree_paths = {}
+      args.each do |dir|
+        dir_sha = get_tree_sha(dir, root)
+        hash_list = []
+        descend_tree(get_tree(dir_sha), dir, hash_list)
+        dir_hash = hash_list.inject({}) do |memo, hash|
+          memo.merge(hash)
+        end
+        @tree_paths.merge!(dir_hash)
+      end
+      @trees ||= @tree_paths.values
+    end
+
+    def descend_tree(tree, path, list)
+      list << { path => tree }
+      tree['tree'].map do |f|
+        if f['type'] == 'tree'
+          descend_tree(get_tree(f['sha']), File.join(path, f['path']), list)
+        end
+      end
+    end
+
+    # Override
+    def get_paths_by_type(dir, regex)
+      paths = get_paths_by_directory(dir)
+      paths.select { |p| p =~ regex }
+    end
+
+    def get_paths_by_directory(dir)
+      tree = @tree_paths[dir]
+      if tree.nil?
+        log_status("#{dir} not found in Git tree.")
+        return []
+      end
+
+      files = tree['tree'].map do |f|
+        case f['type']
+        when 'blob'
+          f['path']
+        when 'tree'
+          loc = File.join(dir, f['path'])
+          {loc => get_paths_by_directory(loc)}
+        end
+      end
+      files
+    end
+
+    # Override
+    def read_files(path, files)
+      hashes, strings = files.partition { |f| f.is_a?(Hash) }
+      contents = {}
+      contents = super(path, strings) unless strings.nil?
+      hashes.each do |h|
+        h.each do |k, v|
+          contents.merge!(read_files(k, v))
+        end
+      end
+      contents
     end
   end
 end

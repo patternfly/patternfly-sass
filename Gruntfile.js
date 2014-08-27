@@ -57,6 +57,11 @@ module.exports = function (grunt) {
         ]
       }
     },
+    shell: {
+      rake: {
+        command: "rake 'convert[<%= branch %>]'"
+      }
+    },
     sass: {
       dist: {
         options: {
@@ -75,11 +80,18 @@ module.exports = function (grunt) {
         dest: 'dist/css/',
         ext: '.min.css'
       }
+    },
+    casperjs: {
+      files: ['tests/casperjs/**/*.js']
     }
   });
 
+  var branch = grunt.option('branch') || 'master';
+
   grunt.loadNpmTasks('grunt-contrib-sass');
   grunt.loadNpmTasks('grunt-contrib-cssmin');
+  grunt.loadNpmTasks('grunt-casperjs');
+  grunt.loadNpmTasks('grunt-shell');
 
   grunt.registerTask('server', [
     'connect:server',
@@ -87,8 +99,14 @@ module.exports = function (grunt) {
   ]);
 
   grunt.registerTask('build', [
+    'shell',
     'sass',
     'cssmin'
+  ]);
+
+  grunt.registerTask('test', [
+    'build',
+    'casperjs'
   ]);
 
   grunt.registerTask('default', ['build']);

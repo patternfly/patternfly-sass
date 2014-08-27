@@ -1,5 +1,5 @@
 
-task :convert do |t, args|
+task :convert, [:branch] do |t, args|
   require './tasks/converter'
-  Patternfly::Converter.new().process_patternfly
+  Patternfly::Converter.new(branch: args[:branch]).process_patternfly
 end
