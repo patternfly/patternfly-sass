@@ -36,12 +36,51 @@ module Patternfly
         file = convert_less(file)
         name = name.sub(/\.less$/, '.scss')
         path = File.join(save_to, name)
-        unless name == 'patternfly.scss'
+
+        # Special cases go here
+        case name
+        when 'patternfly.scss'
+          file = fix_top_level(file)
+        end
+
+        unless name == "patternfly.scss"
           path = File.join(File.dirname(path), "_#{File.basename(path)}")
         end
+
         save_file(path, file)
         log_processed(File.basename(path))
       end
+    end
+
+    def fix_top_level(file)
+      patternfly_components = "../components/patternfly/components"
+      file = replace_all(
+        file,
+        %r(../components/font-awesome/less/font-awesome),
+        "#{patternfly_components}/font-awesome/scss/font-awesome")
+      file = replace_all(
+        file,
+        %r(../components/bootstrap-select/bootstrap-select),
+        "#{patternfly_components}/bootstrap-select/bootstrap-select"
+      )
+      file = replace_all(
+        file,
+        %r(../components/bootstrap/less/bootstrap),
+        "../components/bootstrap-sass-official/vendor/assets/stylesheets/bootstrap")
+      file
+    end
+
+    # Override
+    def replace_file_imports(less, target_path='')
+      less.gsub!(
+        %r([@\$]import\s+(?:\(\w+\)\s+)?["|']([\w\-\./]+).less["|'];),
+        %Q(@import "#{target_path}\\1";)
+      )
+      less.gsub!(
+        %r([@\$]import\s+(?:\(\w+\)\s+)?["|']([\w\-\./]+).(css)["|'];),
+        %Q(@import "#{target_path}\\1.\\2";)
+      )
+      less
     end
 
     def cache_tests
