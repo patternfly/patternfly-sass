@@ -8,7 +8,7 @@ module Patternfly
       super(repo: repo, cache_path: cache_path)
       @save_to = { scss: 'sass' }
       @test_dir = test_dir
-      get_trees('less', 'tests')
+      get_trees('less', 'tests', 'components/bootstrap/less')
     end
 
     def process_patternfly
@@ -31,6 +31,10 @@ module Patternfly
     def process_patternfly_less_assets
       log_status "Processing stylesheets..."
       files = read_files('less', bootstrap_less_files)
+      mixin_files = read_files('components/bootstrap/less', bootstrap_mixin_files)
+      mixin_files = Hash[mixin_files.map { |k, v| ["mixins/#{k}", v] }]
+      files.merge!(mixin_files)
+
       save_to = @save_to[:scss]
       files.each do |name, file|
         file = convert_less(file)
@@ -96,6 +100,10 @@ module Patternfly
       get_paths_by_type('less', /\.less$/)
     end
 
+    def bootstrap_mixin_files
+      get_paths_by_type('components/bootstrap/less', /mixins\.less$/)
+    end
+
     def store_version
       path = "package.json"
       content = File.read(path)
@@ -106,10 +114,13 @@ module Patternfly
     protected
     # Override
     def get_trees(*args)
-      root = get_tree(@branch_sha)
+      root = get_tree(@branch_sha)['sha']
       @tree_paths = {}
       args.each do |dir|
-        dir_sha = get_tree_sha(dir, root)
+        path_components = dir.split('/')
+        dir_sha = path_components.inject(root) do |tree_sha, component|
+          tree_sha = get_tree_sha(component, get_tree(tree_sha))
+        end
         hash_list = []
         descend_tree(get_tree(dir_sha), dir, hash_list)
         dir_hash = hash_list.inject({}) do |memo, hash|
