@@ -7,9 +7,12 @@ module Patternfly
     PATTERNFLY_LESS_ROOT = 'less'
 
     # Override
-    def initialize(repo: 'patternfly/patternfly', cache_path: 'tmp/converter-cache-patternfly', branch: 'master', test_dir: 'tests/casperjs/patternfly')
-      super(repo: repo, cache_path: cache_path)
-      @save_to = { scss: 'sass' }
+    def initialize(repo: 'patternfly/patternfly',
+      cache_path: 'tmp/converter-cache-patternfly',
+      branch: 'master',
+      test_dir: 'tests/casperjs/patternfly')
+      super(:repo => repo, :cache_path => cache_path)
+      @save_to = {:scss => 'sass'}
       @test_dir = test_dir
       get_trees(PATTERNFLY_LESS_ROOT, BOOTSTRAP_LESS_ROOT, 'tests')
     end
@@ -31,20 +34,32 @@ module Patternfly
       cache_tests
     end
 
+    def remove_xforms(transforms, *rejects)
+      transforms.reject do |xform|
+        rejects.include?(xform)
+      end
+    end
+
     def process_patternfly_less_assets
       log_status "Processing stylesheets..."
       files = read_files('less', bootstrap_less_files)
       save_to = @save_to[:scss]
 
       files.each do |name, file|
-        # TODO unify with the case statement below.  Maybe pass in two procs as
+        # TODO unify the case statements.  Maybe pass in two procs as
         # callbacks; one for before and one for after.
-        transforms = DEFAULT_TRANSFORMS
+        #
+        # TODO override replace_spin so its regex isn't so over-zealous
+        transforms = DEFAULT_TRANSFORMS.dup
         case name
         when 'patternfly.less'
-          transforms.reject! { |xform| xform == :replace_spin }
+          transforms = remove_xforms(transforms, :replace_spin)
+        when 'variables.less'
+          transforms = remove_xforms(transforms, :replace_spin)
+        when 'spinner.less'
+          transforms = remove_xforms(transforms, :replace_spin, :replace_image_urls)
         when 'icons.less'
-          transforms.reject! { |xform| xform == :replace_escaping }
+          transforms = remove_xforms(transforms, :replace_escaping)
         end
 
         file = convert_less(file, *transforms)
@@ -52,16 +67,23 @@ module Patternfly
         # Special cases go here
         case name
         when 'mixins.less'
-          file = replace_all(file,
+          file = replace_all(
+            file,
             /,\s*\.open\s+\.dropdown-toggle& \{(.*?)\}/m,
             " {\\1}\n  .open & { &.dropdown-toggle {\\1} }")
         when 'icons.less'
           # Note the %q to prevent Ruby interpolation
-          file = replace_all(file,
-            %r#\.\$\{(icon-prefix)\}#,
-            %q(#{$\\1}))
+          file = replace_all(
+            file,
+            %r!\.\$\{(icon-prefix)\}!,
+            %q(#{$\\1}\\2))
         when 'patternfly.less'
           file = fix_top_level(file)
+        when 'spinner.less'
+          file = replace_all(
+            file,
+            %r!"\$(img-path)/!,
+            %q("#{$\\1}/))
         end
 
         name_out = "#{File.basename(name, ".less")}.scss"
@@ -86,10 +108,10 @@ module Patternfly
       :replace_vars,
       :replace_file_imports,
       :replace_mixin_definitions,
-      { :replace_mixins => ["mixins"] },
+      {:replace_mixins => ["mixins"]},
       :replace_spin,
-      :replace_image_urls,
-      :replace_image_urls,
+      :replace_fadein,
+      # :replace_image_urls, # bootstrap-sass does this but we don't need it
       :replace_escaping,
       :convert_less_ampersand,
       :deinterpolate_vararg_mixins,
@@ -97,7 +119,19 @@ module Patternfly
     ]
 
     def convert_to_scss(file, *transforms)
+      # TODO The logging noop is to avoid a warning about an unused variable.
+      # We actually are using mixins but we are reading it with an eval.
+      # Possibly worth checking the arity of the method represented by xform
+      # and send in variable in a defined order based on it? But that limits
+      # us to a parameter order that every xform must follow.
+      # Something like
+      # params = [file, mixins]
+      # arity = self.method(xform).arity
+      # send(xform, *params[0..arity])
       mixins = @shared_mixins + read_mixins(file)
+      silence_log do
+        log_status(mixins)
+      end
       transforms.each do |xform|
         args = ["file"]
         if xform.is_a?(Hash)
@@ -114,16 +148,16 @@ module Patternfly
       patternfly_components = "../components/patternfly/components"
       file = replace_all(
         file,
-        %r(../components/font-awesome/less/font-awesome),
+        %r{../components/font-awesome/less/font-awesome},
         "#{patternfly_components}/font-awesome/scss/font-awesome")
       file = replace_all(
         file,
-        %r(../components/bootstrap-select/bootstrap-select),
+        %r{../components/bootstrap-select/bootstrap-select},
         "#{patternfly_components}/bootstrap-select/bootstrap-select"
       )
       file = replace_all(
         file,
-        %r(../components/bootstrap/less/bootstrap),
+        %r{../components/bootstrap/less/bootstrap},
         "../components/bootstrap-sass-official/vendor/assets/stylesheets/bootstrap")
       file
     end
@@ -163,8 +197,8 @@ module Patternfly
     def load_shared
       mixin_hash = {}
       [BOOTSTRAP_LESS_ROOT, PATTERNFLY_LESS_ROOT].each do |root|
-        log_status "Reading shared mixins from #{root}"
-        mixin_hash[root] = read_files(root, get_paths_by_type(root, /mixins\.less$/)).values.join("\n")
+        mixin_hash[root] = read_files(
+          root, get_paths_by_type(root, /mixins\.less$/)).values.join("\n")
       end
       @shared_mixins ||= begin
         read_mixins(mixin_hash.values.join("\n"), :nested => NESTED_MIXINS)
@@ -179,6 +213,7 @@ module Patternfly
     end
 
     protected
+
     # Override
     def get_trees(*args)
       root = get_tree(@branch_sha)['sha']
@@ -199,7 +234,7 @@ module Patternfly
     end
 
     def descend_tree(tree, path, list)
-      list << { path => tree }
+      list << {path => tree}
       tree['tree'].map do |f|
         if f['type'] == 'tree'
           descend_tree(get_tree(f['sha']), File.join(path, f['path']), list)
@@ -236,7 +271,7 @@ module Patternfly
       get_json("https://api.github.com/repos/#@repo/git/trees/#{sha}")
     end
 
-    def get_tree_sha(dir, tree = get_trees)
+    def get_tree_sha(dir, tree=get_trees)
       tree['tree'].find { |t| t['path'] == dir }['sha']
     end
 
