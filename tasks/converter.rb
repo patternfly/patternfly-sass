@@ -3,12 +3,15 @@ require "#{bootstrap_sass}/tasks/converter"
 
 module Patternfly
   class Converter < ::Converter
+    BOOTSTRAP_LESS_ROOT = 'components/bootstrap/less'
+    PATTERNFLY_LESS_ROOT = 'less'
+
     # Override
     def initialize(repo: 'patternfly/patternfly', cache_path: 'tmp/converter-cache-patternfly', branch: 'master', test_dir: 'tests/casperjs/patternfly')
       super(repo: repo, cache_path: cache_path)
       @save_to = { scss: 'sass' }
       @test_dir = test_dir
-      get_trees('less', 'tests', 'components/bootstrap/less')
+      get_trees(PATTERNFLY_LESS_ROOT, BOOTSTRAP_LESS_ROOT, 'tests')
     end
 
     def process_patternfly
@@ -31,29 +34,80 @@ module Patternfly
     def process_patternfly_less_assets
       log_status "Processing stylesheets..."
       files = read_files('less', bootstrap_less_files)
-      mixin_files = read_files('components/bootstrap/less', bootstrap_mixin_files)
-      mixin_files = Hash[mixin_files.map { |k, v| ["mixins/#{k}", v] }]
-      files.merge!(mixin_files)
-
       save_to = @save_to[:scss]
+
       files.each do |name, file|
-        file = convert_less(file)
-        name = name.sub(/\.less$/, '.scss')
-        path = File.join(save_to, name)
+        # TODO unify with the case statement below.  Maybe pass in two procs as
+        # callbacks; one for before and one for after.
+        transforms = DEFAULT_TRANSFORMS
+        case name
+        when 'patternfly.less'
+          transforms.reject! { |xform| xform == :replace_spin }
+        when 'icons.less'
+          transforms.reject! { |xform| xform == :replace_escaping }
+        end
+
+        file = convert_less(file, *transforms)
 
         # Special cases go here
         case name
-        when 'patternfly.scss'
+        when 'mixins.less'
+          file = replace_all(file,
+            /,\s*\.open\s+\.dropdown-toggle& \{(.*?)\}/m,
+            " {\\1}\n  .open & { &.dropdown-toggle {\\1} }")
+        when 'icons.less'
+          # Note the %q to prevent Ruby interpolation
+          file = replace_all(file,
+            %r#\.\$\{(icon-prefix)\}#,
+            %q(#{$\\1}))
+        when 'patternfly.less'
           file = fix_top_level(file)
         end
 
-        unless name == "patternfly.scss"
-          path = File.join(File.dirname(path), "_#{File.basename(path)}")
+        name_out = "#{File.basename(name, ".less")}.scss"
+        unless name_out == "patternfly.scss"
+          name_out = "_#{name_out}"
         end
 
+        path = File.join(save_to, name_out)
         save_file(path, file)
         log_processed(File.basename(path))
       end
+    end
+
+    def convert_less(less, *transforms)
+      load_shared
+      less = convert_to_scss(less, *transforms)
+      less = yield(less) if block_given?
+      less
+    end
+
+    DEFAULT_TRANSFORMS = [
+      :replace_vars,
+      :replace_file_imports,
+      :replace_mixin_definitions,
+      { :replace_mixins => ["mixins"] },
+      :replace_spin,
+      :replace_image_urls,
+      :replace_image_urls,
+      :replace_escaping,
+      :convert_less_ampersand,
+      :deinterpolate_vararg_mixins,
+      :replace_calculation_semantics,
+    ]
+
+    def convert_to_scss(file, *transforms)
+      mixins = @shared_mixins + read_mixins(file)
+      transforms.each do |xform|
+        args = ["file"]
+        if xform.is_a?(Hash)
+          args.concat(xform.values.first)
+          xform = xform.keys.first
+        end
+        args.map! { |a| "#{eval a}" }
+        file = send(xform, *args)
+      end
+      file
     end
 
     def fix_top_level(file)
@@ -96,12 +150,25 @@ module Patternfly
     end
 
     # Override
+    # bootstrap-sass uses this method to read in all Bootstrap's less source files
+    # We're going to repurpose it.
     def bootstrap_less_files
+      patternfly_less_files
+    end
+
+    def patternfly_less_files
       get_paths_by_type('less', /\.less$/)
     end
 
-    def bootstrap_mixin_files
-      get_paths_by_type('components/bootstrap/less', /mixins\.less$/)
+    def load_shared
+      mixin_hash = {}
+      [BOOTSTRAP_LESS_ROOT, PATTERNFLY_LESS_ROOT].each do |root|
+        log_status "Reading shared mixins from #{root}"
+        mixin_hash[root] = read_files(root, get_paths_by_type(root, /mixins\.less$/)).values.join("\n")
+      end
+      @shared_mixins ||= begin
+        read_mixins(mixin_hash.values.join("\n"), :nested => NESTED_MIXINS)
+      end
     end
 
     def store_version
@@ -163,6 +230,14 @@ module Patternfly
         end
       end
       files
+    end
+
+    def get_tree(sha)
+      get_json("https://api.github.com/repos/#@repo/git/trees/#{sha}")
+    end
+
+    def get_tree_sha(dir, tree = get_trees)
+      tree['tree'].find { |t| t['path'] == dir }['sha']
     end
 
     # Override
