@@ -81,12 +81,6 @@ small,
 // Undo browser default styling
 cite    { font-style: normal; }
 
-mark,
-.mark {
-  background-color: $state-warning-bg;
-  padding: .2em;
-}
-
 // Alignment
 .text-left           { text-align: left; }
 .text-right          { text-align: right; }
@@ -138,7 +132,7 @@ mark,
 
 
 // Lists
-// -------------------------
+// --------------------------------------------------
 
 // Unordered and Ordered lists
 ul,
@@ -192,12 +186,8 @@ dd {
 // Defaults to being stacked without any of the below styles applied, until the
 // grid breakpoint is reached (default of ~768px).
 
-.dl-horizontal {
-  dd {
-    @include clearfix(); // Clear the floated `dt` if an empty `dd` is present
-  }
-
-  @media (min-width: $grid-float-breakpoint) {
+@media (min-width: $grid-float-breakpoint) {
+  .dl-horizontal {
     dt {
       float: left;
       width: ($component-offset-horizontal - 20);
@@ -207,13 +197,13 @@ dd {
     }
     dd {
       margin-left: $component-offset-horizontal;
+      @include clearfix(); // Clear the floated `dt` if an empty `dd` is present
     }
   }
 }
 
-
-// Misc
-// -------------------------
+// MISC
+// ----
 
 // Abbreviations and acronyms
 abbr[title],
