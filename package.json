@@ -12,9 +12,16 @@
     "connect-livereload": "~0.3.0",
     "grunt-contrib-uglify": "~0.3.2",
     "grunt-contrib-cssmin": "~0.10.0",
+    "grunt-shell": "~1.0.1",
+    "grunt-casper": "~0.4.1",
     "phantomcss": "~0.7.2",
-    "casperjs": "~1.1.0",
-    "grunt-casperjs": "~2.0.0",
-    "grunt-shell": "~1.0.1"
+    "connect": "~3.2.0",
+    "process": "~0.8.0",
+    "serve-static": "~1.6.1",
+    "serve-index": "~1.2.1",
+    "http": "0.0.0",
+    "fs": "0.0.2",
+    "path": "~0.4.9",
+    "glob": "~4.0.5"
   }
 }
