@@ -10,7 +10,7 @@ module Patternfly
     def initialize(repo: 'patternfly/patternfly',
       cache_path: 'tmp/converter-cache-patternfly',
       branch: 'master',
-      test_dir: 'tests/casperjs/patternfly')
+      test_dir: 'tests/patternfly')
       super(:repo => repo, :cache_path => cache_path)
       @save_to = {:scss => 'sass'}
       @test_dir = test_dir
@@ -110,7 +110,7 @@ module Patternfly
       :replace_mixin_definitions,
       {:replace_mixins => ["mixins"]},
       :replace_spin,
-      :replace_fadein,
+      # :replace_fadein,
       # :replace_image_urls, # bootstrap-sass does this but we don't need it
       :replace_escaping,
       :convert_less_ampersand,
@@ -178,6 +178,7 @@ module Patternfly
     def cache_tests
       test_files = get_paths_by_directory('tests')
       test_contents = read_files('tests', test_files)
+      FileUtils.mkdir_p(@test_dir)
       test_contents.each do |name, content|
         save_file(File.join(@test_dir, name), content)
       end
