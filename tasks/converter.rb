@@ -5,6 +5,7 @@ module Patternfly
   class Converter < ::Converter
     BOOTSTRAP_LESS_ROOT = 'components/bootstrap/less'
     PATTERNFLY_LESS_ROOT = 'less'
+    PATTERNFLY_COMPONENTS = "../components/patternfly/components"
 
     # Override
     def initialize(repo: 'patternfly/patternfly',
@@ -79,6 +80,14 @@ module Patternfly
             %q(#{$\\1}\\2))
         when 'patternfly.less'
           file = fix_top_level(file)
+          # This is a hack.  We want bootstrap-select to be placed in
+          # the final compiled CSS, but Sass doesn't insert a file's contents
+          # when that file has a '.css' extension.  Sass just uses a @import
+          # statement.  This method moves the bootstrap-select.css into our
+          # output directory and renames it with a '.scss' extension.
+          add_to_dist(
+            "bootstrap-select/bootstrap-select.css",
+            "_bootstrap-select.scss")
         when 'spinner.less'
           file = replace_all(
             file,
@@ -95,6 +104,15 @@ module Patternfly
         save_file(path, file)
         log_processed(File.basename(path))
       end
+    end
+
+    def add_to_dist(name, name_out)
+      in_path = File.join('components', File.dirname(name))
+      in_file = File.basename(name)
+      file = read_files(in_path, [in_file])[in_file]
+      out_path = File.join(@save_to[:scss], name_out)
+      save_file(out_path, file)
+      log_processed(File.basename(out_path))
     end
 
     def convert_less(less, *transforms)
@@ -145,15 +163,14 @@ module Patternfly
     end
 
     def fix_top_level(file)
-      patternfly_components = "../components/patternfly/components"
       file = replace_all(
         file,
         %r{../components/font-awesome/less/font-awesome},
-        "#{patternfly_components}/font-awesome/scss/font-awesome")
+        "#{PATTERNFLY_COMPONENTS}/font-awesome/scss/font-awesome")
       file = replace_all(
         file,
-        %r{../components/bootstrap-select/bootstrap-select},
-        "#{patternfly_components}/bootstrap-select/bootstrap-select"
+        %r{../components/bootstrap-select/bootstrap-select.css},
+        "bootstrap-select"
       )
       file = replace_all(
         file,
