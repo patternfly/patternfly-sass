@@ -1,5 +1,6 @@
 bootstrap_sass = Gem::Specification.find_by_name("bootstrap-sass").gem_dir
 require "#{bootstrap_sass}/tasks/converter"
+require 'pathname'
 
 module Patternfly
   class Converter < ::Converter
@@ -43,7 +44,7 @@ module Patternfly
 
     def process_patternfly_less_assets
       log_status "Processing stylesheets..."
-      files = read_files('less', bootstrap_less_files)
+      files = read_files(bootstrap_less_files)
       save_to = @save_to[:scss]
 
       files.each do |name, file|
@@ -107,9 +108,8 @@ module Patternfly
     end
 
     def add_to_dist(name, name_out)
-      in_path = File.join('components', File.dirname(name))
-      in_file = File.basename(name)
-      file = read_files(in_path, [in_file])[in_file]
+      in_file = File.join('components', name)
+      file = read_files([in_file])[in_file]
       out_path = File.join(@save_to[:scss], name_out)
       save_file(out_path, file)
       log_processed(File.basename(out_path))
@@ -193,11 +193,26 @@ module Patternfly
     end
 
     def cache_tests
-      test_files = get_paths_by_directory('tests')
-      test_contents = read_files('tests', test_files)
       FileUtils.mkdir_p(@test_dir)
-      test_contents.each do |name, content|
-        save_file(File.join(@test_dir, name), content)
+      test_files = get_paths_by_directory('tests')
+      test_contents = read_files(test_files)
+      test_contents.each do |file, content|
+        # We go through all this rigmarole so we can save the tests and their
+        # directory structure in a root of our choosing.
+        top = ""
+        # Get the top level directory
+        Pathname.new(file).ascend do |v|
+          top = v
+        end
+        # Get the filename below the top directory
+        save_path = Pathname.new(file).relative_path_from(top).to_s
+
+        # Create the correct destination
+        save_path = File.join(@test_dir, save_path)
+        unless File.directory?(File.dirname(save_path))
+          FileUtils.mkdir_p(File.dirname(save_path))
+        end
+        save_file(save_path, content)
       end
     end
 
@@ -216,7 +231,7 @@ module Patternfly
       mixin_hash = {}
       [BOOTSTRAP_LESS_ROOT, PATTERNFLY_LESS_ROOT].each do |root|
         mixin_hash[root] = read_files(
-          root, get_paths_by_type(root, /mixins\.less$/)).values.join("\n")
+          get_paths_by_type(root, /mixins\.less$/)).values.join("\n")
       end
       @shared_mixins ||= begin
         read_mixins(mixin_hash.values.join("\n"), :nested => NESTED_MIXINS)
@@ -261,9 +276,20 @@ module Patternfly
     end
 
     # Override
-    def get_paths_by_type(dir, regex)
-      paths = get_paths_by_directory(dir)
-      paths.select { |p| p =~ regex }
+    def get_paths_by_type(base_dir, regex)
+      paths = get_paths_by_directory(base_dir)
+
+      # See http://stackoverflow.com/a/2698531 and http://stackoverflow.com/a/2552946
+      matches = Hash.new do |h, key|
+        h[key] = Array.new
+      end
+
+      paths.each do |dir, files|
+        files.each do |f|
+          matches[dir] << f if File.join(dir, f) =~ regex
+        end
+      end
+      matches
     end
 
     def get_paths_by_directory(dir)
@@ -273,13 +299,15 @@ module Patternfly
         return []
       end
 
-      files = tree['tree'].map do |f|
+      files = {}
+      files[dir] = []
+      tree['tree'].map do |f|
         case f['type']
         when 'blob'
-          f['path']
+          files[dir] << f['path']
         when 'tree'
           loc = File.join(dir, f['path'])
-          {loc => get_paths_by_directory(loc)}
+          files.merge!(get_paths_by_directory(loc))
         end
       end
       files
@@ -294,14 +322,16 @@ module Patternfly
     end
 
     # Override
-    def read_files(path, files)
-      hashes, strings = files.partition { |f| f.is_a?(Hash) }
+    def read_files(files)
       contents = {}
-      contents = super(path, strings) unless strings.nil?
-      hashes.each do |h|
-        h.each do |k, v|
-          contents.merge!(read_files(k, v))
-        end
+      files.each do |dir, file|
+        dir_contents = super(dir, file)
+        full_path_contents = Hash[
+          dir_contents.map do |k, v|
+            [File.join(dir, k), v]
+          end
+        ]
+        contents.merge!(full_path_contents)
       end
       contents
     end

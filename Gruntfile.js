@@ -104,28 +104,15 @@ module.exports = function (grunt) {
   var serveIndex = require('serve-index');
 
   grunt.registerTask('reference', 'Serve the reference Patternfly tests.', function() {
-    var keepalive = grunt.option('keepalive') || false;
-    var done = this.async();
     app = connect();
     app.use(serveIndex('tests'));
     app.use('/dist', serveStatic(path.join(projectConfig.src, 'components', 'patternfly', 'dist')));
     app.use('/components', serveStatic(path.join(projectConfig.src, 'components', 'patternfly', 'components')));
     app.use('/patternfly', serveStatic(path.join(projectConfig.src, 'tests', 'patternfly')));
-    app.use('/patternfly/img', serveStatic(path.join(projectConfig.src, 'tests', 'patternfly')));
-
-    require('http').createServer(app).listen(port).on('listening', function() {
-      grunt.log.writeln("Started web server on port " + port);
-      if (!keepalive) {
-        done();
-      } else {
-        grunt.log.writeln("Listening forever...");
-      }
-    });
+    runServer(app, this);
   });
 
   grunt.registerTask('serve', 'Serve the Patternfly tests using Sass CSS.', function() {
-    var keepalive = grunt.option('keepalive') || false;
-    var done = this.async();
     app = connect();
     app.use(serveIndex('tests'));
     app.use('/dist/css', serveStatic(path.join(projectConfig.src, 'dist', 'css')));
@@ -135,11 +122,14 @@ module.exports = function (grunt) {
       asset = otherAssets[i];
       app.use('/dist/' + asset, serveStatic(path.join(projectConfig.src, 'components', 'patternfly', 'dist', asset)));
     }
-
     app.use('/components', serveStatic(path.join(projectConfig.src, 'components', 'patternfly', 'components')));
     app.use('/patternfly', serveStatic(path.join(projectConfig.src, 'tests', 'patternfly')));
-    app.use('/patternfly/img', serveStatic(path.join(projectConfig.src, 'tests', 'patternfly')));
+    runServer(app, this);
+  });
 
+  var runServer = function(app, task) {
+    var keepalive = grunt.option('keepalive') || false;
+    var done = task.async();
     require('http').createServer(app).listen(port).on('listening', function() {
       grunt.log.writeln("Started web server on port " + port);
       if (!keepalive) {
@@ -148,7 +138,7 @@ module.exports = function (grunt) {
         grunt.log.writeln("Listening forever...");
       }
     });
-  });
+  }
 
   grunt.registerTask('render-reference', ['reference', 'casper:reference']);
 
