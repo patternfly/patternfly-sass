@@ -16,7 +16,7 @@ module Patternfly
       super(:repo => repo, :cache_path => cache_path)
       @save_to = {:scss => 'sass'}
       @test_dir = test_dir
-      get_trees(PATTERNFLY_LESS_ROOT, BOOTSTRAP_LESS_ROOT, 'tests')
+      get_trees(PATTERNFLY_LESS_ROOT, BOOTSTRAP_LESS_ROOT, 'components/bootstrap-select', 'tests')
     end
 
     def process_patternfly
@@ -53,6 +53,7 @@ module Patternfly
         #
         # TODO override replace_spin so its regex isn't so over-zealous
         transforms = DEFAULT_TRANSFORMS.dup
+        name = File.basename(name)
         case name
         when 'patternfly.less'
           transforms = remove_xforms(transforms, :replace_spin)
@@ -78,7 +79,7 @@ module Patternfly
           file = replace_all(
             file,
             %r!\.\$\{(icon-prefix)\}!,
-            %q(#{$\\1}\\2))
+            %q(.#{$\\1}))
         when 'patternfly.less'
           file = fix_top_level(file)
           # This is a hack.  We want bootstrap-select to be placed in
@@ -108,11 +109,13 @@ module Patternfly
     end
 
     def add_to_dist(name, name_out)
-      in_file = File.join('components', name)
-      file = read_files([in_file])[in_file]
+      in_dir = File.join('components', File.dirname(name))
+      in_file = File.basename(name)
+      dir_files = get_paths_by_directory(in_dir)
+      file = read_files(dir_files)[in_file]
       out_path = File.join(@save_to[:scss], name_out)
       save_file(out_path, file)
-      log_processed(File.basename(out_path))
+      log_processed("Moving #{File.join(in_dir, in_file)} to #{out_path}")
     end
 
     def convert_less(less, *transforms)
@@ -129,7 +132,7 @@ module Patternfly
       {:replace_mixins => ["mixins"]},
       :replace_spin,
       # :replace_fadein,
-      # :replace_image_urls, # bootstrap-sass does this but we don't need it
+      :replace_image_urls,
       :replace_escaping,
       :convert_less_ampersand,
       :deinterpolate_vararg_mixins,
