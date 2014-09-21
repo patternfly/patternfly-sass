@@ -21,9 +21,10 @@ module.exports = function (grunt) {
   } catch (e) {}
 
   var testPath = path.join(projectConfig.src, 'tests', 'patternfly');
-  var testFiles = glob(path.join(testPath, '**', '*.html'), { sync: true }, function(err, files) {
-    return files.map(function(x) { return path.join('patternfly', x) });
-  });
+  var testFiles = glob.sync(path.join(testPath, '**', '*.html'));
+  testFiles = testFiles.map(function(x) { return path.join('patternfly', path.relative(testPath, x)); });
+  var port = grunt.option('port') || 9000;
+  var casperArgs = testFiles.concat(["--port=" + port]);
 
   grunt.initConfig({
     config: projectConfig,
@@ -76,16 +77,31 @@ module.exports = function (grunt) {
     casper: {
       reference: {
         options: {
-          args: testFiles
+          args: casperArgs,
+          save: 'tests/reference'
         },
         src: ['tests/render.js']
+      },
+      actual: {
+        options: {
+          args: casperArgs,
+          save: 'tests/actual'
+        },
+        src: ['tests/render.js']
+      },
+      compare: {
+        options: {
+          test: true,
+          args: ['--reference=tests/reference', '--actual=tests/actual'],
+          save: 'tests/results'
+        },
+        src: ['tests/compare.js']
       }
     }
   });
 
   // TODO Make this specific to the shell task
   var branch = grunt.option('branch') || 'master';
-  var port = grunt.option('port') || 9000;
 
   grunt.registerTask('server', [
     'connect:server',
@@ -138,13 +154,15 @@ module.exports = function (grunt) {
         grunt.log.writeln("Listening forever...");
       }
     });
-  }
+  };
 
-  grunt.registerTask('render-reference', ['reference', 'casper:reference']);
+  grunt.registerTask('render:reference', ['reference', 'casper:reference']);
+  grunt.registerTask('render:actual', ['serve', 'casper:actual']);
 
   grunt.registerTask('test', [
     'build',
-    'reference'
-    // TODO create task to render Sass tests.
+    'render:reference',
+    'render:actual',
+    'casper:compare'
   ]);
 };

@@ -24,3 +24,8 @@ tmp
 # RVM files
 .ruby-gemset
 .ruby-version
+
+# Directories with test images
+tests/actual
+tests/reference
+tests/failures
