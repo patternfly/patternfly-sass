@@ -61,8 +61,6 @@ module Patternfly
           transforms = remove_xforms(transforms, :replace_spin)
         when 'spinner.less'
           transforms = remove_xforms(transforms, :replace_spin, :replace_image_urls)
-        when 'icons.less'
-          transforms = remove_xforms(transforms, :replace_escaping)
         end
 
         file = convert_less(file, *transforms)
@@ -74,12 +72,6 @@ module Patternfly
             file,
             /,\s*\.open\s+\.dropdown-toggle& \{(.*?)\}/m,
             " {\\1}\n  .open & { &.dropdown-toggle {\\1} }")
-        when 'icons.less'
-          # Note the %q to prevent Ruby interpolation
-          file = replace_all(
-            file,
-            %r!\.\$\{(icon-prefix)\}!,
-            %q(.#{$\\1}))
         when 'patternfly.less'
           file = fix_top_level(file)
           # This is a hack.  We want bootstrap-select to be placed in
@@ -90,11 +82,6 @@ module Patternfly
           add_to_dist(
             "bootstrap-select/bootstrap-select.css",
             "_bootstrap-select.scss")
-        when 'spinner.less'
-          file = replace_all(
-            file,
-            %r!"\$(img-path)/!,
-            %q("#{$\\1}/))
         end
 
         name_out = "#{File.basename(name, ".less")}.scss"
@@ -193,6 +180,20 @@ module Patternfly
         %Q(@import "#{target_path}\\1.\\2";)
       )
       less
+    end
+
+    # Override - bootstrap-sass doesn't handle cases where interpolation occurs outside
+    # double quotes and removes the curly braces too early in the replace process.
+    def replace_escaping(less)
+     # Get rid of ~"" escape
+     less = less.gsub(/~"([^"]+)"/, '#{\1}')
+     # interpolate variable in string, e.g. url("$file-1x") => url("#{$file-1x}")
+     less.gsub!(/\$\{([\w\-]+)\}/, '#{$\1}')
+     # less.gsub!(/(?:"|')([^"'\n]*)(\$\{[\w\-]+\})([^"'\n]*)(?:"|')/, '"\1#{\2}\3"')
+     # Get rid of @{} escape
+     less.gsub!(/\$\{([^}]+)\}/, '$\1')
+     # Get rid of e(%("")) escape
+     less.gsub(/(\W)e\(%\("?([^"]*)"?\)\)/, '\1\2')
     end
 
     def cache_tests
