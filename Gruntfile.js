@@ -23,8 +23,10 @@ module.exports = function (grunt) {
   var testPath = path.join(projectConfig.src, 'tests', 'patternfly');
   var testFiles = glob.sync(path.join(testPath, '**', '*.html'));
   testFiles = testFiles.map(function(x) { return path.join('patternfly', path.relative(testPath, x)); });
+
+  // If you supply --port, it needs to go before the task name in the command line!  For example:
+  // grunt --port=9001 serve
   var port = grunt.option('port') || 9000;
-  var casperArgs = testFiles.concat(["--port=" + port]);
 
   grunt.initConfig({
     config: projectConfig,
@@ -77,14 +79,14 @@ module.exports = function (grunt) {
     casper: {
       reference: {
         options: {
-          args: casperArgs,
+          args: testFiles.concat(["--port=" + port]),
           save: 'tests/reference'
         },
         src: ['tests/render.js']
       },
       actual: {
         options: {
-          args: casperArgs,
+          args: testFiles.concat(["--port=" + port]),
           save: 'tests/actual'
         },
         src: ['tests/render.js']
@@ -119,13 +121,17 @@ module.exports = function (grunt) {
   var serveStatic = require('serve-static');
   var serveIndex = require('serve-index');
 
-  grunt.registerTask('reference', 'Serve the reference Patternfly tests.', function() {
+  grunt.registerTask('reference', 'Serve the reference Patternfly tests.', function(p) {
     app = connect();
     app.use(serveIndex('tests'));
     app.use('/dist', serveStatic(path.join(projectConfig.src, 'components', 'patternfly', 'dist')));
     app.use('/components', serveStatic(path.join(projectConfig.src, 'components', 'patternfly', 'components')));
     app.use('/patternfly', serveStatic(path.join(projectConfig.src, 'tests', 'patternfly')));
-    runServer(app, this);
+
+    if (arguments.length == 0) {
+      p = port;
+    }
+    runServer(app, this, p);
   });
 
   grunt.registerTask('serve', 'Serve the Patternfly tests using Sass CSS.', function() {
@@ -140,14 +146,14 @@ module.exports = function (grunt) {
     }
     app.use('/components', serveStatic(path.join(projectConfig.src, 'components', 'patternfly', 'components')));
     app.use('/patternfly', serveStatic(path.join(projectConfig.src, 'tests', 'patternfly')));
-    runServer(app, this);
+    runServer(app, this, port);
   });
 
-  var runServer = function(app, task) {
+  var runServer = function(app, task, p) {
     var keepalive = grunt.option('keepalive') || false;
     var done = task.async();
-    require('http').createServer(app).listen(port).on('listening', function() {
-      grunt.log.writeln("Started web server on port " + port);
+    require('http').createServer(app).listen(p).on('listening', function() {
+      grunt.log.writeln("Started web server on port " + p);
       if (!keepalive) {
         done();
       } else {
@@ -156,13 +162,26 @@ module.exports = function (grunt) {
     });
   };
 
-  grunt.registerTask('render:reference', ['reference', 'casper:reference']);
+  grunt.registerTask('render:reference', "Render reference images", function(p) {
+    if (arguments.length == 0) {
+      p = port;
+    }
+    grunt.task.run('reference:' + p);
+    grunt.config('casper.reference.options.args', testFiles.concat(["--port=" + p]));
+    grunt.task.run('casper:reference');
+  });
+
   grunt.registerTask('render:actual', ['serve', 'casper:actual']);
 
-  grunt.registerTask('test', [
-    'build',
-    'render:reference',
-    'render:actual',
-    'casper:compare'
-  ]);
+  grunt.registerTask('test', "Run tests", function() {
+    grunt.task.run('build');
+    // We have to do all this stupidity with the ports because I don't know of away to stop a server
+    // once it has started, and if we start two servers on the same port, the task will fail.
+    //
+    // Looks like other people hit the same issue: https://github.com/gruntjs/grunt-contrib-connect/issues/83
+    var p = port + 1;
+    grunt.task.run('render:reference:' + p);
+    grunt.task.run('render:actual');
+    grunt.task.run('casper:compare');
+  });
 };
