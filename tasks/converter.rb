@@ -96,10 +96,11 @@ module Patternfly
     end
 
     def add_to_dist(name, name_out)
-      in_dir = File.join('components', File.dirname(name))
-      in_file = File.basename(name)
+      in_file = File.join('components', name);
+      in_dir = File.dirname(in_file)
       dir_files = get_paths_by_directory(in_dir)
       file = read_files(dir_files)[in_file]
+      raise "add_to_dist failed for #{name}" if file.nil?
       out_path = File.join(@save_to[:scss], name_out)
       save_file(out_path, file)
       log_processed("Moving #{File.join(in_dir, in_file)} to #{out_path}")
