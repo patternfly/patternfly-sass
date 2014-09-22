@@ -167,7 +167,18 @@ module Patternfly
         file,
         %r{../components/bootstrap/less/bootstrap},
         "../components/bootstrap-sass-official/vendor/assets/stylesheets/bootstrap")
-      file
+      file = replace_all(
+        file,
+        %r{@import\s+"variables";},
+        "")
+      # Variables need to be declared before they are used.
+      variables = <<-VAR.gsub(/^\s*/, '')
+        @import "variables";
+        @import "../components/bootstrap-sass-official/vendor/assets/stylesheets/bootstrap/variables";
+        @import "#{PATTERNFLY_COMPONENTS}/font-awesome/scss/variables";
+
+      VAR
+      variables + file
     end
 
     # Override
