@@ -5,7 +5,7 @@
 .form-control {
   &[disabled], &[readonly], fieldset[disabled] & {
     border-color: $input-border-disabled !important;
-    @extend .box-shadow(none);
+    @include box-shadow(none);
     color: #969696;
   }
   &:hover {
@@ -14,7 +14,7 @@
 }
 
 .input-group .input-group-btn .btn {
-  @extend .box-shadow(none);
+  @include box-shadow(none);
 }
 
 label {

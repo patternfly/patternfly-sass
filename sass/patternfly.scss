@@ -1,16 +1,19 @@
+@import "variables";
+@import "../components/bootstrap-sass-official/vendor/assets/stylesheets/bootstrap/variables";
+@import "../components/patternfly/components/font-awesome/scss/variables";
 /* PatternFly */
 
 /* Bootstrap 3 */
-$import "../components/bootstrap/less/bootstrap";
+@import "../components/bootstrap-sass-official/vendor/assets/stylesheets/bootstrap";
 
 /* Font Awesome */
-$import "../components/font-awesome/less/font-awesome";
+@import "../components/patternfly/components/font-awesome/scss/font-awesome";
 
 /* Bootstrap-Select */
-$import (less) "../components/bootstrap-select/bootstrap-select.css";
+@import "bootstrap-select";
 
 /* PatternFly overrides and new stuff */
-@import "variables";
+
 @import "mixins";
 @import "alerts";
 @import "badges";
@@ -37,7 +40,7 @@ $import (less) "../components/bootstrap-select/bootstrap-select.css";
 @import "progress-bars";
 @import "search";
 @import "sidebar";
-@import "adjust-huener";
+@import "spinner";
 @import "tables";
 @import "tabs";
 @import "tooltip";

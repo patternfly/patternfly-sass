@@ -10,7 +10,7 @@
       display: table-cell;
       width: 100%;
       .btn {
-        @extend .box-shadow(none);
+        @include box-shadow(none);
         float: left;
         margin-left: -1px;
         &.btn-lg {

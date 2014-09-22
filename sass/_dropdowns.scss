@@ -28,7 +28,7 @@
 .dropdown-menu {
   // Dividers (basically an hr) within the dropdown
   .divider {
-    @extend .nav-divider($dropdown-divider-bg, $dropdown-divider-margin);
+    @include nav-divider($dropdown-divider-bg, $dropdown-divider-margin);
   }
   // Links within the dropdown menu
   > li > a {
@@ -43,14 +43,14 @@
 .dropdown-menu > li > a {
   &:hover {
     border-color: $dropdown-link-hover-border-color;
-    @extend .reset-filter;
+    @include reset-filter();
   }
   &:focus,
   &:active {
     background-color: $dropdown-link-focus-bg;
     border-color: $dropdown-link-active-border-color;
     color: $dropdown-link-focus-color !important;
-    @extend .reset-filter;
+    @include reset-filter();
   }
 }
 
@@ -61,7 +61,7 @@
   &:focus {
     background-color: $dropdown-link-active-bg !important;
     border-color: $dropdown-link-active-border-color !important;
-    @extend .reset-filter;
+    @include reset-filter();
   }
 }
 

@@ -15,7 +15,7 @@
     padding: 12px 0;
     margin: 0 0 0 20px;
     .ie8 & {
-      background: url('$img-path/$img-brand-ie8') no-repeat 0 49%;
+      background: url('#{$img-path}/#{$img-brand-ie8}') no-repeat 0 49%;
       min-width: $navbar-pf-navbar-navbar-brand-min-width;
     }
     img {
@@ -28,7 +28,7 @@
   }
   .navbar-collapse {
     border-top: 0;
-    @extend .box-shadow(none);
+    @include box-shadow(none);
     padding: 0;
   }
   .navbar-header {
@@ -104,7 +104,7 @@
           .dropdown-menu {
             border: 0;
             bottom: auto;
-            @extend .box-shadow(none);
+            @include box-shadow(none);
             display: block;
             float: none;
             margin: 0;
@@ -179,7 +179,7 @@
       background-color: transparent;
       outline: none;
       .icon-bar {
-        @extend .box-shadow(0 0 3px rgba(255,255,255,1));
+        @include box-shadow(0 0 3px rgba(255,255,255,1));
       }
     }
     .icon-bar {
@@ -219,7 +219,7 @@
     }
     .navbar-primary {
       font-size: $font-size-large;
-      #gradient @extend .vertical($navbar-pf-navbar-primary-bg-color-start, $navbar-pf-navbar-primary-bg-color-stop);
+      @include gradient-vertical($navbar-pf-navbar-primary-bg-color-start, $navbar-pf-navbar-primary-bg-color-stop);
       &.persistent-secondary {
         .context {
           .dropdown-menu {
@@ -251,7 +251,7 @@
             > li {
               &.active {
                 &, &:hover {
-                  @extend .tab-indicator($background: $nav-tabs-active-link-hover-color, $left: 20px, $right: 20px);
+                  @include tab-indicator($background: $nav-tabs-active-link-hover-color, $left: 20px, $right: 20px);
                 }
                 > a, > a:hover, &:hover > a {
                   color: $link-color !important;
@@ -288,7 +288,7 @@
                 }
               }
               &:hover, &.open {
-                @extend .tab-indicator($left: 20px, $right: 20px);
+                @include tab-indicator($left: 20px, $right: 20px);
                 > a {
                   color: $gray-darker;
                   &:after {
@@ -330,16 +330,16 @@
           background-color: $navbar-pf-navbar-primary-hover-bg-color-stop;
           border-top-color: $navbar-pf-navbar-primary-hover-border-color;
           color: $navbar-pf-color;
-          #gradient @extend .vertical($navbar-pf-navbar-primary-hover-bg-color-start, $navbar-pf-navbar-primary-hover-bg-color-stop);
+          @include gradient-vertical($navbar-pf-navbar-primary-hover-bg-color-start, $navbar-pf-navbar-primary-hover-bg-color-stop);
         }
       }
       > .active > a, > .active > a:hover, > .active > a:focus, > .open > a, > .open > a:hover, > .open > a:focus {
         background-color: $navbar-pf-navbar-primary-active-bg-color-stop;
         border-bottom-color: $navbar-pf-navbar-primary-active-bg-color-stop;
         border-top-color: $navbar-pf-navbar-primary-active-border-color;
-        @extend .box-shadow(none);
+        @include box-shadow(none);
         color: $navbar-pf-active-color;
-        #gradient @extend .vertical($navbar-pf-navbar-primary-active-bg-color-start, $navbar-pf-navbar-primary-active-bg-color-stop);
+        @include gradient-vertical($navbar-pf-navbar-primary-active-bg-color-start, $navbar-pf-navbar-primary-active-bg-color-stop);
       }
       li.dropdown.context {
         border-bottom: 0;
@@ -349,13 +349,13 @@
           border-right: 1px solid $navbar-pf-navbar-primary-context-border-color;
           border-top-color: $navbar-pf-navbar-primary-context-border-top-color;
           font-weight: 600;
-          #gradient @extend .vertical($navbar-pf-navbar-primary-context-bg-color-start, $navbar-pf-navbar-primary-context-bg-color-stop);
+          @include gradient-vertical($navbar-pf-navbar-primary-context-bg-color-start, $navbar-pf-navbar-primary-context-bg-color-stop);
           &:hover {
             background-color: $navbar-pf-navbar-primary-context-hover-bg-color-stop;
             border-bottom-color: $navbar-pf-navbar-primary-context-hover-border-color;
             border-right-color: $navbar-pf-navbar-primary-context-hover-border-color;
             border-top-color: $navbar-pf-navbar-primary-context-hover-border-top-color;
-            #gradient @extend .vertical($navbar-pf-navbar-primary-context-hover-bg-color-start, $navbar-pf-navbar-primary-context-hover-bg-color-stop);
+            @include gradient-vertical($navbar-pf-navbar-primary-context-hover-bg-color-start, $navbar-pf-navbar-primary-context-hover-bg-color-stop);
           }
         }
         &.open > a {
@@ -363,7 +363,7 @@
           border-bottom-color: $navbar-pf-navbar-primary-context-active-border-color;
           border-right-color: $navbar-pf-navbar-primary-context-active-border-right-color;
           border-top-color: $navbar-pf-navbar-primary-context-active-border-top-color;
-          #gradient @extend .vertical($navbar-pf-navbar-primary-context-active-bg-color-start, $navbar-pf-navbar-primary-context-active-bg-color-stop);
+          @include gradient-vertical($navbar-pf-navbar-primary-context-active-bg-color-start, $navbar-pf-navbar-primary-context-active-bg-color-stop);
         }
       }
     }

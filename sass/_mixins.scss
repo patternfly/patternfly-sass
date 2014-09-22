@@ -8,25 +8,32 @@
 // Button variants
 @mixin button-variant($color, $background, $background-image-start, $background-image-stop, $border) {
   background-color: $background;
-  #gradient @extend .vertical($background-image-start, $background-image-stop);
+  @include gradient-vertical($background-image-start, $background-image-stop);
   border-color: $border;
   color: $color;
 
   &:hover,
   &:focus,
   &:active,
-  &.active,
-  .open .dropdown-toggle& {
+  &.active {
     background-color: $background;
     background-image: none;
     border-color: $border;
     color: $color;
   }
+  .open & { &.dropdown-toggle {
+    background-color: $background;
+    background-image: none;
+    border-color: $border;
+    color: $color;
+  } }
   &:active,
-  &.active,
-  .open .dropdown-toggle& {
+  &.active {
     background-image: none;
   }
+  .open & { &.dropdown-toggle {
+    background-image: none;
+  } }
   &.disabled,
   &[disabled],
   fieldset[disabled] & {

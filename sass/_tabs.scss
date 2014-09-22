@@ -66,7 +66,7 @@
   > li {
     margin-bottom: 0;
     &.active > a {
-      @extend .tab-indicator($background: $nav-tabs-active-link-hover-color);
+      @include tab-indicator($background: $nav-tabs-active-link-hover-color);
       &,
       &:active,
       &:focus,
@@ -96,7 +96,7 @@
       &:active,
       &:focus,
       &:hover {
-        @extend .tab-indicator
+        @include tab-indicator()
       }
     }
     > .dropdown-menu {

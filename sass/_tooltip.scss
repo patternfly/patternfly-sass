@@ -6,7 +6,7 @@
 .tooltip {
   font-size: $tooltip-font-size;
   
-  &.in { @extend .opacity(.88); }
+  &.in { @include opacity(.88); }
 }
 
 // Wrapper for the tooltip content

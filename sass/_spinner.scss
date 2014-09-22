@@ -12,7 +12,7 @@
   to {transform: rotate(359deg);}
 }
 
-.adjust-huener {
+.spinner {
   -webkit-animation: rotation .6s infinite linear;
   animation: rotation .6s infinite linear;
   border-bottom: 4px solid rgba(0,0,0,.25);
@@ -24,21 +24,21 @@
   margin: 0 auto;
   position: relative;
   width: $font-size-base*2;
-  &.adjust-huener-inline {
+  &.spinner-inline {
     display: inline-block;
     margin-right: 3px;
   }
-  &.adjust-huener-lg {
+  &.spinner-lg {
     border-width: 5px;
     height: $font-size-base*2.5;
     width: $font-size-base*2.5;
   }
-  &.adjust-huener-sm {
+  &.spinner-sm {
     border-width: 3px;
     height: $font-size-base*1.5;
     width: $font-size-base*1.5;
   }
-  &.adjust-huener-xs {
+  &.spinner-xs {
     border-width: 2px;
     height: $font-size-base;
     width: $font-size-base;
@@ -46,17 +46,17 @@
 }
 
 .ie8, .ie9 {
-  .adjust-huener {
-    background: url("$img-path/#{$img-adjust-huener}") no-repeat;
+  .spinner {
+    background: url("#{$img-path}/#{$img-spinner}") no-repeat;
     border: 0;
-    &.adjust-huener-lg {
-      background-image: url(if($bootstrap-sass-asset-helper, twbs-image-path("$img-path/#{$img-adjust-huener-lg}"), "$img-path/#{$img-adjust-huener-lg}"));
+    &.spinner-lg {
+      background-image: url("#{$img-path}/#{$img-spinner-lg}");
     }
-    &.adjust-huener-sm {
-      background-image: url(if($bootstrap-sass-asset-helper, twbs-image-path("$img-path/#{$img-adjust-huener-sm}"), "$img-path/#{$img-adjust-huener-sm}"));
+    &.spinner-sm {
+      background-image: url("#{$img-path}/#{$img-spinner-sm}");
     }
-    &.adjust-huener-xs {
-      background-image: url(if($bootstrap-sass-asset-helper, twbs-image-path("$img-path/#{$img-adjust-huener-xs}"), "$img-path/#{$img-adjust-huener-xs}"));
+    &.spinner-xs {
+      background-image: url("#{$img-path}/#{$img-spinner-xs}");
     }
   }
 }
