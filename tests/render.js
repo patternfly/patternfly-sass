@@ -20,6 +20,20 @@ casper_fs.makeDirectory(dest);
 // TODO need to test on different viewport sizes
 casper.start().each(casper.cli.args, function(self, test) {
   self.thenOpen(host + test, function() {
+    // Disable animations so we don't get jitter in the image comparisons.
+    // Cribbed from phantomcss's turnOffAnimations and
+    // http://codeutopia.net/blog/2014/02/05/tips-for-taking-screenshots-with-phantomjs-casperjs/
+    this.evaluate(function() {
+      var style = document.createElement('style');
+      style.innerHTML = [
+        '* {',
+        'animation: none !important;',
+        'transition: none !important;',
+        '-webkit-animation: none !important;',
+        '-webkit-transition: none !important;',
+        '}'].join('\n');
+      document.body.appendChild(style);
+    });
     var destination = path.join(dest, path.basename(test, '.html'));
     this.capture(destination + '.png');
   });
