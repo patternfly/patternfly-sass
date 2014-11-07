@@ -57,6 +57,12 @@ module.exports = function (grunt) {
         command: "rake 'convert[<%= branch %>]'"
       }
     },
+    clean: {
+      rendered: [
+        'tests/actual/*.png',
+        'tests/reference/*.png',
+        'tests/failures/*.png']
+    },
     sass: {
       dist: {
         options: {
