@@ -59,7 +59,7 @@ module.exports = function (grunt) {
     },
     clean: {
       rendered: [
-        'tests/actual/*.png',
+        'tests/sass/*.png',
         'tests/reference/*.png',
         'tests/failures/*.png']
     },
@@ -90,17 +90,17 @@ module.exports = function (grunt) {
         },
         src: ['tests/render.js']
       },
-      actual: {
+      sass: {
         options: {
           args: testFiles.concat(["--port=" + port]),
-          save: 'tests/actual'
+          save: 'tests/sass'
         },
         src: ['tests/render.js']
       },
       compare: {
         options: {
           test: true,
-          args: ['--reference=tests/reference', '--actual=tests/actual'],
+          args: ['--reference=tests/reference', '--sass=tests/sass'],
           save: 'tests/results'
         },
         src: ['tests/compare.js']
@@ -127,7 +127,7 @@ module.exports = function (grunt) {
   var serveStatic = require('serve-static');
   var serveIndex = require('serve-index');
 
-  grunt.registerTask('reference', 'Serve the reference Patternfly tests.', function(p) {
+  grunt.registerTask('serve:reference', 'Serve the reference Patternfly tests.', function(p) {
     app = connect();
     app.use(serveIndex('tests'));
     app.use('/dist', serveStatic(path.join(projectConfig.src, 'components', 'patternfly', 'dist')));
@@ -140,7 +140,7 @@ module.exports = function (grunt) {
     runServer(app, this, p);
   });
 
-  grunt.registerTask('serve', 'Serve the Patternfly tests using Sass CSS.', function() {
+  grunt.registerTask('serve:sass', 'Serve the Patternfly tests using Sass CSS.', function() {
     app = connect();
     app.use(serveIndex('tests'));
     app.use('/dist/css', serveStatic(path.join(projectConfig.src, 'dist', 'css')));
@@ -172,12 +172,12 @@ module.exports = function (grunt) {
     if (arguments.length == 0) {
       p = port;
     }
-    grunt.task.run('reference:' + p);
+    grunt.task.run('serve:reference:' + p);
     grunt.config('casper.reference.options.args', testFiles.concat(["--port=" + p]));
     grunt.task.run('casper:reference');
   });
 
-  grunt.registerTask('render:actual', ['serve', 'casper:actual']);
+  grunt.registerTask('render:sass', ['serve:sass', 'casper:sass']);
 
   grunt.registerTask('test', "Run tests", function() {
     grunt.task.run('build');
@@ -187,7 +187,7 @@ module.exports = function (grunt) {
     // Looks like other people hit the same issue: https://github.com/gruntjs/grunt-contrib-connect/issues/83
     var p = port + 1;
     grunt.task.run('render:reference:' + p);
-    grunt.task.run('render:actual');
+    grunt.task.run('render:sass');
     grunt.task.run('casper:compare');
   });
 };

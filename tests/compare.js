@@ -1,7 +1,7 @@
 // The casper instance is created by grunt-casper when in test mode 
 var dest = casper.cli.get('save');
 var reference = casper.cli.get('reference');
-var actual = casper.cli.get('actual');
+var sass = casper.cli.get('sass');
 
 var path = require('path');
 
@@ -24,7 +24,7 @@ casper.then(function() {
   for (var i = 0; i < referenceFiles.length; i++) {
     var file = referenceFiles[i];
     var a = path.join('.', reference, file);
-    var b = path.join('.', actual, file);
+    var b = path.join('.', sass, file);
     if (casper_fs.isFile(b)) {
       phantomcss.compareFiles(a, b);
     }

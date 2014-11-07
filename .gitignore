@@ -26,6 +26,6 @@ tmp
 .ruby-version
 
 # Directories with test images
-tests/actual
+tests/sass
 tests/reference
 tests/failures
