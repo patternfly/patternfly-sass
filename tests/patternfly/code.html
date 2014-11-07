@@ -5,7 +5,7 @@
 <html>
 <!--<![endif]-->
   <head>
-    <title>Badges - PatternFly</title>
+    <title>Code - PatternFly</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="shortcut icon" href="../dist/img/favicon.ico">
     <link rel="apple-touch-icon-precomposed" sizes="144x144" href="../dist/img/apple-touch-icon-144-precomposed.png">
@@ -13,7 +13,6 @@
     <link rel="apple-touch-icon-precomposed" sizes="72x72" href="../dist/img/apple-touch-icon-72-precomposed.png">
     <link rel="apple-touch-icon-precomposed" href="../dist/img/apple-touch-icon-57-precomposed.png">
     <link href="../dist/css/patternfly.css" rel="stylesheet" media="screen, print">
-    <link href="tests.css" rel="stylesheet" media="screen, print">
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
     <script src="../components/html5shiv/dist/html5shiv.min.js"></script>
@@ -30,7 +29,7 @@
       <div class="row">
         <div class="col-md-12">
           <div class="page-header">
-            <h1>Badges</h1>
+            <h1>Code</h1>
           </div>
           <div class="alert alert-warning">
              <span class="pficon-layered">
@@ -40,33 +39,17 @@
             These examples are included for development testing purposes.  For official documentation, see <a href="https://www.patternfly.org" class="alert-link">https://www.patternfly.org</a> and <a href="http://getbootstrap.com" class="alert-link">http://getbootstrap.com</a>.
           </div>
           <hr>
-          <a href="#">Inbox <span class="badge">42</span></a>
-          <hr>
-          <ul class="nav nav-pills">
-            <li class="active"><a href="#">Home <span class="badge">42</span></a></li>
-            <li><a href="#">Profile</a></li>
-            <li><a href="#">Messages <span class="badge">3</span></a></li>
-          </ul>
-          <hr>
-          <ul class="nav nav-pills nav-stacked" style="max-width: 260px;">
-            <li class="active">
-              <a href="#">
-                <span class="badge pull-right">42</span>
-                Home
-              </a>
-            </li>
-            <li><a href="#">Profile</a></li>
-            <li>
-              <a href="#">
-                <span class="badge pull-right">3</span>
-                Messages
-              </a>
-            </li>
-          </ul>
-          <hr>
-          <button class="btn btn-primary" type="button">
-            Messages <span class="badge">4</span>
-          </button>
+          <h2>Inline</h2>
+          <p>For example, <code>&lt;section&gt;</code> should be wrapped as inline.</p>
+          <h2>User input</h2>
+          <p>To switch directories, type <kbd>cd</kbd> followed by the name of the directory.<br>
+          To edit settings, press <kbd><kbd>ctrl</kbd> + <kbd>,</kbd></kbd></p>
+          <h2>Basic block</h2>
+          <pre>&lt;p&gt;Sample text here...&lt;/p&gt;</pre>
+          <h2>Variables</h2>
+          <var>y</var> = <var>m</var><var>x</var> + <var>b</var>
+          <h2>Sample output</h2>
+          <samp>This text is meant to be treated as sample output from a computer program.</samp>
         </div><!-- /col -->
       </div><!-- /row -->
     </div><!-- /container -->
