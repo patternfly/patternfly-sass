@@ -49,6 +49,7 @@ module Patternfly
     def process_patternfly_less_assets
       log_status "Processing stylesheets..."
       files = read_files(bootstrap_less_files)
+      files['less/mixin_overrides.less'] = files['less/mixins.less'].dup
       save_to = @save_to[:scss]
 
       files.each do |name, file|
@@ -59,6 +60,11 @@ module Patternfly
         transforms = DEFAULT_TRANSFORMS.dup
         name = File.basename(name)
         case name
+        when 'mixin_overrides.less'
+          button_variant = ".button-variant(.*?)"
+          file = replace_rules(file, button_variant) do |rule, pos|
+            ""
+          end
         when 'patternfly.less'
           transforms = remove_xforms(transforms, :replace_spin)
         when 'variables.less'
@@ -160,6 +166,10 @@ module Patternfly
     def fix_top_level(file)
       file = replace_all(
         file,
+        %r{@import\s+"variables";},
+        "")
+      file = replace_all(
+        file,
         %r{../components/font-awesome/less/font-awesome},
         "#{PATTERNFLY_COMPONENTS}/font-awesome/scss/font-awesome")
       file = replace_all(
@@ -168,12 +178,9 @@ module Patternfly
         "bootstrap-select")
       file = replace_all(
         file,
-        %r{../components/bootstrap/less/bootstrap},
-        "../components/bootstrap-sass-official/vendor/assets/stylesheets/bootstrap")
-      file = replace_all(
-        file,
-        %r{@import\s+"variables";},
-        "")
+        %r{@import\s+"../components/bootstrap/less/bootstrap";},
+        #"../components/bootstrap-sass-official/vendor/assets/stylesheets/bootstrap")
+        fetch_bootstrap_sass)
       file = replace_all(
         file,
         %r{../components/bootstrap-combobox/less/combobox},
@@ -184,9 +191,36 @@ module Patternfly
         @import "variables";
         @import "../components/bootstrap-sass-official/vendor/assets/stylesheets/bootstrap/variables";
         @import "#{PATTERNFLY_COMPONENTS}/font-awesome/scss/variables";
-
       VAR
       variables + file
+    end
+
+    def fetch_bootstrap_sass
+      bootstrap_path = 'components/bootstrap-sass-official/vendor/assets/stylesheets'
+      bootstrap_sass = IO.read(File.join(bootstrap_path, 'bootstrap.scss'))
+
+      bootstrap_sass = replace_all(
+        bootstrap_sass,
+        %r{@import\s+"bootstrap/variables";},
+        ""
+      )
+
+      mixin_location = end_of(bootstrap_sass, %r{@import\s+"bootstrap/mixins";}).first
+      bootstrap_sass = bootstrap_sass[0..mixin_location] + "@import \"mixin_overrides\";\n" + bootstrap_sass[mixin_location..-1]
+
+      bootstrap_sass = replace_all(
+        bootstrap_sass,
+        %r{bootstrap/},
+        File.join("..", bootstrap_path, "bootstrap/"))
+
+      # variables_location = start_of(bootstrap_sass, %r{@import\s+"bootstrap/variables";}).first
+      # bootstrap_sass = bootstrap_sass[0..variables_location] + "@import \"variables\";\n" + bootstrap_sass[variables_location..-1]
+      bootstrap_sass
+    end
+
+    def end_of(s, regex)
+      # Returns an array with the end position of each match
+      s.enum_for(:scan, regex).map { Regexp.last_match.end(0) }
     end
 
     # Override
