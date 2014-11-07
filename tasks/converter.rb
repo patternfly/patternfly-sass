@@ -165,8 +165,7 @@ module Patternfly
       file = replace_all(
         file,
         %r{../components/bootstrap-select/bootstrap-select.css},
-        "bootstrap-select"
-      )
+        "bootstrap-select")
       file = replace_all(
         file,
         %r{../components/bootstrap/less/bootstrap},
@@ -175,6 +174,11 @@ module Patternfly
         file,
         %r{@import\s+"variables";},
         "")
+      file = replace_all(
+        file,
+        %r{../components/bootstrap-combobox/less/combobox},
+        "#{PATTERNFLY_COMPONENTS}/bootstrap-combobox/css/bootstrap-combobox.css")
+
       # Variables need to be declared before they are used.
       variables = <<-VAR.gsub(/^\s*/, '')
         @import "variables";
