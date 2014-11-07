@@ -4,13 +4,64 @@
 /* PatternFly */
 
 /* Bootstrap 3 */
-@import "../components/bootstrap-sass-official/vendor/assets/stylesheets/bootstrap";
+// Core variables and mixins
+
+@import "../components/bootstrap-sass-official/vendor/assets/stylesheets/bootstrap/mixins";
+@import "mixin_overrides";
+
+
+// Reset
+@import "../components/bootstrap-sass-official/vendor/assets/stylesheets/bootstrap/normalize";
+@import "../components/bootstrap-sass-official/vendor/assets/stylesheets/bootstrap/print";
+
+// Core CSS
+@import "../components/bootstrap-sass-official/vendor/assets/stylesheets/bootstrap/scaffolding";
+@import "../components/bootstrap-sass-official/vendor/assets/stylesheets/bootstrap/type";
+@import "../components/bootstrap-sass-official/vendor/assets/stylesheets/bootstrap/code";
+@import "../components/bootstrap-sass-official/vendor/assets/stylesheets/bootstrap/grid";
+@import "../components/bootstrap-sass-official/vendor/assets/stylesheets/bootstrap/tables";
+@import "../components/bootstrap-sass-official/vendor/assets/stylesheets/bootstrap/forms";
+@import "../components/bootstrap-sass-official/vendor/assets/stylesheets/bootstrap/buttons";
+
+// Components
+@import "../components/bootstrap-sass-official/vendor/assets/stylesheets/bootstrap/component-animations";
+@import "../components/bootstrap-sass-official/vendor/assets/stylesheets/bootstrap/glyphicons";
+@import "../components/bootstrap-sass-official/vendor/assets/stylesheets/bootstrap/dropdowns";
+@import "../components/bootstrap-sass-official/vendor/assets/stylesheets/bootstrap/button-groups";
+@import "../components/bootstrap-sass-official/vendor/assets/stylesheets/bootstrap/input-groups";
+@import "../components/bootstrap-sass-official/vendor/assets/stylesheets/bootstrap/navs";
+@import "../components/bootstrap-sass-official/vendor/assets/stylesheets/bootstrap/navbar";
+@import "../components/bootstrap-sass-official/vendor/assets/stylesheets/bootstrap/breadcrumbs";
+@import "../components/bootstrap-sass-official/vendor/assets/stylesheets/bootstrap/pagination";
+@import "../components/bootstrap-sass-official/vendor/assets/stylesheets/bootstrap/pager";
+@import "../components/bootstrap-sass-official/vendor/assets/stylesheets/bootstrap/labels";
+@import "../components/bootstrap-sass-official/vendor/assets/stylesheets/bootstrap/badges";
+@import "../components/bootstrap-sass-official/vendor/assets/stylesheets/bootstrap/jumbotron";
+@import "../components/bootstrap-sass-official/vendor/assets/stylesheets/bootstrap/thumbnails";
+@import "../components/bootstrap-sass-official/vendor/assets/stylesheets/bootstrap/alerts";
+@import "../components/bootstrap-sass-official/vendor/assets/stylesheets/bootstrap/progress-bars";
+@import "../components/bootstrap-sass-official/vendor/assets/stylesheets/bootstrap/media";
+@import "../components/bootstrap-sass-official/vendor/assets/stylesheets/bootstrap/list-group";
+@import "../components/bootstrap-sass-official/vendor/assets/stylesheets/bootstrap/panels";
+@import "../components/bootstrap-sass-official/vendor/assets/stylesheets/bootstrap/wells";
+@import "../components/bootstrap-sass-official/vendor/assets/stylesheets/bootstrap/close";
+
+// Components w/ JavaScript
+@import "../components/bootstrap-sass-official/vendor/assets/stylesheets/bootstrap/modals";
+@import "../components/bootstrap-sass-official/vendor/assets/stylesheets/bootstrap/tooltip";
+@import "../components/bootstrap-sass-official/vendor/assets/stylesheets/bootstrap/popovers";
+@import "../components/bootstrap-sass-official/vendor/assets/stylesheets/bootstrap/carousel";
+
+// Utility classes
+@import "../components/bootstrap-sass-official/vendor/assets/stylesheets/bootstrap/utilities";
+@import "../components/bootstrap-sass-official/vendor/assets/stylesheets/bootstrap/responsive-utilities";
+
 
 /* Font Awesome */
 @import "../components/patternfly/components/font-awesome/scss/font-awesome";
 
 /* Bootstrap-Combobox */
-@import "../components/bootstrap-combobox/less/combobox";
+@import "../components/patternfly/components/bootstrap-combobox/css/bootstrap-combobox.css";
 
 /* Bootstrap-Select */
 @import "bootstrap-select";
