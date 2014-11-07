@@ -2,10 +2,16 @@
 *.sublime-workspace
 *.sublime-project
 
+# Ignore WebStorm files
+.idea
+
 # Ignore vim files
 *.swp
 *.swn
 *.swo
+
+# Ignore work-in-progress type files
+*.patch
 
 # Ignore local nodejs packages
 node_modules/
