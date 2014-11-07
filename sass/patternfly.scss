@@ -9,6 +9,9 @@
 /* Font Awesome */
 @import "../components/patternfly/components/font-awesome/scss/font-awesome";
 
+/* Bootstrap-Combobox */
+@import "../components/bootstrap-combobox/less/combobox";
+
 /* Bootstrap-Select */
 @import "bootstrap-select";
 
@@ -17,6 +20,7 @@
 @import "mixins";
 @import "alerts";
 @import "badges";
+@import "bootstrap-combobox";
 @import "bootstrap-select";
 @import "bootstrap-treeview";
 @import "breadcrumbs";
