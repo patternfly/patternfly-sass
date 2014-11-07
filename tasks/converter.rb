@@ -9,13 +9,17 @@ module Patternfly
     PATTERNFLY_COMPONENTS = "../components/patternfly/components"
 
     # Override
-    def initialize(repo: 'patternfly/patternfly',
-      cache_path: 'tmp/converter-cache-patternfly',
-      branch: 'master',
-      test_dir: 'tests/patternfly')
-      super(:repo => repo, :cache_path => cache_path)
+    def initialize(options)
+      defaults = {
+        :branch => 'master',
+        :repo => 'patternfly/patternfly',
+        :cache_path => 'tmp/converter-cache-patternfly',
+        :test_dir => 'tests/patternfly'
+      }
+      options = defaults.merge(options)
+      super(:repo => options[:repo], :cache_path => options[:cache_path])
       @save_to = {:scss => 'sass'}
-      @test_dir = test_dir
+      @test_dir = options[:test_dir]
       get_trees(PATTERNFLY_LESS_ROOT, BOOTSTRAP_LESS_ROOT, 'components/bootstrap-select', 'tests')
     end
 
