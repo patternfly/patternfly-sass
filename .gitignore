@@ -26,6 +26,7 @@ npm.cmd
 build
 .sass-cache
 tmp
+dist
 
 # RVM files
 .ruby-gemset

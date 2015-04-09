@@ -7,6 +7,16 @@
 
 
 
+// Form control outline
+@mixin form-control-outline($color: $input-border-focus) {
+  $color-rgba: rgba(red($color), green($color), blue($color), .6);
+  &:focus {
+    border-color: $color;
+    outline: 0 !important;
+    @include box-shadow(#{inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px #{$color-rgba}});
+  }
+}
+
 // Gradients
 #gradient {
   @mixin striped($color: rgba(0,0,0,.15), $angle: -45deg) {
