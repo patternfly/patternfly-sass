@@ -78,10 +78,17 @@ module Patternfly
         # Special cases go here
         case name
         when 'mixins.less'
+          NESTED_MIXINS.each do |selector, prefix|
+            file = flatten_mixins(file, selector, prefix)
+          end
           file = replace_all(
             file,
             /,\s*\.open\s+\.dropdown-toggle& \{(.*?)\}/m,
             " {\\1}\n  .open & { &.dropdown-toggle {\\1} }")
+        when 'mixin_overrides.less'
+          NESTED_MIXINS.each do |selector, prefix|
+            file = flatten_mixins(file, selector, prefix)
+          end
         when 'patternfly.less'
           file = fix_top_level(file)
           # This is a hack.  We want bootstrap-select to be placed in
