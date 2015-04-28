@@ -14,9 +14,13 @@ bower install patternfly
 
 PatternFly is also available as an RPM.  See https://copr.fedoraproject.org/coprs/patternfly/patternfly1/.
 
+## Dependencies
+
+PatternFly incorporates other libraries and components; therefore, in addition to the contents of `dist`, the contents of `components` are also required for a complete installation of PatternFly.
+
 ## Development
 
-Development setup requires nodejs. If you do not already have nodejs and npm installed on your system, please see https://github.com/joyent/node/wiki/Installing-Node.js-via-package-manager for how to install on your distribution.
+Development setup requires nodejs and Ruby. If you do not already have nodejs, npm, and Ruby installed on your system, see https://github.com/joyent/node/wiki/Installing-Node.js-via-package-manager and https://www.ruby-lang.org/en/downloads.
 
 ### Install Bower
 
@@ -38,13 +42,17 @@ Additionally you may need to install the grunt command line utility.  To do this
 
     npm install -g grunt-cli
 
+Test pages are generated using [Jekyll](http://jekyllrb.com/).  After ensuring Ruby is installed and available, run:
+
+    gem install jekyll
+
 ### Live Reload Server
 
 A local development server can be quickly fired up by using the Gruntjs server task:
 
     grunt server
 
-This local static asset server (i.e., [http://localhost:9000](http://localhost:9000)) has the advantage of having livereload integration. Thus, if you start the Gruntjs server, any changes you make to `.html` or `.less` files will be automatically reloaded into your browser and the changes reflected almost immediately. This has the obvious benefit of not having to refresh your browser and still be able to see the changes as you add or remove them from your development files.
+This local static asset server (i.e., [http://localhost:9000](http://localhost:9000)) has the advantage of having livereload integration. Thus, if you start the Gruntjs server, any changes you make to `.html` or `.less` files will be automatically reloaded into your browser and the changes reflected almost immediately. This has the obvious benefit of not having to refresh your browser and still be able to see the changes as you add or remove them from your development files.  Additionally, any changes made to Jekyll source files (`tests-src/`) will trigger a Jekyll build.
 
 ### Coding Style
 
@@ -77,6 +85,8 @@ PatternFlyIcons font is generated using [IcoMoon](http://icomoon.io/app).  [Load
 ## Tests
 
 The `tests/` directory contains HTML pages with component and pattern examples in order to facilitate development.  Please consult the official documentation (see below) for full details on how to use PatternFly.
+
+The HTML pages in `tests/` are generated using Jekyll.  Do *not* edit these files directly.  See `tests-src/` to change these files.
 
 ## Release
 
@@ -134,9 +144,9 @@ Make the dist:
 make dist
 ```
 
-Copy the resulting tarball from the previous step to your rpmbuild/SOURCES directly.
+Copy the resulting tarball from the previous step to your rpmbuild/SOURCES directory.
 
-e.g., `cp patternfly1-1.0.3-0.0.master.fc20.src.rpm ~/rpmbuild/SOURCES`
+e.g., `cp patternfly-1.1.1.tar.gz ~/rpmbuild/SOURCES`
 
 Build the RPM:
 
@@ -146,7 +156,7 @@ rpmbuild -ba patternfly.spec
 
 Upload the source RPM [1] to a public web server.
 
-[1] e.g., ~/rpmbuild/SRPMS/patternfly1-1.0.3-0.0.master.fc20.src.rpm
+[1] e.g., ~/rpmbuild/SRPMS/patternfly1-1.1.1-1.fc20.src.rpm
 
 Ask @rhamilto or @EmilyDirsh to add a new build on [Fedora Copr](https://copr.fedoraproject.org/coprs/patternfly/patternfly1/add_build/) using the URL created in the previous step.
 
@@ -162,6 +172,10 @@ PACKAGE_RPM_RELEASE=0.0.$(MILESTONE)
 ## Documentation
 
 See [https://www.patternfly.org](https://www.patternfly.org) and [http://getbootstrap.com/](http://getbootstrap.com/).
+
+### Browser and Device Support
+
+Since PatternFly is based on Bootstrap, PatternFly supports [the same browsers as Bootstrap](http://getbootstrap.com/getting-started/#support), plus the latest version of [Firefox for Linux](https://support.mozilla.org/en-US/kb/install-firefox-linux).
 
 ### Product Backlog
 
