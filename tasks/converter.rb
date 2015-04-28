@@ -20,7 +20,7 @@ module Patternfly
       super(:repo => options[:repo], :cache_path => options[:cache_path])
       @save_to = {:scss => 'sass'}
       @test_dir = options[:test_dir]
-      get_trees(PATTERNFLY_LESS_ROOT, BOOTSTRAP_LESS_ROOT, 'components/bootstrap-select', 'tests')
+      get_trees(PATTERNFLY_LESS_ROOT, BOOTSTRAP_LESS_ROOT, 'components/bootstrap-select', 'components/bootstrap-combobox', 'tests')
     end
 
     def process_patternfly
@@ -89,9 +89,9 @@ module Patternfly
           # when that file has a '.css' extension.  Sass just uses a @import
           # statement.  This method moves the bootstrap-select.css into our
           # output directory and renames it with a '.scss' extension.
-          add_to_dist(
-            "bootstrap-select/bootstrap-select.css",
-            "_bootstrap-select.scss")
+          add_to_dist("bootstrap-select/bootstrap-select.css", "_bootstrap-select.scss")
+          # Similar solution for the bootstrap-combobox
+          add_to_dist("bootstrap-combobox/css/bootstrap-combobox.css", "_bootstrap-combobox-css.scss")
         end
 
         name_out = "#{File.basename(name, ".less")}.scss"
@@ -181,10 +181,11 @@ module Patternfly
         %r{@import\s+"../components/bootstrap/less/bootstrap";},
         #"../components/bootstrap-sass-official/vendor/assets/stylesheets/bootstrap")
         fetch_bootstrap_sass)
+
       file = replace_all(
         file,
         %r{../components/bootstrap-combobox/less/combobox},
-        "#{PATTERNFLY_COMPONENTS}/bootstrap-combobox/css/bootstrap-combobox.css")
+        "bootstrap-combobox-css")
 
       # Variables need to be declared before they are used.
       variables = <<-VAR.gsub(/^\s*/, '')
