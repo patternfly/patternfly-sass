@@ -38,4 +38,12 @@ casper.then(function() {
   }
 });
 
-casper.run();
+// Workaround to exit with failure when some comparisons were unsuccessful
+var fail = false;
+casper.run(function() {
+  if (fail) this.exit(1);
+  else this.exit(0);
+});
+casper.test.on('fail', function (failure) {
+    fail = true;
+});

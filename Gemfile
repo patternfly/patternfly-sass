@@ -6,3 +6,7 @@ gem 'bootstrap-sass', '3.1.1'
 group :development do
   gem 'term-ansicolor'
 end
+
+group :test do
+  gem 'rake'
+end
