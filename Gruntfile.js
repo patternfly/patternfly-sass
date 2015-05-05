@@ -66,7 +66,8 @@ module.exports = function (grunt) {
     sass: {
       dist: {
         options: {
-          style: 'nested'
+          style: 'nested',
+          precision: 8
         },
         files: {
           'dist/css/patternfly.css': 'sass/patternfly.scss'
