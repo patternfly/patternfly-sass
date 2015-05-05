@@ -96,7 +96,7 @@ module Patternfly
           # when that file has a '.css' extension.  Sass just uses a @import
           # statement.  This method moves the bootstrap-select.css into our
           # output directory and renames it with a '.scss' extension.
-          add_to_dist("bootstrap-select/bootstrap-select.css", "_bootstrap-select.scss")
+          add_to_dist("bootstrap-select/bootstrap-select.css", "_bootstrap-select-css.scss")
           # Similar solution for the bootstrap-combobox
           add_to_dist("bootstrap-combobox/css/bootstrap-combobox.css", "_bootstrap-combobox-css.scss")
         end
@@ -182,7 +182,7 @@ module Patternfly
       file = replace_all(
         file,
         %r{../components/bootstrap-select/bootstrap-select.css},
-        "bootstrap-select")
+        "bootstrap-select-css")
       file = replace_all(
         file,
         %r{@import\s+"../components/bootstrap/less/bootstrap";},
