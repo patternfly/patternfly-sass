@@ -1,4 +1,7 @@
-# Developer Set-Up
+#patternfly-sass
+[![Build Status](https://travis-ci.org/patternfly/patternfly-sass.svg)](https://travis-ci.org/patternfly/patternfly-sass)
+
+## Developer Set-Up
 For more specific instructions on Fedora, see
 [Fedora Specific Set-Up](#fedora-setup).
 
@@ -26,11 +29,11 @@ For more specific instructions on Fedora, see
    ```
 
 <a name="fedora-setup"></a>
-## Fedora Specific Set-Up
+### Fedora Specific Set-Up
 These steps are current as of Fedora 20.
 
 For the NodeJs dependencies:
- 
+
 ```sh
 $ sudo yum install -y nodejs-grunt-cli npm
 ```
