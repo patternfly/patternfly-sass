@@ -28,6 +28,9 @@ module.exports = function (grunt) {
   // grunt --port=9001 serve
   var port = grunt.option('port') || 9000;
 
+  // You can specify a branch or even a version by appending: --branch=tags/vx.y.z
+  var branch = grunt.option('branch') || 'master';
+
   grunt.initConfig({
     config: projectConfig,
     clean: {
@@ -54,7 +57,7 @@ module.exports = function (grunt) {
     },
     shell: {
       rake: {
-        command: "rake 'convert[<%= branch %>]'"
+        command: "rake 'convert["+branch+"]'"
       }
     },
     clean: {
@@ -108,9 +111,6 @@ module.exports = function (grunt) {
       }
     }
   });
-
-  // TODO Make this specific to the shell task
-  var branch = grunt.option('branch') || 'master';
 
   grunt.registerTask('server', [
     'connect:server',

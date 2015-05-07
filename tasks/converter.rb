@@ -17,7 +17,7 @@ module Patternfly
         :test_dir => 'tests/patternfly'
       }
       options = defaults.merge(options)
-      super(:repo => options[:repo], :cache_path => options[:cache_path])
+      super(:repo => options[:repo], :cache_path => options[:cache_path], :branch => options[:branch])
       @save_to = {:scss => 'sass'}
       @test_dir = options[:test_dir]
       get_trees(PATTERNFLY_LESS_ROOT, BOOTSTRAP_LESS_ROOT, 'components/bootstrap-select', 'components/bootstrap-combobox', 'tests')
@@ -400,6 +400,17 @@ module Patternfly
         contents.merge!(full_path_contents)
       end
       contents
+    end
+
+    # Override
+    def get_branch_sha
+      @branch_sha ||= begin
+        cmd = "git ls-remote #{Shellwords.escape "https://github.com/#@repo"} #@branch"
+        log cmd
+        result = %x[#{cmd}]
+        raise 'Could not get branch sha!' unless $?.success? && !result.empty?
+        result.split(/\s+/).first
+      end
     end
   end
 end
