@@ -10,4 +10,5 @@ end
 group :test do
   gem 'rake'
   gem 'webrick'
+  gem 'imgur-api'
 end
