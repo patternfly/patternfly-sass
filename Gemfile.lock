@@ -3,6 +3,13 @@ GEM
   specs:
     bootstrap-sass (3.1.1.0)
       sass (~> 3.2)
+    httparty (0.13.3)
+      json (~> 1.8)
+      multi_xml (>= 0.5.2)
+    imgur-api (0.0.4)
+      httparty
+    json (1.8.2)
+    multi_xml (0.5.5)
     rake (10.4.2)
     sass (3.4.3)
     term-ansicolor (1.3.0)
@@ -15,6 +22,7 @@ PLATFORMS
 
 DEPENDENCIES
   bootstrap-sass (= 3.1.1)
+  imgur-api
   rake
   sass (~> 3.2)
   term-ansicolor

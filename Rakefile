@@ -46,4 +46,17 @@ task :serve do
   server.start
 end
 
+task :upload do
+  require 'imgur'
+  require 'term/ansicolor'
+
+  client = Imgur.new ENV['IMGUR_ID']
+  images = Dir["tests/failures/*.png"].map { |img| client.upload Imgur::LocalImage.new(img, :title => img.sub('.png', '')) }
+
+  unless images.empty?
+    album = client.new_album(images, :title => "patternfly-sass build ##{ENV['TRAVIS_BUILD_NUMBER']} failures #{Time.now}")
+    puts Term::ANSIColor.bold "Failure image diffs uploaded to: #{Term::ANSIColor.red album.link}"
+  end
+end
+
 task default: :convert
