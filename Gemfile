@@ -9,4 +9,5 @@ end
 
 group :test do
   gem 'rake'
+  gem 'webrick'
 end
