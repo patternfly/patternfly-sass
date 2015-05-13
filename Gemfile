@@ -10,4 +10,8 @@ end
 group :test do
   gem 'rake'
   gem 'webrick'
+  gem 'rspec'
+  gem 'nokogiri'
+  gem 'rmagick'
+  gem 'imgur-api'
 end
