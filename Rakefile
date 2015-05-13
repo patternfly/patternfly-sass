@@ -5,15 +5,17 @@ task :convert, [:branch] do |t, args|
   Patternfly::Converter.new(:branch => branch).process_patternfly
 end
 
+desc "Compile patternfly-sass into CSS"
 task :compile do
   require 'sass'
+  require 'fileutils'
   require 'term/ansicolor'
 
   Sass::Script::Number.precision = 8
 
   path = 'sass'
   css_path = 'dist/css'
-  Dir.mkdir(css_path) unless File.directory?(css_path)
+  FileUtils.mkdir_p(css_path)
 
   puts Term::ANSIColor.bold "Compiling SCSS in #{path}"
 
