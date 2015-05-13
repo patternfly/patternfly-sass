@@ -1,10 +1,15 @@
 GEM
   remote: https://rubygems.org/
   specs:
-    bootstrap-sass (3.1.1.0)
-      sass (~> 3.2)
+    autoprefixer-rails (5.1.11)
+      execjs
+      json
+    bootstrap-sass (3.3.4.1)
+      autoprefixer-rails (>= 5.0.0.1)
+      sass (>= 3.2.19)
     diff-lcs (1.2.5)
-    httparty (0.13.3)
+    execjs (2.5.2)
+    httparty (0.13.4)
       json (~> 1.8)
       multi_xml (>= 0.5.2)
     imgur-api (0.0.4)
@@ -39,7 +44,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  bootstrap-sass (= 3.1.1)
+  bootstrap-sass (~> 3.3.4)
   imgur-api
   nokogiri
   rake

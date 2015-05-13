@@ -43,13 +43,13 @@
 .dropdown-menu > li > a {
   &:hover, &:focus {
     border-color: $dropdown-link-hover-border-color;
-    @include reset-filter();
+    @include reset-filter;
   }
   &:active {
     background-color: $dropdown-link-focus-bg;
     border-color: $dropdown-link-active-border-color;
     color: $dropdown-link-focus-color !important;
-    @include reset-filter();
+    @include reset-filter;
   }
 }
 
@@ -60,7 +60,7 @@
   &:focus {
     background-color: $dropdown-link-active-bg !important;
     border-color: $dropdown-link-active-border-color !important;
-    @include reset-filter();
+    @include reset-filter;
   }
 }
 

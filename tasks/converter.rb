@@ -186,7 +186,7 @@ module Patternfly
       file = replace_all(
         file,
         %r{@import\s+"../components/bootstrap/less/bootstrap";},
-        #"../components/bootstrap-sass-official/vendor/assets/stylesheets/bootstrap")
+        #"../components/bootstrap-sass-official/assets/stylesheets/bootstrap")
         fetch_bootstrap_sass)
 
       file = replace_all(
@@ -197,15 +197,15 @@ module Patternfly
       # Variables need to be declared before they are used.
       variables = <<-VAR.gsub(/^\s*/, '')
         @import "variables";
-        @import "../components/bootstrap-sass-official/vendor/assets/stylesheets/bootstrap/variables";
+        @import "../components/bootstrap-sass-official/assets/stylesheets/bootstrap/variables";
         @import "#{PATTERNFLY_COMPONENTS}/font-awesome/scss/variables";
       VAR
       variables + file
     end
 
     def fetch_bootstrap_sass
-      bootstrap_path = 'components/bootstrap-sass-official/vendor/assets/stylesheets'
-      bootstrap_sass = IO.read(File.join(bootstrap_path, 'bootstrap.scss'))
+      bootstrap_path = 'components/bootstrap-sass-official/assets/stylesheets'
+      bootstrap_sass = IO.read(File.join(bootstrap_path, '_bootstrap.scss'))
 
       bootstrap_sass = replace_all(
         bootstrap_sass,
@@ -297,7 +297,7 @@ module Patternfly
       mixin_hash = {}
       [BOOTSTRAP_LESS_ROOT, PATTERNFLY_LESS_ROOT].each do |root|
         mixin_hash[root] = read_files(
-          get_paths_by_type(root, /mixins\.less$/)).values.join("\n")
+          get_paths_by_type(root, /mixins(\/)|(\.less)/)).values.join("\n")
       end
       @shared_mixins ||= begin
         read_mixins(mixin_hash.values.join("\n"), :nested => NESTED_MIXINS)
