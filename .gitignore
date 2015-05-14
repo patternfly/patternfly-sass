@@ -34,5 +34,6 @@ dist
 
 # Directories with test images
 tests/sass
+tests/less
 tests/reference
 tests/failures
