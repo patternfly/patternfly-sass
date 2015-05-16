@@ -12,3 +12,4 @@ after_failure:
   - bundle exec rake upload
 after_script:
   - kill -2 $PID
+  - sleep 3
