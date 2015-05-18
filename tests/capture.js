@@ -12,6 +12,7 @@ if (args.length === 5) {
   var output = args[4];
   var page = require('webpage').create();
   page.viewportSize = { width: width, height: height };
+  page.settings.resourceTimeout = 2000;
   page.open(url, function() {
     page.evaluate(function() {
       var style = document.createElement('style');
