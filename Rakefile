@@ -38,10 +38,12 @@ task :serve do
   server = WEBrick::HTTPServer.new :Port => 9000, :DirectoryIndex => []
   {
     '/'                => 'tests/index.html',
-    '/less/dist'       => 'components/patternfly/dist',
+    '/less/dist'       => 'tests/patternfly/dist',
     '/less/components' => 'components/patternfly/components',
     '/less/patternfly' => 'tests/patternfly',
-    '/sass/dist'       => 'components/patternfly/dist',
+    '/sass/dist/fonts' => 'tests/patternfly/dist/fonts',
+    '/sass/dist/img'   => 'tests/patternfly/dist/img',
+    '/sass/dist/js'    => 'tests/patternfly/dist/js',
     '/sass/dist/css'   => 'dist/css',
     '/sass/components' => 'components/patternfly/components',
     '/sass/patternfly' => 'tests/patternfly'

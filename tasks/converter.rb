@@ -20,7 +20,7 @@ module Patternfly
       super(:repo => options[:repo], :cache_path => options[:cache_path], :branch => options[:branch])
       @save_to = {:scss => 'sass'}
       @test_dir = options[:test_dir]
-      get_trees(PATTERNFLY_LESS_ROOT, BOOTSTRAP_LESS_ROOT, 'components/bootstrap-select', 'components/bootstrap-combobox', 'tests')
+      get_trees(PATTERNFLY_LESS_ROOT, BOOTSTRAP_LESS_ROOT, 'components/bootstrap-select', 'components/bootstrap-combobox', 'tests', 'dist')
     end
 
     def process_patternfly
@@ -261,8 +261,10 @@ module Patternfly
     def cache_tests
       FileUtils.mkdir_p(@test_dir)
       test_files = get_paths_by_directory('tests')
+      dist_files = get_paths_by_directory('dist')
       test_contents = read_files(test_files)
-      test_contents.each do |file, content|
+      dist_contents = fixup_path(read_files(dist_files))
+      test_contents.merge(dist_contents).each do |file, content|
         # We go through all this rigmarole so we can save the tests and their
         # directory structure in a root of our choosing.
         top = ""
@@ -280,6 +282,10 @@ module Patternfly
         end
         save_file(save_path, content)
       end
+    end
+
+    def fixup_path(hash)
+      Hash[hash.map { |k, v| ["dist/#{k}", v] }]
     end
 
     # Override
