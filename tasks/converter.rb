@@ -1,5 +1,5 @@
-bootstrap_sass = Gem::Specification.find_by_name("bootstrap-sass").gem_dir
-require "#{bootstrap_sass}/tasks/converter"
+BOOTSTRAP_GEM_ROOT = Gem::Specification.find_by_name("bootstrap-sass").gem_dir
+require "#{BOOTSTRAP_GEM_ROOT}/tasks/converter"
 require 'pathname'
 
 module Patternfly
@@ -186,7 +186,6 @@ module Patternfly
       file = replace_all(
         file,
         %r{@import\s+"../components/bootstrap/less/bootstrap";},
-        #"../components/bootstrap-sass-official/assets/stylesheets/bootstrap")
         fetch_bootstrap_sass)
 
       file = replace_all(
@@ -197,15 +196,14 @@ module Patternfly
       # Variables need to be declared before they are used.
       variables = <<-VAR.gsub(/^\s*/, '')
         @import "variables";
-        @import "../components/bootstrap-sass-official/assets/stylesheets/bootstrap/variables";
+        @import "bootstrap/variables";
         @import "#{PATTERNFLY_COMPONENTS}/font-awesome/scss/variables";
       VAR
       variables + file
     end
 
     def fetch_bootstrap_sass
-      bootstrap_path = 'components/bootstrap-sass-official/assets/stylesheets'
-      bootstrap_sass = IO.read(File.join(bootstrap_path, '_bootstrap.scss'))
+      bootstrap_sass = IO.read(File.join(BOOTSTRAP_GEM_ROOT, 'assets', 'stylesheets', '_bootstrap.scss'))
 
       bootstrap_sass = replace_all(
         bootstrap_sass,
@@ -215,14 +213,6 @@ module Patternfly
 
       mixin_location = end_of(bootstrap_sass, %r{@import\s+"bootstrap/mixins";}).first
       bootstrap_sass = bootstrap_sass[0..mixin_location] + "@import \"mixin_overrides\";\n" + bootstrap_sass[mixin_location..-1]
-
-      bootstrap_sass = replace_all(
-        bootstrap_sass,
-        %r{bootstrap/},
-        File.join("..", bootstrap_path, "bootstrap/"))
-
-      # variables_location = start_of(bootstrap_sass, %r{@import\s+"bootstrap/variables";}).first
-      # bootstrap_sass = bootstrap_sass[0..variables_location] + "@import \"variables\";\n" + bootstrap_sass[variables_location..-1]
       bootstrap_sass
     end
 
