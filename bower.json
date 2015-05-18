@@ -18,7 +18,6 @@
     "Gruntfile.js"
   ],
   "devDependencies": {
-    "patternfly": "~1.1.4",
-    "bootstrap-sass-official": "3.3.4"
+    "patternfly": "~1.1.4"
   }
 }

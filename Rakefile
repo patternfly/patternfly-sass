@@ -14,7 +14,10 @@ task :compile do
   require 'fileutils'
   require 'term/ansicolor'
 
+  BOOTSTRAP_GEM_ROOT = Gem::Specification.find_by_name("bootstrap-sass").gem_dir
+
   Sass::Script::Number.precision = 8
+  Sass.load_paths << File.join(BOOTSTRAP_GEM_ROOT, 'assets', 'stylesheets')
 
   path = 'sass'
   css_path = 'dist/css'
