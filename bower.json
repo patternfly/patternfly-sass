@@ -16,9 +16,5 @@
     "tests",
     "package.json",
     "Gruntfile.js"
-  ],
-  "devDependencies": {
-    "patternfly": "~1.1.4",
-    "bootstrap-sass-official": "3.3.4"
-  }
+  ]
 }
