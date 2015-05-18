@@ -31,6 +31,7 @@
     font-weight: normal;
     margin-bottom: 5px;
     margin-top: 5px;
+    padding-left: 20px;
   }
 }
 
@@ -109,7 +110,7 @@
         width: 31px;
         &:hover,
         &:focus {
-          @include reset-filter();
+          @include reset-filter;
         }
       }
       &.last > span {
@@ -119,7 +120,7 @@
         background: #f5f5f5;
         border-left-color: #ececec;
         border-right-color: #ececec;
-        @include reset-filter();
+        @include reset-filter;
       }
     }
   }

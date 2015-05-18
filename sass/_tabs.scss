@@ -96,7 +96,7 @@
       &:active,
       &:focus,
       &:hover {
-        @include tab-indicator()
+        @include tab-indicator
       }
     }
     > .dropdown-menu {
