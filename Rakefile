@@ -56,6 +56,8 @@ end
 desc "Clean up the test results"
 task :cleanup do
   require 'fileutils'
+  FileUtils.rm_rf 'tmp'
+  FileUtils.rm_rf '.sass-cache'
   FileUtils.rm_rf 'tests/less'
   FileUtils.rm_rf 'tests/sass'
   FileUtils.rm_rf 'tests/failures'
