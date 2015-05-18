@@ -1,6 +1,6 @@
 @import "variables";
 @import "bootstrap/variables";
-@import "../components/patternfly/components/font-awesome/scss/variables";
+@import "font-awesome/variables";
 /* PatternFly */
 
 /* Bootstrap 3 */
@@ -59,7 +59,7 @@
 
 
 /* Font Awesome */
-@import "../components/patternfly/components/font-awesome/scss/font-awesome";
+@import "font-awesome";
 
 /* Bootstrap-Combobox */
 @import "bootstrap-combobox-css";

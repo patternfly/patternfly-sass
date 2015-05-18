@@ -178,7 +178,7 @@ module Patternfly
       file = replace_all(
         file,
         %r{../components/font-awesome/less/font-awesome},
-        "#{PATTERNFLY_COMPONENTS}/font-awesome/scss/font-awesome")
+        "font-awesome")
       file = replace_all(
         file,
         %r{../components/bootstrap-select/bootstrap-select.css},
@@ -197,7 +197,7 @@ module Patternfly
       variables = <<-VAR.gsub(/^\s*/, '')
         @import "variables";
         @import "bootstrap/variables";
-        @import "#{PATTERNFLY_COMPONENTS}/font-awesome/scss/variables";
+        @import "font-awesome/variables";
       VAR
       variables + file
     end

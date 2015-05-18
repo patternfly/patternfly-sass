@@ -9,6 +9,8 @@ GEM
       sass (>= 3.2.19)
     diff-lcs (1.2.5)
     execjs (2.5.2)
+    font-awesome-sass (4.2.2)
+      sass (~> 3.2)
     httparty (0.13.4)
       json (~> 1.8)
       multi_xml (>= 0.5.2)
@@ -45,6 +47,7 @@ PLATFORMS
 
 DEPENDENCIES
   bootstrap-sass (~> 3.3.4)
+  font-awesome-sass (~> 4.2.0)
   imgur-api
   nokogiri
   rake

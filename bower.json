@@ -16,8 +16,5 @@
     "tests",
     "package.json",
     "Gruntfile.js"
-  ],
-  "devDependencies": {
-    "patternfly": "~1.1.4"
-  }
+  ]
 }
