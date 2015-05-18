@@ -10,7 +10,7 @@ end
 
 group :test do
   gem 'rake'
-  gem 'webrick'
+  gem 'thin'
   gem 'rspec'
   gem 'nokogiri'
   gem 'rmagick'

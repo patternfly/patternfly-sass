@@ -39,23 +39,9 @@ end
 
 desc "Start a web server with both the less and the sass version"
 task :serve do
-  require 'webrick'
-  server = WEBrick::HTTPServer.new :Port => 9000, :DirectoryIndex => []
-  {
-    '/'                => 'tests/index.html',
-    '/less/dist'       => 'tests/patternfly/dist',
-    '/less/components' => 'components/patternfly/components',
-    '/less/patternfly' => 'tests/patternfly',
-    '/sass/dist/fonts' => 'tests/patternfly/dist/fonts',
-    '/sass/dist/img'   => 'tests/patternfly/dist/img',
-    '/sass/dist/js'    => 'tests/patternfly/dist/js',
-    '/sass/dist/css'   => 'dist/css',
-    '/sass/components' => 'components/patternfly/components',
-    '/sass/patternfly' => 'tests/patternfly'
-  }.each { |http, local| server.mount http, WEBrick::HTTPServlet::FileHandler, local }
-
-  trap('INT') { server.stop }
-  server.start
+  require 'rack'
+  app, _ = Rack::Builder.parse_file('config.ru')
+  Rack::Handler::Thin.run(app, :Port => 9000)
 end
 
 desc "Clean up the test results"
@@ -68,27 +54,11 @@ task :cleanup do
   FileUtils.rm_rf 'tests/failures'
 end
 
-desc "Run the tests with a web server"
-task :test do
-  pid = Process.fork do
-    puts "Starting web server on port 9000"
-    $stdout.reopen('/dev/null', 'w')
-    $stderr.reopen('/dev/null', 'w')
-    Rake::Task[:serve].invoke
-    puts "Stopping web server on port 9000"
-  end
-  sleep(3) # Give some time for the web server to start
-  puts "Starting the tests against the web server"
-  Rake::Task[:spec].invoke
-  Process.kill('INT', pid)
-end
+desc "Run the tests"
+task :test => :spec
 
 desc "Run the tests without a web server"
-RSpec::Core::RakeTask.new(:spec) do |t|
-  Rake::Task[:cleanup].invoke
-  FileUtils.mkdir_p 'tests/less'
-  FileUtils.mkdir_p 'tests/sass'
-  FileUtils.mkdir_p 'tests/failures'
+RSpec::Core::RakeTask.new(:spec => :cleanup) do |t|
   t.pattern = Dir.glob('spec/**/*_spec.rb')
 end
 
