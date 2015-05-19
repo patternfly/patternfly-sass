@@ -25,8 +25,10 @@ if (args.length === 5) {
         '}'].join('\n');
       document.body.appendChild(style);
     });
-    page.render(output);
-    phantom.exit();
+    window.setTimeout(function () {
+      page.render(output);
+      phantom.exit();
+    }, 200);
   });
 } else {
   console.log("Invalid argument!");
