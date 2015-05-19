@@ -13,7 +13,11 @@ if (args.length === 5) {
   var page = require('webpage').create();
   page.viewportSize = { width: width, height: height };
   page.settings.resourceTimeout = 2000;
-  page.open(url, function() {
+  page.open(url, function(status) {
+    if (status == "fail") {
+      console.log("Opening " + url + " failed");
+      phantom.exit();
+    }
     page.evaluate(function() {
       var style = document.createElement('style');
       style.innerHTML = [
