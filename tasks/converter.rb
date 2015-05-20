@@ -272,6 +272,11 @@ module Patternfly
         end
         save_file(save_path, content)
       end
+      # Load external dependencies for testing
+      `bower install`
+      # This is a workaround for removing the obsoletely installed bootstrap and jquery
+      FileUtils.rm_rf 'tests/components/bootstrap'
+      FileUtils.rm_rf 'tests/components/jquery'
     end
 
     def fixup_path(hash)

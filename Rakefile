@@ -1,6 +1,9 @@
 require 'rake'
 require 'rspec/core/rake_task'
 
+BOOTSTRAP_GEM_ROOT = Gem::Specification.find_by_name("bootstrap-sass").gem_dir
+FONTAWESOME_GEM_ROOT = Gem::Specification.find_by_name("font-awesome-sass").gem_dir
+
 desc "Convert LESS to SCSS"
 task :convert, [:branch] do |_, args|
   require './tasks/converter'
@@ -14,8 +17,6 @@ task :compile do
   require 'fileutils'
   require 'term/ansicolor'
 
-  BOOTSTRAP_GEM_ROOT = Gem::Specification.find_by_name("bootstrap-sass").gem_dir
-  FONTAWESOME_GEM_ROOT = Gem::Specification.find_by_name("font-awesome-sass").gem_dir
 
   Sass.load_paths << File.join(BOOTSTRAP_GEM_ROOT, 'assets', 'stylesheets')
   Sass.load_paths << File.join(FONTAWESOME_GEM_ROOT, 'assets', 'stylesheets')
@@ -42,16 +43,20 @@ task :serve do
   require 'webrick'
   server = WEBrick::HTTPServer.new :Port => 9000, :DirectoryIndex => []
   {
-    '/'                => 'tests/index.html',
-    '/less/dist'       => 'tests/patternfly/dist',
-    '/less/components' => 'components/patternfly/components',
-    '/less/patternfly' => 'tests/patternfly',
-    '/sass/dist/fonts' => 'tests/patternfly/dist/fonts',
-    '/sass/dist/img'   => 'tests/patternfly/dist/img',
-    '/sass/dist/js'    => 'tests/patternfly/dist/js',
-    '/sass/dist/css'   => 'dist/css',
-    '/sass/components' => 'components/patternfly/components',
-    '/sass/patternfly' => 'tests/patternfly'
+    '/'                                   => 'tests/index.html',
+    '/less/dist'                          => 'tests/patternfly/dist',
+    '/less/components'                    => 'tests/components',
+    '/less/components/bootstrap/dist/js'  => File.join(BOOTSTRAP_GEM_ROOT, 'assets', 'javascripts'),
+    '/less/components/font-awesome/fonts' => File.join(FONTAWESOME_GEM_ROOT, 'assets', 'fonts', 'font-awesome'),
+    '/less/patternfly'                    => 'tests/patternfly',
+    '/sass/dist/fonts'                    => 'tests/patternfly/dist/fonts',
+    '/sass/dist/img'                      => 'tests/patternfly/dist/img',
+    '/sass/dist/js'                       => 'tests/patternfly/dist/js',
+    '/sass/dist/css'                      => 'dist/css',
+    '/sass/components'                    => 'tests/components',
+    '/sass/components/bootstrap/dist/js'  => File.join(BOOTSTRAP_GEM_ROOT, 'assets', 'javascripts'),
+    '/sass/components/font-awesome/fonts' => File.join(FONTAWESOME_GEM_ROOT, 'assets', 'fonts', 'font-awesome'),
+    '/sass/patternfly'                    => 'tests/patternfly'
   }.each { |http, local| server.mount http, WEBrick::HTTPServlet::FileHandler, local }
 
   trap('INT') { server.stop }
