@@ -17,7 +17,6 @@ task :compile do
   require 'fileutils'
   require 'term/ansicolor'
 
-
   Sass.load_paths << File.join(BOOTSTRAP_GEM_ROOT, 'assets', 'stylesheets')
   Sass.load_paths << File.join(FONTAWESOME_GEM_ROOT, 'assets', 'stylesheets')
   Sass::Script::Number.precision = 8
