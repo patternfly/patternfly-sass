@@ -79,8 +79,11 @@ task :test do
   end
   sleep(3) # Give some time for the web server to start
   puts "Starting the tests against the web server"
-  Rake::Task[:spec].invoke
-  Process.kill('INT', pid)
+  begin
+    Rake::Task[:spec].invoke
+  ensure
+    Process.kill('INT', pid)
+  end
 end
 
 desc "Run the tests without a web server"
