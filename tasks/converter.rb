@@ -89,6 +89,8 @@ module Patternfly
           NESTED_MIXINS.each do |selector, prefix|
             file = flatten_mixins(file, selector, prefix)
           end
+        when 'variables.less'
+          file = replace_all(file, "../../components/font-awesome/fonts", "../../components/font-awesome/fonts/")
         when 'patternfly.less'
           file = fix_top_level(file)
           # This is a hack.  We want bootstrap-select to be placed in
@@ -272,6 +274,11 @@ module Patternfly
         end
         save_file(save_path, content)
       end
+      # Load external dependencies for testing
+      `bower install`
+      # This is a workaround for removing the obsoletely installed bootstrap and jquery
+      FileUtils.rm_rf 'tests/components/bootstrap'
+      FileUtils.rm_rf 'tests/components/jquery'
     end
 
     def fixup_path(hash)
