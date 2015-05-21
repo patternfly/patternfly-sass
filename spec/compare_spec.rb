@@ -25,14 +25,16 @@ RSpec.describe "compare SASS with LESS screenshots" do
 
           cols = [img_less.base_columns, img_sass.base_columns].max
           rows = [img_less.base_rows, img_sass.base_rows].max
-          img_base = Magick::Image.new(cols, rows) { self.background_color = 'black' }
 
-          img_less = img_base.composite(img_less, 0, 0, Magick::OverCompositeOp)
-          img_sass = img_base.composite(img_sass, 0, 0, Magick::OverCompositeOp)
+          img_less.resize_to_fill!(cols, rows)
+          img_sass.resize_to_fill!(cols, rows)
 
           img_diff, diff_rate = img_less.compare_channel img_sass, Magick::MeanAbsoluteErrorMetric, Magick::AllChannels
+          img_less.destroy!
+          img_sass.destroy!
 
           img_diff.write("tests/failures/#{title}-#{w}x#{h}.png") unless diff_rate <= TOLERANCE
+          img_diff.destroy!
           expect(diff_rate).to be <= TOLERANCE
         end
       end
