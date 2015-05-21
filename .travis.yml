@@ -7,7 +7,7 @@ before_script:
   - export PID=$!
   - sleep 3
 script:
-  - bundle exec rake spec
+  - bundle exec rspec
 after_failure:
   - bundle exec rake upload
 after_script:
