@@ -11,6 +11,7 @@ if (args.length === 5) {
   var url = args[3];
   var output = args[4];
   var page = require('webpage').create();
+  var retries = 3;
   page.viewportSize = { width: width, height: height };
   page.settings.resourceTimeout = 2000;
   page.open(url, function() {
@@ -25,10 +26,17 @@ if (args.length === 5) {
         '}'].join('\n');
       document.body.appendChild(style);
     });
-    window.setTimeout(function () {
-      page.render(output);
-      phantom.exit();
+
+    window.setInterval(function () {
+      if (document.readyState === "complete") {
+        page.render(output);
+        phantom.exit();
+      } else {
+        if (retries == 0) phantom.exit();
+        retries--;
+      }
     }, 200);
+
   });
 } else {
   console.log("Invalid argument!");
