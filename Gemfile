@@ -9,10 +9,9 @@ group :development do
 end
 
 group :test do
-  gem 'rake'
-  gem 'webrick'
-  gem 'rspec'
-  gem 'nokogiri'
-  gem 'rmagick'
-  gem 'imgur-api'
+  gem 'rake', '~> 10.4'
+  gem 'rspec', '~> 3.2'
+  gem 'nokogiri', '~> 1.6'
+  gem 'rmagick', '~> 2.15'
+  gem 'imgur-api', '~> 0.0.4'
 end
