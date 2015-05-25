@@ -19,7 +19,9 @@ module Patternfly
       options = defaults.merge(options)
       super(:repo => options[:repo], :cache_path => options[:cache_path], :branch => options[:branch])
       @save_to = {
-        :scss  => 'assets/stylesheets/patternfly'
+        :scss  => 'assets/stylesheets/patternfly',
+        :js    => 'assets/javascripts/patternfly',
+        :fonts => 'assets/fonts/patternfly'
       }
       @test_dir = options[:test_dir]
       get_trees(PATTERNFLY_LESS_ROOT, BOOTSTRAP_LESS_ROOT, 'components/bootstrap-select', 'components/bootstrap-combobox', 'tests', 'dist')
@@ -35,9 +37,9 @@ module Patternfly
 
       @save_to.values { |v| FileUtils.mkdir_p(v) }
 
-      # process_font_assets
+      process_font_assets
       process_patternfly_less_assets
-      # process_javascript_assets
+      process_javascript_assets
       store_version
       cache_tests
     end
@@ -45,6 +47,33 @@ module Patternfly
     def remove_xforms(transforms, *rejects)
       transforms.reject do |xform|
         rejects.include?(xform)
+      end
+    end
+
+    def process_font_assets
+      log_status 'Processing fonts...'
+      files   = read_files(get_paths_by_type('dist/fonts', /\.(eot|svg|ttf|woff2?)$/))
+      save_to = @save_to[:fonts]
+      files.each do |name, content|
+        save_file File.join(save_to, name.gsub('dist/fonts/', '')), content
+      end
+    end
+
+    def process_javascript_assets
+      log_status 'Processing javascripts...'
+      save_to = @save_to[:js]
+      files   = read_files(get_paths_by_type('dist/js', /\.js$/))
+      files.each do |name, content|
+        save_file File.join(save_to, name.gsub('dist/js/', '')), content
+      end
+    end
+
+    def process_image_assets
+      log_status 'Processing images...'
+      save_to = @save_to[:img]
+      files   = read_files(get_paths_by_type('dist/img', /\.(png|gif|jpg|svg?)$/))
+      files.each do |name, content|
+        save_file File.join(save_to, name.gsub('dist/img/', '')), content
       end
     end
 
@@ -92,7 +121,11 @@ module Patternfly
             file = flatten_mixins(file, selector, prefix)
           end
         when 'variables.less'
+          file = ['$patternfly-sass-asset-helper: false !default;', file].join("\n")
           file = replace_all(file, "../../components/font-awesome/fonts", "../../components/font-awesome/fonts/")
+          file = replace_all file, %r{(\$font-path): (\s*)"(.*)";}, '\\1: \\2if($patternfly-sass-asset-helper, "patternfly", "\\3/patternfly");'
+          file = replace_all file, %r{(\$icon-font-path): (\s*)"(.*)";\n}, ''
+
         when 'patternfly.less'
           file = fix_top_level(file)
           # This is a hack.  We want bootstrap-select to be placed in
