@@ -2,7 +2,7 @@ source 'https://rubygems.org'
 
 gem 'sass', '~> 3.2'
 gem 'bootstrap-sass', '~> 3.3.4'
-gem 'font-awesome-sass', '~> 4.2.0'
+gem 'font-awesome-sass', '~> 4.3.0'
 
 group :development do
   gem 'term-ansicolor'
