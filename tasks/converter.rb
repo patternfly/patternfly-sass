@@ -289,7 +289,7 @@ module Patternfly
     def cache_tests
       FileUtils.mkdir_p(@test_dir)
       test_files = get_paths_by_directory('tests')
-      dist_files = get_paths_by_directory('dist')
+      dist_files = get_paths_by_directory('dist/css')
       test_contents = read_files(test_files)
       dist_contents = fixup_path(read_files(dist_files))
       test_contents.merge(dist_contents).each do |file, content|
