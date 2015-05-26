@@ -1,3 +1,4 @@
+$patternfly-sass-asset-helper: false !default;
 //
 // Variables
 // --------------------------------------------------
@@ -13,7 +14,7 @@ $dropdown-link-hover-border-color:                                  #b3d3e7;
 $dropdown-link-focus-color:                                         #fff;
 $font-family-monospace:                                             Menlo, Monaco, Consolas, monospace;
 $fa-font-path:                                                      "../../components/font-awesome/fonts/";
-$font-path:                                                         "../fonts";
+$font-path:                                                         if($patternfly-sass-asset-helper, "patternfly", "../fonts/patternfly");
 $gray-light-pf:                                                     #aaa;
 $gray-pf:                                                           #4d5258;
 $icon-font-name-fa:                                                 "FontAwesome";
@@ -25,7 +26,7 @@ $img-badge-ie8-width:                                               73px;
 $img-bg-login:                                                      "bg-login.jpg";
 $img-brand-ie8:                                                     "brand.png";
 $img-brand-lg-ie8:                                                  "brand-lg.png";
-$img-path:                                                          "../img";
+$img-path:                                                          if($patternfly-sass-asset-helper, "patternfly", "../images/patternfly");
 $img-spinner:                                                       "spinner.gif";
 $img-spinner-lg:                                                    "spinner-lg.gif";
 $img-spinner-sm:                                                    "spinner-sm.gif";
@@ -125,7 +126,6 @@ $gray-darker:                                                       lighten(#000
 $gray-light:                                                        lighten(#000, 60%);   // #999
 $gray-lighter:                                                      lighten(#000, 93.5%); // #eee
 $grid-gutter-width:                                                 40px;
-$icon-font-path:                                                    "../../components/bootstrap/dist/fonts/";
 $input-bg-disabled:                                                 #F8F8F8;
 $input-border:                                                      #BABABA;
 $line-height-base:                                                  1.66666667; // 20/12

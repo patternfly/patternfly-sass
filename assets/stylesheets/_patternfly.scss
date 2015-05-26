@@ -1,4 +1,4 @@
-@import "variables";
+@import "patternfly/variables";
 @import "bootstrap/variables";
 @import "font-awesome/variables";
 /* PatternFly */
@@ -7,7 +7,7 @@
 // Core variables and mixins
 
 @import "bootstrap/mixins";
-@import "mixin_overrides";
+@import "patternfly/mixin_overrides";
 
 
 // Reset and dependencies
@@ -62,44 +62,44 @@
 @import "font-awesome";
 
 /* Bootstrap-Combobox */
-@import "bootstrap-combobox-css";
+@import "patternfly/bootstrap-combobox-css";
 
 /* Bootstrap-Select */
-@import "bootstrap-select-css";
+@import "patternfly/bootstrap-select-css";
 
 /* PatternFly overrides and new stuff */
 
-@import "mixins";
-@import "alerts";
-@import "badges";
-@import "blank-slate";
-@import "bootstrap-combobox";
-@import "bootstrap-select";
-@import "bootstrap-treeview";
-@import "breadcrumbs";
-@import "buttons";
-@import "close";
-@import "datatables";
-@import "dropdowns";
-@import "fonts";
-@import "forms";
-@import "icons";
-@import "infotip";
-@import "labels";
-@import "list-group";
-@import "login";
-@import "modals";
-@import "navbar";
-@import "pager";
-@import "pagination";
-@import "panels";
-@import "popovers";
-@import "progress-bars";
-@import "search";
-@import "sidebar";
-@import "spinner";
-@import "syntax-highlighting";
-@import "tables";
-@import "tabs";
-@import "tooltip";
-@import "type";
+@import "patternfly/mixins";
+@import "patternfly/alerts";
+@import "patternfly/badges";
+@import "patternfly/blank-slate";
+@import "patternfly/bootstrap-combobox";
+@import "patternfly/bootstrap-select";
+@import "patternfly/bootstrap-treeview";
+@import "patternfly/breadcrumbs";
+@import "patternfly/buttons";
+@import "patternfly/close";
+@import "patternfly/datatables";
+@import "patternfly/dropdowns";
+@import "patternfly/fonts";
+@import "patternfly/forms";
+@import "patternfly/icons";
+@import "patternfly/infotip";
+@import "patternfly/labels";
+@import "patternfly/list-group";
+@import "patternfly/login";
+@import "patternfly/modals";
+@import "patternfly/navbar";
+@import "patternfly/pager";
+@import "patternfly/pagination";
+@import "patternfly/panels";
+@import "patternfly/popovers";
+@import "patternfly/progress-bars";
+@import "patternfly/search";
+@import "patternfly/sidebar";
+@import "patternfly/spinner";
+@import "patternfly/syntax-highlighting";
+@import "patternfly/tables";
+@import "patternfly/tabs";
+@import "patternfly/tooltip";
+@import "patternfly/type";

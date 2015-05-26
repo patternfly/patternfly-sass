@@ -21,19 +21,19 @@ task :compile do
   Sass.load_paths << File.join(FONTAWESOME_GEM_ROOT, 'assets', 'stylesheets')
   Sass::Script::Number.precision = 8
 
-  path = 'sass'
-  css_path = 'dist/css'
-  FileUtils.mkdir_p(css_path)
+  path = 'assets/stylesheets'
+  FileUtils.mkdir_p('tmp')
 
   puts Term::ANSIColor.bold "Compiling SCSS in #{path}"
 
-  %w(patternfly.css patternfly.min.css).each do |save_path|
-    style = (save_path == "patternfly.min.css") ? :compressed : :nested
-    save_path = "dist/css/#{save_path}"
-    engine = Sass::Engine.for_file("#{path}/patternfly.scss", :syntax => :scss, :load_paths => [path], :style => style)
+  %w(patternfly.css patternfly.min.css).each do |out|
+    style = (out == "patternfly.min.css") ? :compressed : :nested
+    src_path = File.join(path, '_patternfly.scss')
+    dst_path = File.join('tmp', out)
+    engine = Sass::Engine.for_file(src_path, :syntax => :scss, :load_paths => [path], :style => style)
     css = engine.render
-    File.open(save_path, 'w') { |f| f.write css }
-    puts Term::ANSIColor.cyan("  #{save_path}") + '...'
+    File.open(dst_path, 'w') { |f| f.write css }
+    puts Term::ANSIColor.cyan("  #{dst_path}") + '...'
   end
 end
 
@@ -48,10 +48,10 @@ task :serve do
     '/less/components/bootstrap/dist/js'  => File.join(BOOTSTRAP_GEM_ROOT, 'assets', 'javascripts'),
     '/less/components/font-awesome/fonts' => File.join(FONTAWESOME_GEM_ROOT, 'assets', 'fonts', 'font-awesome'),
     '/less/patternfly'                    => 'tests/patternfly',
-    '/sass/dist/fonts'                    => 'tests/patternfly/dist/fonts',
-    '/sass/dist/img'                      => 'tests/patternfly/dist/img',
-    '/sass/dist/js'                       => 'tests/patternfly/dist/js',
-    '/sass/dist/css'                      => 'dist/css',
+    '/sass/dist/fonts'                    => 'assets/fonts',
+    '/sass/dist/img'                      => 'assets/images/patternfly',
+    '/sass/dist/js'                       => 'assets/javascripts/patternfly',
+    '/sass/dist/css'                      => 'tmp',
     '/sass/components'                    => 'tests/components',
     '/sass/components/bootstrap/dist/js'  => File.join(BOOTSTRAP_GEM_ROOT, 'assets', 'javascripts'),
     '/sass/components/font-awesome/fonts' => File.join(FONTAWESOME_GEM_ROOT, 'assets', 'fonts', 'font-awesome'),
@@ -65,7 +65,6 @@ end
 desc "Clean up the test results"
 task :cleanup do
   require 'fileutils'
-  FileUtils.rm_rf 'tmp'
   FileUtils.rm_rf '.sass-cache'
   FileUtils.rm_rf 'tests/less'
   FileUtils.rm_rf 'tests/sass'

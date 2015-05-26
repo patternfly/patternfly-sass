@@ -18,7 +18,11 @@ module Patternfly
       }
       options = defaults.merge(options)
       super(:repo => options[:repo], :cache_path => options[:cache_path], :branch => options[:branch])
-      @save_to = {:scss => 'sass'}
+      @save_to = {
+        :scss  => 'assets/stylesheets/patternfly',
+        :js    => 'assets/javascripts/patternfly',
+        :fonts => 'assets/fonts/patternfly'
+      }
       @test_dir = options[:test_dir]
       get_trees(PATTERNFLY_LESS_ROOT, BOOTSTRAP_LESS_ROOT, 'components/bootstrap-select', 'components/bootstrap-combobox', 'tests', 'dist')
     end
@@ -33,9 +37,9 @@ module Patternfly
 
       @save_to.values { |v| FileUtils.mkdir_p(v) }
 
-      # process_font_assets
+      process_font_assets
       process_patternfly_less_assets
-      # process_javascript_assets
+      process_javascript_assets
       store_version
       cache_tests
     end
@@ -43,6 +47,33 @@ module Patternfly
     def remove_xforms(transforms, *rejects)
       transforms.reject do |xform|
         rejects.include?(xform)
+      end
+    end
+
+    def process_font_assets
+      log_status 'Processing fonts...'
+      files   = read_files(get_paths_by_type('dist/fonts', /\.(eot|svg|ttf|woff2?)$/))
+      save_to = @save_to[:fonts]
+      files.each do |name, content|
+        save_file File.join(save_to, name.gsub('dist/fonts/', '')), content
+      end
+    end
+
+    def process_javascript_assets
+      log_status 'Processing javascripts...'
+      save_to = @save_to[:js]
+      files   = read_files(get_paths_by_type('dist/js', /\.js$/))
+      files.each do |name, content|
+        save_file File.join(save_to, name.gsub('dist/js/', '')), content
+      end
+    end
+
+    def process_image_assets
+      log_status 'Processing images...'
+      save_to = @save_to[:img]
+      files   = read_files(get_paths_by_type('dist/img', /\.(png|gif|jpg|svg?)$/))
+      files.each do |name, content|
+        save_file File.join(save_to, name.gsub('dist/img/', '')), content
       end
     end
 
@@ -90,7 +121,11 @@ module Patternfly
             file = flatten_mixins(file, selector, prefix)
           end
         when 'variables.less'
+          file = ['$patternfly-sass-asset-helper: false !default;', file].join("\n")
           file = replace_all(file, "../../components/font-awesome/fonts", "../../components/font-awesome/fonts/")
+          file = replace_all file, %r{(\$font-path): (\s*)"(.*)";}, '\\1: \\2if($patternfly-sass-asset-helper, "patternfly", "\\3/patternfly");'
+          file = replace_all file, %r{(\$icon-font-path): (\s*)"(.*)";\n}, ''
+
         when 'patternfly.less'
           file = fix_top_level(file)
           # This is a hack.  We want bootstrap-select to be placed in
@@ -104,14 +139,14 @@ module Patternfly
         end
 
         name_out = "#{File.basename(name, ".less")}.scss"
-        unless name_out == "patternfly.scss"
-          name_out = "_#{name_out}"
-        end
+        name_out = "_#{name_out}"
 
         path = File.join(save_to, name_out)
         save_file(path, file)
         log_processed(File.basename(path))
       end
+
+      FileUtils.mv("#{save_to}/_patternfly.scss", File.expand_path("#{save_to}/../_patternfly.scss"))
     end
 
     def add_to_dist(name, name_out)
@@ -177,6 +212,7 @@ module Patternfly
         file,
         %r{@import\s+"variables";},
         "")
+      file = replace_all(file, /@import "([^\.]{2})/, '@import "patternfly/\1')
       file = replace_all(
         file,
         %r{../components/font-awesome/less/font-awesome},
@@ -184,7 +220,7 @@ module Patternfly
       file = replace_all(
         file,
         %r{../components/bootstrap-select/bootstrap-select.css},
-        "bootstrap-select-css")
+        "patternfly/bootstrap-select-css")
       file = replace_all(
         file,
         %r{@import\s+"../components/bootstrap/less/bootstrap";},
@@ -193,11 +229,11 @@ module Patternfly
       file = replace_all(
         file,
         %r{../components/bootstrap-combobox/less/combobox},
-        "bootstrap-combobox-css")
+        "patternfly/bootstrap-combobox-css")
 
       # Variables need to be declared before they are used.
       variables = <<-VAR.gsub(/^\s*/, '')
-        @import "variables";
+        @import "patternfly/variables";
         @import "bootstrap/variables";
         @import "font-awesome/variables";
       VAR
@@ -214,7 +250,7 @@ module Patternfly
       )
 
       mixin_location = end_of(bootstrap_sass, %r{@import\s+"bootstrap/mixins";}).first
-      bootstrap_sass = bootstrap_sass[0..mixin_location] + "@import \"mixin_overrides\";\n" + bootstrap_sass[mixin_location..-1]
+      bootstrap_sass = bootstrap_sass[0..mixin_location] + "@import \"patternfly/mixin_overrides\";\n" + bootstrap_sass[mixin_location..-1]
       bootstrap_sass
     end
 
