@@ -27,6 +27,7 @@ build
 .sass-cache
 tmp
 /dist
+/pkg
 
 # RVM files
 .ruby-gemset

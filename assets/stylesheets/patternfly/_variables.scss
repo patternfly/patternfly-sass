@@ -13,7 +13,6 @@ $dropdown-link-active-border-color:                                 #0076b7;
 $dropdown-link-hover-border-color:                                  #b3d3e7;
 $dropdown-link-focus-color:                                         #fff;
 $font-family-monospace:                                             Menlo, Monaco, Consolas, monospace;
-$fa-font-path:                                                      "../../components/font-awesome/fonts/";
 $font-path:                                                         if($patternfly-sass-asset-helper, "patternfly", "../fonts/patternfly");
 $gray-light-pf:                                                     #aaa;
 $gray-pf:                                                           #4d5258;
