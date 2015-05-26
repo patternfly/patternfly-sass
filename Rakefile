@@ -43,7 +43,10 @@ task :serve do
   server = WEBrick::HTTPServer.new :Port => 9000, :DirectoryIndex => []
   {
     '/'                                   => 'tests/index.html',
-    '/less/dist'                          => 'tests/patternfly/dist',
+    '/less/dist/css'                      => 'tests/patternfly/dist/css',
+    '/less/dist/fonts'                    => 'assets/fonts/patternfly',
+    '/less/dist/img'                      => 'assets/images/patternfly',
+    '/less/dist/js'                       => 'assets/javascripts/patternfly',
     '/less/components'                    => 'tests/components',
     '/less/components/bootstrap/dist/js'  => File.join(BOOTSTRAP_GEM_ROOT, 'assets', 'javascripts'),
     '/less/components/font-awesome/fonts' => File.join(FONTAWESOME_GEM_ROOT, 'assets', 'fonts', 'font-awesome'),
