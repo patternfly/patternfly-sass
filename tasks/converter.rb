@@ -122,8 +122,10 @@ module Patternfly
           end
         when 'variables.less'
           file = ['$patternfly-sass-asset-helper: false !default;', file].join("\n")
+          file = replace_all(file, %r{"../img"}, '"../images"')
           file = replace_all(file, "../../components/font-awesome/fonts", "../../components/font-awesome/fonts/")
           file = replace_all file, %r{(\$font-path): (\s*)"(.*)";}, '\\1: \\2if($patternfly-sass-asset-helper, "patternfly", "\\3/patternfly");'
+          file = replace_all file, %r{(\$img-path): (\s*)"(.*)";}, '\\1: \\2if($patternfly-sass-asset-helper, "patternfly", "\\3/patternfly");'
           file = replace_all file, %r{(\$icon-font-path): (\s*)"(.*)";\n}, ''
 
         when 'patternfly.less'
