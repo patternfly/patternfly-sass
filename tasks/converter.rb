@@ -123,10 +123,10 @@ module Patternfly
         when 'variables.less'
           file = ['$patternfly-sass-asset-helper: false !default;', file].join("\n")
           file = replace_all(file, %r{"../img"}, '"../images"')
-          file = replace_all(file, "../../components/font-awesome/fonts", "../../components/font-awesome/fonts/")
           file = replace_all file, %r{(\$font-path): (\s*)"(.*)";}, '\\1: \\2if($patternfly-sass-asset-helper, "patternfly", "\\3/patternfly");'
           file = replace_all file, %r{(\$img-path): (\s*)"(.*)";}, '\\1: \\2if($patternfly-sass-asset-helper, "patternfly", "\\3/patternfly");'
           file = replace_all file, %r{(\$icon-font-path): (\s*)"(.*)";\n}, ''
+          file = replace_all file, %r{(\$fa-font-path): (\s*)"(.*)";\n}, ''
 
         when 'patternfly.less'
           file = fix_top_level(file)
@@ -345,9 +345,8 @@ module Patternfly
     end
 
     def store_version
-      path = "package.json"
-      content = File.read(path)
-      # TODO read JSON and set correct version
+      path    = 'lib/patternfly-sass/version.rb'
+      content = File.read(path).sub(/PATTERNFLY_SHA\s*=\s*['"][\w]+['"]/, "PATTERNFLY_SHA = '#@branch_sha'")
       File.open(path, 'w') { |f| f.write(content) }
     end
 

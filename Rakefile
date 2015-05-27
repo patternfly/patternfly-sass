@@ -1,5 +1,6 @@
 require 'rake'
 require 'rspec/core/rake_task'
+require 'bundler/gem_tasks'
 
 BOOTSTRAP_GEM_ROOT = Gem::Specification.find_by_name("bootstrap-sass").gem_dir
 FONTAWESOME_GEM_ROOT = Gem::Specification.find_by_name("font-awesome-sass").gem_dir
@@ -57,7 +58,7 @@ task :serve do
     '/sass/dist/css'                      => 'tmp',
     '/sass/components'                    => 'tests/components',
     '/sass/components/bootstrap/dist/js'  => File.join(BOOTSTRAP_GEM_ROOT, 'assets', 'javascripts'),
-    '/sass/components/font-awesome/fonts' => File.join(FONTAWESOME_GEM_ROOT, 'assets', 'fonts', 'font-awesome'),
+    '/sass/dist/fonts/font-awesome'       => File.join(FONTAWESOME_GEM_ROOT, 'assets', 'fonts', 'font-awesome'),
     '/sass/patternfly'                    => 'tests/patternfly'
   }.each { |http, local| server.mount http, WEBrick::HTTPServlet::FileHandler, local }
 
