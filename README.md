@@ -1,4 +1,7 @@
 #patternfly-sass
+
+[![Gem Version](https://badge.fury.io/rb/patternfly-sass.svg)](http://badge.fury.io/rb/patternfly-sass)
+[![Dependency Status](https://gemnasium.com/patternfly/patternfly-sass.svg)](https://gemnasium.com/patternfly/patternfly-sass)
 [![Build Status](https://travis-ci.org/patternfly/patternfly-sass.svg)](https://travis-ci.org/patternfly/patternfly-sass)
 
 ## Developer Set-Up
