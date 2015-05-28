@@ -54,6 +54,7 @@ task :serve do
     '/less/patternfly'                    => 'tests/patternfly',
     '/sass/dist/fonts'                    => 'assets/fonts',
     '/sass/dist/img'                      => 'assets/images/patternfly',
+    '/sass/dist/images'                   => 'assets/images',
     '/sass/dist/js'                       => 'assets/javascripts/patternfly',
     '/sass/dist/css'                      => 'tmp',
     '/sass/components'                    => 'tests/components',
