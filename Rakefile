@@ -20,7 +20,7 @@ task :compile do
 
   Sass.load_paths << File.join(BOOTSTRAP_GEM_ROOT, 'assets', 'stylesheets')
   Sass.load_paths << File.join(FONTAWESOME_GEM_ROOT, 'assets', 'stylesheets')
-  Sass::Script::Number.precision = 8
+  ::Sass::Script::Value::Number.precision = [8, ::Sass::Script::Value::Number.precision].max
 
   path = 'assets/stylesheets'
   FileUtils.mkdir_p('tmp')
