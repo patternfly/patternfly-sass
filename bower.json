@@ -1,21 +1,20 @@
 {
-  "name": "PatternFlySass",
-  "version": "1.0.0",
-  "authors": "Red Hat",
-  "license": "Apache-2.0",
+  "name": "patternfly-sass",
+  "version": "1.2.0",
   "homepage": "https://www.patternfly.org",
-  "main": [
-    "dist/css/patternfly.css"
+  "authors": [
+    "Alex Wood",
+    "Dávid Halász"
   ],
+  "description": "Red Hat's Patternfly, converted to Sass and ready to drop into Rails",
+  "main": "assets/stylesheets/_patternfly.scss",
+  "license": "MIT",
   "ignore": [
     "**/.*",
     "node_modules",
     "bower_components",
-    "app/components",
-    "test",
-    "tests",
-    "package.json",
-    "Gruntfile.js"
+    "spec",
+    "tests"
   ],
   "devDependencies": {
     "bootstrap-combobox": "~1.1.6",

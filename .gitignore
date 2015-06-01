@@ -38,6 +38,7 @@ tests/sass
 tests/less
 tests/reference
 tests/failures
+tests/components
 
 # Gemfile.lock
 /Gemfile.lock
