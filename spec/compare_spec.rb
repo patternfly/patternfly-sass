@@ -6,6 +6,9 @@ RSpec.describe "compare SASS with LESS screenshots" do
   BASEURL = "http://localhost:9000"
   RESOLUTIONS = [[320, 480], [768, 1024], [1280, 1024]]
   CONTEXTS = %w(less sass)
+
+  # TODO: Set this to 0 when SASS 3.4.15 is released.
+  # See https://github.com/sass/sass/issues/1732
   TOLERANCE = 0.05
 
   html = Net::HTTP.get(URI("#{BASEURL}/less/patternfly/index.html"))
