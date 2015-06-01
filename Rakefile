@@ -39,7 +39,7 @@ task :compile do
 end
 
 desc "Start a web server with both the less and the sass version"
-task :serve do
+task :serve => :deps do
   require 'webrick'
   server = WEBrick::HTTPServer.new :Port => 9000, :DirectoryIndex => []
   {
@@ -65,6 +65,15 @@ task :serve do
 
   trap('INT') { server.stop }
   server.start
+end
+
+desc "Install testing dependencies using bower"
+task :deps do
+  puts ">>> Installing required components using bower <<<"
+  system("bower install", out: $stdout, err: :out)
+  # This is a workaround for removing the obsoletely installed bootstrap and jquery
+  FileUtils.rm_rf 'tests/components/bootstrap'
+  puts ">>> The command 'bower install' was finished <<<"
 end
 
 desc "Clean up the test results"
