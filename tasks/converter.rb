@@ -121,12 +121,13 @@ module Patternfly
             file = flatten_mixins(file, selector, prefix)
           end
         when 'variables.less'
+          file = insert_default_vars(file)
           file = ['$patternfly-sass-asset-helper: false !default;', file].join("\n")
           file = replace_all(file, %r{"../img"}, '"../images"')
-          file = replace_all file, %r{(\$font-path): (\s*)"(.*)";}, '\\1: \\2if($patternfly-sass-asset-helper, "patternfly", "\\3/patternfly");'
-          file = replace_all file, %r{(\$img-path): (\s*)"(.*)";}, '\\1: \\2if($patternfly-sass-asset-helper, "patternfly", "\\3/patternfly");'
-          file = replace_all file, %r{(\$icon-font-path): (\s*)"(.*)";\n}, ''
-          file = replace_all file, %r{(\$fa-font-path): (\s*)"(.*)";\n}, ''
+          file = replace_all file, %r{(\$font-path): (\s*)"(.*)" (!default);}, '\\1: \\2if($patternfly-sass-asset-helper, "patternfly", "\\3/patternfly") \\4;'
+          file = replace_all file, %r{(\$img-path): (\s*)"(.*)" (!default);}, '\\1: \\2if($patternfly-sass-asset-helper, "patternfly", "\\3/patternfly") \\4;'
+          file = replace_all file, %r{(\$icon-font-path): (\s*)"(.*)" (!default);\n}, ''
+          file = replace_all file, %r{(\$fa-font-path): (\s*)"(.*)" (!default);\n}, ''
 
         when 'patternfly.less'
           file = fix_top_level(file)
