@@ -9,7 +9,7 @@ Gem::Specification.new do |s|
   s.email    = 'patternflyui@gmail.com'
   s.summary  = "Red Hat's Patternfly, converted to Sass and ready to drop into Rails"
   s.homepage = "https://github.com/Patternfly/patternfly-sass"
-  s.license  = 'MIT'
+  s.license  = 'Apache-2.0'
 
   s.add_runtime_dependency 'sass', '~> 3.2'
   s.add_runtime_dependency 'bootstrap-sass', '~> 3.3.4'

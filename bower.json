@@ -1,6 +1,7 @@
 {
-  "name": "patternfly-sass",
-  "version": "1.2.0",
+  "name": "PatternFlySass",
+  "version": "1.2.1",
+  "license": "Apache-2.0",
   "homepage": "https://www.patternfly.org",
   "authors": [
     "Alex Wood",
@@ -8,7 +9,6 @@
   ],
   "description": "Red Hat's Patternfly, converted to Sass and ready to drop into Rails",
   "main": "assets/stylesheets/_patternfly.scss",
-  "license": "MIT",
   "ignore": [
     "**/.*",
     "node_modules",
