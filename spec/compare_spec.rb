@@ -11,7 +11,14 @@ RSpec.describe "compare SASS with LESS screenshots" do
   # See https://github.com/sass/sass/issues/1732
   TOLERANCE = 0.05
 
-  html = Net::HTTP.get(URI("#{BASEURL}/less/patternfly/index.html"))
+  # Give some time for the testing server to start
+  html = nil
+  5.times do |t|
+    html = Net::HTTP.get(URI("#{BASEURL}/less/patternfly/index.html")) rescue nil
+    break unless html.nil?
+    sleep(t + 1)
+  end
+  raise Errno::ECONNREFUSED if html.nil?
   document = Nokogiri::HTML(html)
 
   document.css(".row a").each do |link|
