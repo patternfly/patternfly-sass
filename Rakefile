@@ -43,24 +43,24 @@ task :serve => :deps do
   require 'webrick'
   server = WEBrick::HTTPServer.new :Port => 9000, :DirectoryIndex => []
   {
-    '/'                                   => 'tests/index.html',
-    '/less/dist/css'                      => 'tests/patternfly/dist/css',
+    '/'                                   => 'spec/html/main.html',
+    '/less/dist/css'                      => 'spec/html/dist/css',
     '/less/dist/fonts'                    => 'assets/fonts/patternfly',
     '/less/dist/img'                      => 'assets/images/patternfly',
     '/less/dist/js'                       => 'assets/javascripts/patternfly',
-    '/less/components'                    => 'tests/components',
+    '/less/components'                    => 'spec/components',
     '/less/components/bootstrap/dist/js'  => File.join(BOOTSTRAP_GEM_ROOT, 'assets', 'javascripts'),
     '/less/components/font-awesome/fonts' => File.join(FONTAWESOME_GEM_ROOT, 'assets', 'fonts', 'font-awesome'),
-    '/less/patternfly'                    => 'tests/patternfly',
+    '/less/patternfly'                    => 'spec/html',
     '/sass/dist/fonts'                    => 'assets/fonts',
     '/sass/dist/img'                      => 'assets/images/patternfly',
     '/sass/dist/images'                   => 'assets/images',
     '/sass/dist/js'                       => 'assets/javascripts/patternfly',
     '/sass/dist/css'                      => 'tmp',
-    '/sass/components'                    => 'tests/components',
+    '/sass/components'                    => 'spec/components',
     '/sass/components/bootstrap/dist/js'  => File.join(BOOTSTRAP_GEM_ROOT, 'assets', 'javascripts'),
     '/sass/dist/fonts/font-awesome'       => File.join(FONTAWESOME_GEM_ROOT, 'assets', 'fonts', 'font-awesome'),
-    '/sass/patternfly'                    => 'tests/patternfly'
+    '/sass/patternfly'                    => 'spec/html'
   }.each { |http, local| server.mount http, WEBrick::HTTPServlet::FileHandler, local }
 
   trap('INT') { server.stop }
@@ -71,16 +71,14 @@ desc "Install testing dependencies using bower"
 task :deps do
   system("bower install", out: $stdout, err: :out)
   # This is a workaround for removing the obsoletely installed bootstrap and jquery
-  FileUtils.rm_rf 'tests/components/bootstrap'
+  FileUtils.rm_rf 'spec/components/bootstrap'
 end
 
 desc "Clean up the test results"
 task :cleanup do
   require 'fileutils'
   FileUtils.rm_rf '.sass-cache'
-  FileUtils.rm_rf 'tests/less'
-  FileUtils.rm_rf 'tests/sass'
-  FileUtils.rm_rf 'tests/failures'
+  FileUtils.rm_rf 'spec/results'
 end
 
 desc "Run the tests with a web server"
@@ -103,9 +101,8 @@ end
 desc "Run the tests without a web server"
 RSpec::Core::RakeTask.new(:spec) do |t|
   Rake::Task[:cleanup].invoke
-  FileUtils.mkdir_p 'tests/less'
-  FileUtils.mkdir_p 'tests/sass'
-  FileUtils.mkdir_p 'tests/failures'
+  FileUtils.mkdir_p 'spec/results/sass'
+  FileUtils.mkdir_p 'spec/results/less'
   t.pattern = Dir.glob('spec/**/*_spec.rb')
 end
 
@@ -119,9 +116,9 @@ task :upload do
   print Term::ANSIColor.bold "Uploading failure diffs to imgur "
 
   client = Imgur.new ENV['IMGUR_ID']
-  images = Dir["tests/failures/*.png"].map do |img|
+  images = Dir["spec/results/*.png"].map do |img|
     print Term::ANSIColor.cyan '.'
-    client.upload Imgur::LocalImage.new(img, :title => img.sub('.png', '.html').sub('tests/failures/', ''))
+    client.upload Imgur::LocalImage.new(img, :title => img.sub('.png', '.html').sub('spec/results/', ''))
   end
 
   if images.empty?

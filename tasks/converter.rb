@@ -14,7 +14,7 @@ module Patternfly
         :branch => 'master',
         :repo => 'patternfly/patternfly',
         :cache_path => 'tmp/converter-cache-patternfly',
-        :test_dir => 'tests/patternfly'
+        :test_dir => 'spec/html'
       }
       options = defaults.merge(options)
       super(:repo => options[:repo], :cache_path => options[:cache_path], :branch => options[:branch])

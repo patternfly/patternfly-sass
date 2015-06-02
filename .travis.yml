@@ -2,7 +2,7 @@ language: ruby
 cache:
   bundler: true
   directories:
-    - tests/components
+    - spec/components
 sudo: false
 rvm:
   - 2.0.0

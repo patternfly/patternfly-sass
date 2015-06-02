@@ -34,11 +34,8 @@ tmp
 .ruby-version
 
 # Directories with test images
-tests/sass
-tests/less
-tests/reference
-tests/failures
-tests/components
+spec/results
+spec/components
 
 # Gemfile.lock
 /Gemfile.lock

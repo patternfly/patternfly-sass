@@ -28,10 +28,10 @@ RSpec.describe "compare SASS with LESS screenshots" do
       RESOLUTIONS.each do |w,h|
         it "#{w}x#{h}" do
           CONTEXTS.each do |ctx|
-            `phantomjs tests/capture.js #{w} #{h} #{BASEURL}/#{ctx}/patternfly/#{file} tests/#{ctx}/#{title}-#{w}x#{h}.png`
+            `phantomjs spec/capture.js #{w} #{h} #{BASEURL}/#{ctx}/patternfly/#{file} spec/results/#{ctx}/#{title}-#{w}x#{h}.png`
           end
-          img_less = Magick::Image.read("tests/less/#{title}-#{w}x#{h}.png").first
-          img_sass = Magick::Image.read("tests/sass/#{title}-#{w}x#{h}.png").first
+          img_less = Magick::Image.read("spec/results/less/#{title}-#{w}x#{h}.png").first
+          img_sass = Magick::Image.read("spec/results/sass/#{title}-#{w}x#{h}.png").first
 
           cols = [img_less.base_columns, img_sass.base_columns].max
           rows = [img_less.base_rows, img_sass.base_rows].max
@@ -43,7 +43,7 @@ RSpec.describe "compare SASS with LESS screenshots" do
           img_less.destroy!
           img_sass.destroy!
 
-          img_diff.write("tests/failures/#{title}-#{w}x#{h}.png") unless diff_rate <= TOLERANCE
+          img_diff.write("spec/results/#{title}-#{w}x#{h}.png") unless diff_rate <= TOLERANCE
           img_diff.destroy!
           expect(diff_rate).to be <= TOLERANCE
         end
