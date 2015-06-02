@@ -3,7 +3,6 @@ cache:
   bundler: true
   directories:
     - tests/components
-    - node_modules
 sudo: false
 rvm:
   - 2.0.0
@@ -12,11 +11,10 @@ before_script:
   - bundle exec rake compile
   - bundle exec rake serve > /dev/null 2>&1 &
   - export PID=$!
-  - sleep 3
 script:
   - bundle exec rake spec
 after_failure:
   - bundle exec rake upload
 after_script:
   - kill -2 $PID
-  - sleep 3
+  - sleep 2

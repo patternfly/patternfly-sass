@@ -69,11 +69,9 @@ end
 
 desc "Install testing dependencies using bower"
 task :deps do
-  puts ">>> Installing required components using bower <<<"
   system("bower install", out: $stdout, err: :out)
   # This is a workaround for removing the obsoletely installed bootstrap and jquery
   FileUtils.rm_rf 'tests/components/bootstrap'
-  puts ">>> The command 'bower install' was finished <<<"
 end
 
 desc "Clean up the test results"
@@ -94,7 +92,6 @@ task :test do
     Rake::Task[:serve].invoke
     puts "Stopping web server on port 9000"
   end
-  sleep(3) # Give some time for the web server to start
   puts "Starting the tests against the web server"
   begin
     Rake::Task[:spec].invoke
