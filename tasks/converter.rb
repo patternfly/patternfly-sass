@@ -20,7 +20,7 @@ module Patternfly
       super(:repo => options[:repo], :cache_path => options[:cache_path], :branch => options[:branch])
       @save_to = {
         :scss  => 'assets/stylesheets/patternfly',
-        :js    => 'assets/javascripts/patternfly',
+        :js    => 'assets/javascripts',
         :fonts => 'assets/fonts/patternfly'
       }
       @test_dir = options[:test_dir]
