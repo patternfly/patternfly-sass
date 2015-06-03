@@ -50,6 +50,7 @@ Require PatternFly Javascripts in `app/assets/javascripts/application.js`:
 
 ```js
 //= require jquery
+//= require bootstrap
 //= require patternfly
 ```
 
