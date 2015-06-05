@@ -24,7 +24,15 @@ module Patternfly
         :fonts => 'assets/fonts/patternfly'
       }
       @test_dir = options[:test_dir]
-      get_trees(PATTERNFLY_LESS_ROOT, BOOTSTRAP_LESS_ROOT, 'components/bootstrap-select', 'components/bootstrap-combobox', 'tests', 'dist')
+      get_trees(
+        PATTERNFLY_LESS_ROOT,
+        BOOTSTRAP_LESS_ROOT,
+        'components/bootstrap-select',
+        'components/bootstrap-combobox',
+        'components/c3',
+        'tests',
+        'dist'
+      )
     end
 
     def process_patternfly
@@ -137,8 +145,10 @@ module Patternfly
           # statement.  This method moves the bootstrap-select.css into our
           # output directory and renames it with a '.scss' extension.
           add_to_dist("bootstrap-select/bootstrap-select.css", "_bootstrap-select-css.scss")
-          # Similar solution for the bootstrap-combobox
+          # bootstrap-combobox
           add_to_dist("bootstrap-combobox/css/bootstrap-combobox.css", "_bootstrap-combobox-css.scss")
+          # c3
+          add_to_dist("c3/c3.css", "c3-css.scss")
         end
 
         name_out = "#{File.basename(name, ".less")}.scss"
@@ -233,6 +243,7 @@ module Patternfly
         file,
         %r{../components/bootstrap-combobox/less/combobox},
         "patternfly/bootstrap-combobox-css")
+      file = replace_all(file, %r{../components/c3/c3.css}, "patternfly/c3-css")
 
       # Variables need to be declared before they are used.
       variables = <<-VAR.gsub(/^\s*/, '')
