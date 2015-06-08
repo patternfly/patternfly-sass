@@ -67,6 +67,9 @@
 /* Bootstrap-Select */
 @import "patternfly/bootstrap-select-css";
 
+/* C3 charts*/
+@import "patternfly/c3-css";
+
 /* PatternFly overrides and new stuff */
 
 @import "patternfly/mixins";
@@ -78,6 +81,7 @@
 @import "patternfly/bootstrap-treeview";
 @import "patternfly/breadcrumbs";
 @import "patternfly/buttons";
+@import "patternfly/charts";
 @import "patternfly/close";
 @import "patternfly/datatables";
 @import "patternfly/dropdowns";
