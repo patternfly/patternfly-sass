@@ -82,7 +82,7 @@ task :cleanup do
 end
 
 desc "Run the tests with a web server"
-task :test do
+task :test => :compile do
   pid = Process.fork do
     puts "Starting web server on port 9000"
     $stdout.reopen('/dev/null', 'w')
