@@ -1,6 +1,7 @@
 require 'net/http'
 require 'nokogiri'
 require 'rmagick'
+require 'selenium-webdriver'
 
 RSpec.describe "compare SASS with LESS screenshots" do
   BASEURL = "http://localhost:9000"
@@ -10,6 +11,8 @@ RSpec.describe "compare SASS with LESS screenshots" do
   # TODO: Set this to 0 when SASS 3.4.15 is released.
   # See https://github.com/sass/sass/issues/1732
   TOLERANCE = 0.05
+
+  driver = Selenium::WebDriver.for(:phantomjs)
 
   # Give some time for the testing server to start
   html = nil
@@ -25,10 +28,18 @@ RSpec.describe "compare SASS with LESS screenshots" do
     file = link['href']
     context "#{file}" do
       title = file.sub('.html', '')
-      RESOLUTIONS.each do |w,h|
+      RESOLUTIONS.each do |w, h|
         it "#{w}x#{h}" do
+          driver.manage.window.resize_to(w, h)
           CONTEXTS.each do |ctx|
-            `phantomjs spec/capture.js #{w} #{h} #{BASEURL}/#{ctx}/patternfly/#{file} spec/results/#{ctx}/#{title}-#{w}x#{h}.png`
+            driver.navigate.to("#{BASEURL}/#{ctx}/patternfly/#{file}")
+            driver.execute_script("
+              var style = document.createElement('style');
+              style.innerHTML = '* { -webkit-animation: none !important; -webkit-transition: none !important;';
+              document.body.appendChild(style);
+            ")
+            sleep(1)
+            driver.save_screenshot("spec/results/#{ctx}/#{title}-#{w}x#{h}.png")
           end
           img_less = Magick::Image.read("spec/results/less/#{title}-#{w}x#{h}.png").first
           img_sass = Magick::Image.read("spec/results/sass/#{title}-#{w}x#{h}.png").first
@@ -49,5 +60,9 @@ RSpec.describe "compare SASS with LESS screenshots" do
         end
       end
     end
+  end
+
+  after(:all) do
+    driver.quit
   end
 end

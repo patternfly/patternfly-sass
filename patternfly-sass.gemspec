@@ -23,6 +23,7 @@ Gem::Specification.new do |s|
   s.add_development_dependency 'nokogiri', '~> 1.6'
   s.add_development_dependency 'rmagick', '~> 2.15'
   s.add_development_dependency 'imgur-api', '~> 0.0.4'
+  s.add_development_dependency 'selenium-webdriver', '~> 2.46'
 
   s.files      = `git ls-files`.split("\n")
   s.test_files = `git ls-files -- spec/*`.split("\n")
