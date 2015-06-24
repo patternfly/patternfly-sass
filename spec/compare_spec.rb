@@ -12,7 +12,7 @@ RSpec.describe "compare SASS with LESS screenshots" do
   # See https://github.com/sass/sass/issues/1732
   TOLERANCE = 0.05
 
-  driver = Selenium::WebDriver.for(:phantomjs)
+  driver = Selenium::WebDriver.for(:firefox)
 
   # Give some time for the testing server to start
   html = nil
@@ -35,7 +35,7 @@ RSpec.describe "compare SASS with LESS screenshots" do
             driver.navigate.to("#{BASEURL}/#{ctx}/patternfly/#{file}")
             driver.execute_script("
               var style = document.createElement('style');
-              style.innerHTML = '* { -webkit-animation: none !important; -webkit-transition: none !important;';
+              style.innerHTML = '* { -moz-animation: none !important; -moz-transition: none !important;';
               document.body.appendChild(style);
             ")
             sleep(1)
