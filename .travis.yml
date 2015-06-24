@@ -11,6 +11,9 @@ before_script:
   - bundle exec rake compile
   - bundle exec rake serve > /dev/null 2>&1 &
   - export PID=$!
+  - "export DISPLAY=:99.0"
+  - "sh -e /etc/init.d/xvfb start"
+  - sleep 3 # give xvfb some time to start
 script:
   - bundle exec rake spec
 after_failure:
