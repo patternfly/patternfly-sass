@@ -43,24 +43,26 @@ task :serve => :deps do
   require 'webrick'
   server = WEBrick::HTTPServer.new :Port => 9000, :DirectoryIndex => []
   {
-    '/'                                   => 'spec/html/main.html',
-    '/less/dist/css'                      => 'spec/html/dist/css',
-    '/less/dist/fonts'                    => 'assets/fonts/patternfly',
-    '/less/dist/img'                      => 'assets/images/patternfly',
-    '/less/dist/js'                       => 'assets/javascripts',
-    '/less/components'                    => 'spec/components',
-    '/less/components/bootstrap/dist/js'  => File.join(BOOTSTRAP_GEM_ROOT, 'assets', 'javascripts'),
-    '/less/components/font-awesome/fonts' => File.join(FONTAWESOME_GEM_ROOT, 'assets', 'fonts', 'font-awesome'),
-    '/less/patternfly'                    => 'spec/html',
-    '/sass/dist/fonts'                    => 'assets/fonts',
-    '/sass/dist/img'                      => 'assets/images/patternfly',
-    '/sass/dist/images'                   => 'assets/images',
-    '/sass/dist/js'                       => 'assets/javascripts',
-    '/sass/dist/css'                      => 'tmp',
-    '/sass/components'                    => 'spec/components',
-    '/sass/components/bootstrap/dist/js'  => File.join(BOOTSTRAP_GEM_ROOT, 'assets', 'javascripts'),
-    '/sass/dist/fonts/font-awesome'       => File.join(FONTAWESOME_GEM_ROOT, 'assets', 'fonts', 'font-awesome'),
-    '/sass/patternfly'                    => 'spec/html'
+    '/'                                     => 'spec/html/main.html',
+    '/less/dist/css'                        => 'spec/html/dist/css',
+    '/less/dist/fonts'                      => 'assets/fonts/patternfly',
+    '/less/dist/img'                        => 'assets/images/patternfly',
+    '/less/dist/js'                         => 'assets/javascripts',
+    '/less/components'                      => 'spec/components',
+    '/less/components/bootstrap/dist/js'    => File.join(BOOTSTRAP_GEM_ROOT, 'assets', 'javascripts'),
+    '/less/components/bootstrap/dist/fonts' => File.join(BOOTSTRAP_GEM_ROOT, 'assets', 'fonts', 'bootstrap'),
+    '/less/components/font-awesome/fonts'   => File.join(FONTAWESOME_GEM_ROOT, 'assets', 'fonts', 'font-awesome'),
+    '/less/patternfly'                      => 'spec/html',
+    '/sass/dist/fonts'                      => 'assets/fonts',
+    '/sass/dist/fonts/bootstrap'            => File.join(BOOTSTRAP_GEM_ROOT, 'assets', 'fonts', 'bootstrap'),
+    '/sass/dist/img'                        => 'assets/images/patternfly',
+    '/sass/dist/images'                     => 'assets/images',
+    '/sass/dist/js'                         => 'assets/javascripts',
+    '/sass/dist/css'                        => 'tmp',
+    '/sass/components'                      => 'spec/components',
+    '/sass/components/bootstrap/dist/js'    => File.join(BOOTSTRAP_GEM_ROOT, 'assets', 'javascripts'),
+    '/sass/dist/fonts/font-awesome'         => File.join(FONTAWESOME_GEM_ROOT, 'assets', 'fonts', 'font-awesome'),
+    '/sass/patternfly'                      => 'spec/html'
   }.each { |http, local| server.mount http, WEBrick::HTTPServlet::FileHandler, local }
 
   trap('INT') { server.stop }
