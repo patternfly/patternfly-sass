@@ -29,6 +29,7 @@ module Patternfly
         BOOTSTRAP_LESS_ROOT,
         'components/bootstrap-select',
         'components/bootstrap-combobox',
+        'components/bootstrap-datepicker',
         'components/c3',
         'tests',
         'dist'
@@ -89,6 +90,8 @@ module Patternfly
       log_status "Processing stylesheets..."
       files = read_files(bootstrap_less_files)
       files['less/mixin_overrides.less'] = files['less/mixins.less'].dup
+      # Merge the two separated top level files because they will be splitted on a higher level
+      files['less/patternfly.less'] += files.delete('less/patternfly-additions.less')
       save_to = @save_to[:scss]
 
       files.each do |name, file|
@@ -120,11 +123,8 @@ module Patternfly
           NESTED_MIXINS.each do |selector, prefix|
             file = flatten_mixins(file, selector, prefix)
           end
-          file = replace_all(
-            file,
-            /,\s*\.open\s+\.dropdown-toggle& \{(.*?)\}/m,
-            " {\\1}\n  .open & { &.dropdown-toggle {\\1} }")
-        when 'mixin_overrides.less'
+          file = replace_all(file, /,\s*\.open\s+\.dropdown-toggle& \{([^\{\}]*?)\}/m, " {\\1}\n  .open & { &.dropdown-toggle {\\1} }")
+          file = replace_all(file, /,\s*\.open\s+\.dropdown-toggle& \{(.*?\{.*?\}.*?)\}/m, " {\\1}\n  .open & { &.dropdown-toggle {\\1} }")        when 'mixin_overrides.less'
           NESTED_MIXINS.each do |selector, prefix|
             file = flatten_mixins(file, selector, prefix)
           end
@@ -139,16 +139,11 @@ module Patternfly
 
         when 'patternfly.less'
           file = fix_top_level(file)
-          # This is a hack.  We want bootstrap-select to be placed in
-          # the final compiled CSS, but Sass doesn't insert a file's contents
-          # when that file has a '.css' extension.  Sass just uses a @import
-          # statement.  This method moves the bootstrap-select.css into our
-          # output directory and renames it with a '.scss' extension.
-          add_to_dist("bootstrap-select/bootstrap-select.css", "_bootstrap-select-css.scss")
-          # bootstrap-combobox
+          # Load external components with a '-css' suffix to distinguish them from our additions
+          add_to_dist("bootstrap-select/dist/css/bootstrap-select.css", "_bootstrap-select-css.scss")
           add_to_dist("bootstrap-combobox/css/bootstrap-combobox.css", "_bootstrap-combobox-css.scss")
-          # c3
-          add_to_dist("c3/c3.css", "c3-css.scss")
+          add_to_dist("bootstrap-datepicker/dist/css/bootstrap-datepicker3.css", "_bootstrap-datepicker-css.scss")
+          add_to_dist("c3/c3.css", "_c3-css.scss")
         end
 
         name_out = "#{File.basename(name, ".less")}.scss"
@@ -164,6 +159,7 @@ module Patternfly
 
     def add_to_dist(name, name_out)
       in_file = File.join('components', name);
+      puts in_file
       in_dir = File.dirname(in_file)
       dir_files = get_paths_by_directory(in_dir)
       file = read_files(dir_files)[in_file]
@@ -221,35 +217,27 @@ module Patternfly
     end
 
     def fix_top_level(file)
-      file = replace_all(
-        file,
-        %r{@import\s+"variables";},
-        "")
+      file = replace_all(file, %r{@import\s+"variables";}, "")
       file = replace_all(file, /@import "([^\.]{2})/, '@import "patternfly/\1')
-      file = replace_all(
-        file,
-        %r{../components/font-awesome/less/font-awesome},
-        "font-awesome")
-      file = replace_all(
-        file,
-        %r{../components/bootstrap-select/bootstrap-select.css},
-        "patternfly/bootstrap-select-css")
-      file = replace_all(
-        file,
-        %r{@import\s+"../components/bootstrap/less/bootstrap";},
-        fetch_bootstrap_sass)
-
-      file = replace_all(
-        file,
-        %r{../components/bootstrap-combobox/less/combobox},
-        "patternfly/bootstrap-combobox-css")
+      file = replace_all(file, %r{../components/font-awesome/less/font-awesome}, "font-awesome")
+      file = replace_all(file, %r{../components/bootstrap-select/less/bootstrap-select}, "patternfly/bootstrap-select-css")
+      file = replace_all(file, %r{@import\s+"../components/bootstrap/less/bootstrap";}, fetch_bootstrap_sass)
+      file = replace_all(file, %r{../components/bootstrap-combobox/less/combobox}, "patternfly/bootstrap-combobox-css")
+      file = replace_all(file, %r{../components/bootstrap-datepicker/less/datepicker3}, "patternfly/bootstrap-datepicker-css")
       file = replace_all(file, %r{../components/c3/c3.css}, "patternfly/c3-css")
+
+
+      # Remove undesired lines from the merged top level file
+      file = replace_all(file, "@import \"../components/bootstrap/less/variables\";\n", "")
+      file = replace_all(file, "// Bootstrap variables and mixins\n@import \"../components/bootstrap/less/mixins\";\n", "")
+      file = replace_all(file, "// Font Awesome variables\n@import \"../components/font-awesome/less/variables\";\n", "")
+      # Remove duplicate lines
+      file = file.split("\n").uniq.join("\n").concat("\n")
 
       # Variables need to be declared before they are used.
       variables = <<-VAR.gsub(/^\s*/, '')
         @import "patternfly/variables";
         @import "bootstrap/variables";
-        @import "font-awesome/variables";
       VAR
       variables + file
     end
