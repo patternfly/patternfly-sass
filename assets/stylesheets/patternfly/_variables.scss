@@ -4,10 +4,17 @@ $patternfly-sass-asset-helper: false !default;
 // --------------------------------------------------
 // Bootstrap overrides and PatternFly-specific variables
 
-/* PatternFly specific */
+// PatternFly-specific
+// -------------------
 $btn-default-bg-img-start:                                          #fafafa !default;
 $btn-default-bg-img-stop:                                           #ededed !default;
 $btn-xs-font-weight:                                                400 !default;
+$card-pf-accented-border-top-color:                                 #39a5dc !default;
+$card-pf-bg-color:                                                  #fff !default;
+$card-pf-border-color:                                              #d1d1d1 !default;
+$card-pf-border-top-color:                                          transparent !default;
+$card-pf-container-bg-color:                                        #f5f5f5 !default;
+$card-pf-footer-bg-color:                                           #fafafa !default;
 $dropdown-divider-margin:                                           4px 1px !default;
 $dropdown-link-active-border-color:                                 #0076b7 !default;
 $dropdown-link-hover-border-color:                                  #b3d3e7 !default;
@@ -19,12 +26,7 @@ $gray-pf:                                                           #4d5258 !def
 $icon-font-name-fa:                                                 "FontAwesome" !default;
 $icon-font-name-pf:                                                 "PatternFlyIcons-webfont" !default;
 $icon-prefix:                                                       pficon !default;
-$img-badge-ie8:                                                     "logo.png" !default;
-$img-badge-ie8-height:                                              69px !default;
-$img-badge-ie8-width:                                               73px !default;
 $img-bg-login:                                                      "bg-login.jpg" !default;
-$img-brand-ie8:                                                     "brand.png" !default;
-$img-brand-lg-ie8:                                                  "brand-lg.png" !default;
 $img-path:                                                          if($patternfly-sass-asset-helper, "patternfly", "../images/patternfly") !default;
 $img-spinner:                                                       "spinner.gif" !default;
 $img-spinner-lg:                                                    "spinner-lg.gif" !default;
@@ -94,7 +96,8 @@ $navbar-pf-navbar-primary-context-active-border-top-color:          lighten($nav
 $navbar-pf-navbar-primary-context-active-border-right-color:        $navbar-pf-navbar-primary-context-active-border-color !default;
 
 
-/* Bootstrap overrides */
+// Bootstrap overrides
+// -------------------
 $alert-info-border:                                                 #ccc !default;
 $alert-link-font-weight:                                            500 !default;
 $alert-padding:                                                     7px !default;
@@ -209,7 +212,8 @@ $panel-info-text:                                                   $panel-prima
 $panel-success-text:                                                $panel-primary-text !default;
 $panel-warning-text:                                                $panel-primary-text !default;
 
-/* PatternFly-specific variables based on Bootstrap overides */
+// PatternFly-specific variables based on Bootstrap overides
+// ---------------------------------------------------------
 $btn-danger-bg-img-start:                                           $brand-danger !default;
 $btn-danger-bg-img-stop:                                            $btn-danger-bg !default;
 $btn-primary-bg-img-start:                                          $brand-primary !default;

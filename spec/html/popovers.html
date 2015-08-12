@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-<!--[if IE 8]><html class="ie8"><![endif]-->
 <!--[if IE 9]><html class="ie9"><![endif]-->
 <!--[if gt IE 9]><!-->
 <html>
@@ -8,19 +7,23 @@
     <title>Popovers - PatternFly</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="shortcut icon" href="../dist/img/favicon.ico">
-    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="../dist/img/apple-touch-icon-144-precomposed.png">
-    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="../dist/img/apple-touch-icon-114-precomposed.png">
-    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="../dist/img/apple-touch-icon-72-precomposed.png">
-    <link rel="apple-touch-icon-precomposed" href="../dist/img/apple-touch-icon-57-precomposed.png">
+    <!-- iPad retina icon -->
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../dist/img/apple-touch-icon-precomposed-152.png">
+    <!-- iPad retina icon (iOS < 7) -->
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="../dist/img/apple-touch-icon-precomposed-144.png">
+    <!-- iPad non-retina icon -->
+    <link rel="apple-touch-icon-precomposed" sizes="76x76" href="../dist/img/apple-touch-icon-precomposed-76.png">
+    <!-- iPad non-retina icon (iOS < 7) -->
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="../dist/img/apple-touch-icon-precomposed-72.png">
+    <!-- iPhone 6 Plus icon -->
+    <link rel="apple-touch-icon-precomposed" sizes="120x120" href="../dist/img/apple-touch-icon-precomposed-180.png">
+    <!-- iPhone retina icon (iOS < 7) -->
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="../dist/img/apple-touch-icon-precomposed-114.png">
+    <!-- iPhone non-retina icon (iOS < 7) -->
+    <link rel="apple-touch-icon-precomposed" sizes="57x57" href="../dist/img/apple-touch-icon-precomposed-57.png">
     <link href="../dist/css/patternfly.min.css" rel="stylesheet" media="screen, print">
+    <link href="../dist/css/patternfly-additions.min.css" rel="stylesheet" media="screen, print">
     <link href="tests.css" rel="stylesheet" media="screen, print">
-    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!--[if lt IE 9]>
-    <script src="../components/html5shiv/dist/html5shiv.min.js"></script>
-    <script src="../components/respond/dest/respond.min.js"></script>
-    <![endif]-->
-    <!-- IE8 requires jQuery and Bootstrap JS to load in head to prevent rendering bugs -->
-    <!-- IE8 requires jQuery v1.x -->
     <script src="../components/jquery/dist/jquery.min.js"></script>
     <script src="../components/bootstrap/dist/js/bootstrap.min.js"></script>
     <script src="../dist/js/patternfly.min.js"></script>
@@ -87,10 +90,19 @@
       <div class="bs-example" style="margin: 40px 0;">
         <a href="#" class="btn btn-default" data-toggle="popover" data-html="true" title="" data-content="Empty Title example.<br>This is more information about a smartproxy. This is more information about a smartproxy. This is more information about a smartproxy." data-placement="bottom">Popover on bottom</a>
       </div>
+      <hr>
+      <form class="form-horizontal">
+        <div class="form-group">
+          <label class="col-sm-2 control-label" for="textInput">Default <a tabindex="0" role="button" data-toggle="popover" data-trigger="focus" data-html="true" title="" data-content="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et <a href='#'>dolore magna aliqua</a>." data-placement="top"><span class="fa fa-info-circle"></span></a></label>
+          <div class="col-sm-10">
+            <input type="text" id="textInput" class="form-control">
+          </div>
+        </div>
+      </form>
       <script>
         // Initialize Popovers
         $(document).ready(function() {
-          PatternFly.popovers('[data-toggle=popover]')
+          $('[data-toggle=popover]').popovers()
         });
       </script>
     </div><!-- /container -->

@@ -4,7 +4,7 @@
 <html>
 <!--<![endif]-->
   <head>
-    <title>Tooltip - PatternFly</title>
+    <title>Bootstrap-Datepicker - PatternFly</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="shortcut icon" href="../dist/img/favicon.ico">
     <!-- iPad retina icon -->
@@ -26,40 +26,45 @@
     <link href="tests.css" rel="stylesheet" media="screen, print">
     <script src="../components/jquery/dist/jquery.min.js"></script>
     <script src="../components/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="../components/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>
     <script src="../dist/js/patternfly.min.js"></script>
   </head>
   <body>
     <div class="container">
       <div class="page-header">
-        <h1>Tooltip</h1>
+        <h1>Bootstrap-Datepicker</h1>
       </div>
       <div class="alert alert-warning">
         <span class="pficon pficon-warning-triangle-o"></span>
-        These examples are included for development testing purposes.  For official documentation, see <a href="https://www.patternfly.org" class="alert-link">https://www.patternfly.org</a> and <a href="http://getbootstrap.com" class="alert-link">http://getbootstrap.com</a>.
+        These examples are included for development testing purposes.  For official documentation, see <a href="https://www.patternfly.org" class="alert-link">https://www.patternfly.org</a>, <a href="http://getbootstrap.com" class="alert-link">http://getbootstrap.com</a>, and <a href="http://bootstrap-datepicker.readthedocs.org/en/latest/">http://bootstrap-datepicker.readthedocs.org/en/latest/</a>.
       </div>
       <hr>
-      <div class="tooltip-demo">
-        <a href="#" class="btn btn-default" data-toggle="tooltip" data-original-title="Caribbean Monk Seal, Barbary Lion, Seaside Sparrow">Caribbean Monk Seal, Barbary L...</a>
+      <h2>Text Input</h2>
+      <input type="text" class="form-control bootstrap-datepicker">
+      <h2>Component</h2>
+      <div class="input-group date">
+        <input type="text" class="form-control"><span class="input-group-addon"><span class="fa fa-calendar"></span></span>
       </div>
-      <br>
-      <h2>Tooltip Directions</h2>
-      <div class="tooltip-demo">
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis pretium mi at ante luctus dapibus. Fusce in tempus felis. Suspendisse tristique diam vel.</p>
-        <div class="bs-example-tooltips">
-          <button type="button" class="btn btn-default" data-toggle="tooltip" data-placement="left" title="" data-original-title="Tooltip on left">Tooltip on left</button>
-          <button type="button" class="btn btn-default" data-toggle="tooltip" data-placement="top" title="Tooltip on top">Tooltip on top</button>
-          <button type="button" class="btn btn-default" data-toggle="tooltip" data-placement="bottom" title="Tooltip on bottom">Tooltip on bottom</button>
-          <button type="button" class="btn btn-default" data-toggle="tooltip" data-placement="right" title="" data-original-title="Tooltip on right">Tooltip on right</button>
-        </div>
-        <p style="margin-top: 10px;">Suspendisse tristique diam vel hendrerit aliquet. Vestibulum laoreet nisi ac egestas porttitor. Donec tempus elit convallis.</p>
+      <h2>Inline</h2>
+      <div class="bootstrap-datepicker-inline"></div>
+      <h2>Range <small>Do not use.  PatternFly-approved design coming in a future update.</small></h2>
+      <div class="input-daterange input-group">
+        <input type="text" class="form-control" name="start">
+        <span class="input-group-addon">to</span>
+        <input type="text" class="form-control" name="end">
       </div>
       <script>
-        // Initialize Tooltip
-        $(document).ready(function() {
-          $('.tooltip-demo').tooltip({
-            selector: "[data-toggle=tooltip]",
-            container: "body"
-          });
+        // Initialize Boostrap-Datepicker
+        $('.bootstrap-datepicker, .input-group.date, .bootstrap-datepicker-inline').datepicker({
+          autoclose: true,
+          orientation: "top auto",
+          todayBtn: "linked",
+          todayHighlight: true
+        });
+        $('.input-daterange').datepicker({
+          autoclose: true,
+          todayBtn: "linked",
+          todayHighlight: true
         });
       </script>
     </div><!-- /container -->
