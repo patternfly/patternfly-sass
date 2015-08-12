@@ -3,7 +3,8 @@
 // --------------------------------------------------
 // Bootstrap overrides and PatternFly-specific mixins
 
-/* Bootstrap overrides */
+// Bootstrap overrides
+// -------------------
 
 // Button variants
 @mixin button-variant($color, $background, $background-image-start, $background-image-stop, $border) {
@@ -30,9 +31,21 @@
   &:active,
   &.active {
     background-image: none;
+    &:hover,
+    &:focus,
+    &.focus {
+      background-color: darken($background, 5%);
+          border-color: darken($border, 7%);
+    }
   }
   .open & { &.dropdown-toggle {
     background-image: none;
+    &:hover,
+    &:focus,
+    &.focus {
+      background-color: darken($background, 5%);
+          border-color: darken($border, 7%);
+    }
   } }
   &.disabled,
   &[disabled],
@@ -80,7 +93,8 @@
   &::-webkit-input-placeholder  { color: $color; font-style: italic; } // Safari and Chrome
 }
 
-/* PatternFly-specific */
+// PatternFly-specific
+// -------------------
 
 @mixin tab-indicator($background: $gray-light-pf, $left: 15px, $right: 15px) {
   &:before {

@@ -33,6 +33,7 @@ task :compile do
     dst_path = File.join('tmp', out)
     engine = Sass::Engine.for_file(src_path, :syntax => :scss, :load_paths => [path], :style => style)
     css = engine.render
+    css.gsub!(/(( )|(:))0((px)|(em)|(\%))/, '\10')
     File.open(dst_path, 'w') { |f| f.write css }
     puts Term::ANSIColor.cyan("  #{dst_path}") + '...'
   end

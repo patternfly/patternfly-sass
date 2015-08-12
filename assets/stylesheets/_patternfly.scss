@@ -1,20 +1,22 @@
 @import "patternfly/variables";
 @import "bootstrap/variables";
-@import "font-awesome/variables";
 /* PatternFly */
 
-/* Bootstrap 3 */
+// OpenSans
+@import "patternfly/fonts";
+// Bootstrap
+/*!
+ * Bootstrap v3.3.5 (http://getbootstrap.com)
+ * Copyright 2011-2015 Twitter, Inc.
+ * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
+ */
 // Core variables and mixins
-
 @import "bootstrap/mixins";
 @import "patternfly/mixin_overrides";
-
-
 // Reset and dependencies
 @import "bootstrap/normalize";
 @import "bootstrap/print";
 @import "bootstrap/glyphicons";
-
 // Core CSS
 @import "bootstrap/scaffolding";
 @import "bootstrap/type";
@@ -23,7 +25,6 @@
 @import "bootstrap/tables";
 @import "bootstrap/forms";
 @import "bootstrap/buttons";
-
 // Components
 @import "bootstrap/component-animations";
 @import "bootstrap/dropdowns";
@@ -46,64 +47,59 @@
 @import "bootstrap/responsive-embed";
 @import "bootstrap/wells";
 @import "bootstrap/close";
-
 // Components w/ JavaScript
 @import "bootstrap/modals";
 @import "bootstrap/tooltip";
 @import "bootstrap/popovers";
 @import "bootstrap/carousel";
-
 // Utility classes
 @import "bootstrap/utilities";
 @import "bootstrap/responsive-utilities";
-
-
-/* Font Awesome */
+// Font Awesome
 @import "font-awesome";
-
-/* Bootstrap-Combobox */
-@import "patternfly/bootstrap-combobox-css";
-
-/* Bootstrap-Select */
-@import "patternfly/bootstrap-select-css";
-
-/* C3 charts*/
-@import "patternfly/c3-css";
-
-/* PatternFly overrides and new stuff */
-
+// Bootstrap overrides
 @import "patternfly/mixins";
 @import "patternfly/alerts";
 @import "patternfly/badges";
-@import "patternfly/blank-slate";
-@import "patternfly/bootstrap-combobox";
-@import "patternfly/bootstrap-select";
-@import "patternfly/bootstrap-treeview";
 @import "patternfly/breadcrumbs";
 @import "patternfly/buttons";
-@import "patternfly/charts";
-@import "patternfly/close";
-@import "patternfly/datatables";
 @import "patternfly/dropdowns";
-@import "patternfly/fonts";
 @import "patternfly/forms";
-@import "patternfly/icons";
-@import "patternfly/infotip";
 @import "patternfly/labels";
 @import "patternfly/list-group";
-@import "patternfly/login";
 @import "patternfly/modals";
-@import "patternfly/navbar";
 @import "patternfly/pager";
 @import "patternfly/pagination";
 @import "patternfly/panels";
 @import "patternfly/popovers";
 @import "patternfly/progress-bars";
-@import "patternfly/search";
-@import "patternfly/sidebar";
-@import "patternfly/spinner";
-@import "patternfly/syntax-highlighting";
 @import "patternfly/tables";
 @import "patternfly/tabs";
 @import "patternfly/tooltip";
 @import "patternfly/type";
+/* PatternFly additions to Bootstrap */
+// Bootstrap-Combobox
+@import "patternfly/bootstrap-combobox-css";
+// Bootstrap-Datepicker
+@import "patternfly/bootstrap-datepicker-css";
+// Bootstrap-Select
+@import "patternfly/bootstrap-select-css";
+// C3 charts
+@import "patternfly/c3-css";
+@import "patternfly/blank-slate";
+@import "patternfly/bootstrap-combobox";
+@import "patternfly/bootstrap-datepicker";
+@import "patternfly/bootstrap-select";
+@import "patternfly/bootstrap-treeview";
+@import "patternfly/cards";
+@import "patternfly/charts";
+@import "patternfly/close";
+@import "patternfly/datatables";
+@import "patternfly/icons";
+@import "patternfly/infotip";
+@import "patternfly/login";
+@import "patternfly/navbar";
+@import "patternfly/search";
+@import "patternfly/sidebar";
+@import "patternfly/spinner";
+@import "patternfly/syntax-highlighting";
