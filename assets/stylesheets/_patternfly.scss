@@ -79,13 +79,13 @@
 @import "patternfly/type";
 /* PatternFly additions to Bootstrap */
 // Bootstrap-Combobox
-@import "patternfly/bootstrap-combobox-css";
+@import "patternfly/ext-bootstrap-combobox";
 // Bootstrap-Datepicker
-@import "patternfly/bootstrap-datepicker-css";
+@import "patternfly/ext-bootstrap-datepicker";
 // Bootstrap-Select
-@import "patternfly/bootstrap-select-css";
+@import "patternfly/ext-bootstrap-select";
 // C3 charts
-@import "patternfly/c3-css";
+@import "patternfly/ext-c3";
 @import "patternfly/blank-slate";
 @import "patternfly/bootstrap-combobox";
 @import "patternfly/bootstrap-datepicker";

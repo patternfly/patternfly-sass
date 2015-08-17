@@ -15,6 +15,18 @@ Gem::Specification.new do |s|
   s.add_runtime_dependency 'bootstrap-sass', '~> 3.3.5'
   s.add_runtime_dependency 'font-awesome-sass', '~> 4.3.0'
 
+  # Bower dependencies from rails-assets
+  s.add_development_dependency 'rails-assets-bootstrap-combobox', '~> 1.1.6'
+  s.add_development_dependency 'rails-assets-bootstrap-datepicker', '~> 1.4.0'
+  s.add_development_dependency 'rails-assets-bootstrap-select', '~> 1.7.3'
+  s.add_development_dependency 'rails-assets-bootstrap-treeview', '~> 1.2.0'
+  s.add_development_dependency 'rails-assets-c3', '~> 0.4.10'
+  s.add_development_dependency 'rails-assets-datatables', '~> 1.10.7'
+  s.add_development_dependency 'rails-assets-datatables-colreorder', '~> 1.1.3'
+  s.add_development_dependency 'rails-assets-datatables-colvis', '~> 1.1.2'
+  s.add_development_dependency 'rails-assets-google-code-prettify', '~> 1.0.4'
+  s.add_development_dependency 'rails-assets-matchHeight', '~> 0.6.0'
+
   # Converter's dependencies
   s.add_development_dependency 'rake', '~> 10.4'
   s.add_development_dependency 'term-ansicolor'

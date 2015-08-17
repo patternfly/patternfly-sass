@@ -24,16 +24,7 @@ module Patternfly
         :fonts => 'assets/fonts/patternfly'
       }
       @test_dir = options[:test_dir]
-      get_trees(
-        PATTERNFLY_LESS_ROOT,
-        BOOTSTRAP_LESS_ROOT,
-        'components/bootstrap-select',
-        'components/bootstrap-combobox',
-        'components/bootstrap-datepicker',
-        'components/c3',
-        'tests',
-        'dist'
-      )
+      get_trees(PATTERNFLY_LESS_ROOT, BOOTSTRAP_LESS_ROOT, 'tests', 'dist')
     end
 
     def process_patternfly
@@ -139,11 +130,10 @@ module Patternfly
 
         when 'patternfly.less'
           file = fix_top_level(file)
-          # Load external components with a '-css' suffix to distinguish them from our additions
-          add_to_dist("bootstrap-select/dist/css/bootstrap-select.css", "_bootstrap-select-css.scss")
-          add_to_dist("bootstrap-combobox/css/bootstrap-combobox.css", "_bootstrap-combobox-css.scss")
-          add_to_dist("bootstrap-datepicker/dist/css/bootstrap-datepicker3.css", "_bootstrap-datepicker-css.scss")
-          add_to_dist("c3/c3.css", "_c3-css.scss")
+          add_to_dist('bootstrap-select')
+          add_to_dist('bootstrap-combobox')
+          add_to_dist('bootstrap-datepicker', 'bootstrap-datepicker3')
+          add_to_dist('c3')
         end
 
         name_out = "#{File.basename(name, ".less")}.scss"
@@ -157,16 +147,14 @@ module Patternfly
       FileUtils.mv("#{save_to}/_patternfly.scss", File.expand_path("#{save_to}/../_patternfly.scss"))
     end
 
-    def add_to_dist(name, name_out)
-      in_file = File.join('components', name);
+    # Load external components from rails-assets.org
+    def add_to_dist(gemname, file=nil)
+      file = "app/assets/stylesheets/#{gemname}/#{file.nil? ? gemname : file}.scss"
+      in_file = File.join(Gem::Specification.find_by_name("rails-assets-#{gemname}").gem_dir, file)
       puts in_file
-      in_dir = File.dirname(in_file)
-      dir_files = get_paths_by_directory(in_dir)
-      file = read_files(dir_files)[in_file]
-      raise "add_to_dist failed for #{name}" if file.nil?
-      out_path = File.join(@save_to[:scss], name_out)
-      save_file(out_path, file)
-      log_processed("Moving #{File.join(in_dir, in_file)} to #{out_path}")
+      out_file = File.join(@save_to[:scss], "_ext-#{gemname}.scss")
+      FileUtils.cp(in_file, out_file)
+      log_processed("Moving #{in_file} to #{out_file}")
     end
 
     def convert_less(less, *transforms)
@@ -220,11 +208,11 @@ module Patternfly
       file = replace_all(file, %r{@import\s+"variables";}, "")
       file = replace_all(file, /@import "([^\.]{2})/, '@import "patternfly/\1')
       file = replace_all(file, %r{../components/font-awesome/less/font-awesome}, "font-awesome")
-      file = replace_all(file, %r{../components/bootstrap-select/less/bootstrap-select}, "patternfly/bootstrap-select-css")
+      file = replace_all(file, %r{../components/bootstrap-select/less/bootstrap-select}, "patternfly/ext-bootstrap-select")
       file = replace_all(file, %r{@import\s+"../components/bootstrap/less/bootstrap";}, fetch_bootstrap_sass)
-      file = replace_all(file, %r{../components/bootstrap-combobox/less/combobox}, "patternfly/bootstrap-combobox-css")
-      file = replace_all(file, %r{../components/bootstrap-datepicker/less/datepicker3}, "patternfly/bootstrap-datepicker-css")
-      file = replace_all(file, %r{../components/c3/c3.css}, "patternfly/c3-css")
+      file = replace_all(file, %r{../components/bootstrap-combobox/less/combobox}, "patternfly/ext-bootstrap-combobox")
+      file = replace_all(file, %r{../components/bootstrap-datepicker/less/datepicker3}, "patternfly/ext-bootstrap-datepicker")
+      file = replace_all(file, %r{../components/c3/c3.css}, "patternfly/ext-c3")
 
 
       # Remove undesired lines from the merged top level file
