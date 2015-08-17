@@ -2,7 +2,7 @@ language: ruby
 cache:
   bundler: true
   directories:
-    - spec/components
+    - bower_components
 sudo: false
 rvm:
   - 2.0.0
@@ -13,7 +13,7 @@ before_script:
   - export PID=$!
   - "export DISPLAY=:99.0"
   - "sh -e /etc/init.d/xvfb start"
-  - sleep 3 # give xvfb some time to start
+  - sleep 5 # give xvfb some time to start
 script:
   - bundle exec rake spec
 after_failure:
