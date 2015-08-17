@@ -35,7 +35,7 @@ tmp
 
 # Directories with test images
 spec/results
-spec/components
+bower_components
 
 # Gemfile.lock
 /Gemfile.lock

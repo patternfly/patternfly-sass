@@ -49,7 +49,7 @@ task :serve => :deps do
     '/less/dist/fonts'                      => 'assets/fonts/patternfly',
     '/less/dist/img'                        => 'assets/images/patternfly',
     '/less/dist/js'                         => 'assets/javascripts',
-    '/less/components'                      => 'spec/components',
+    '/less/components'                      => 'bower_components',
     '/less/components/bootstrap/dist/js'    => File.join(BOOTSTRAP_GEM_ROOT, 'assets', 'javascripts'),
     '/less/components/bootstrap/dist/fonts' => File.join(BOOTSTRAP_GEM_ROOT, 'assets', 'fonts', 'bootstrap'),
     '/less/components/font-awesome/fonts'   => File.join(FONTAWESOME_GEM_ROOT, 'assets', 'fonts', 'font-awesome'),
@@ -60,7 +60,7 @@ task :serve => :deps do
     '/sass/dist/images'                     => 'assets/images',
     '/sass/dist/js'                         => 'assets/javascripts',
     '/sass/dist/css'                        => 'tmp',
-    '/sass/components'                      => 'spec/components',
+    '/sass/components'                      => 'bower_components',
     '/sass/components/bootstrap/dist/js'    => File.join(BOOTSTRAP_GEM_ROOT, 'assets', 'javascripts'),
     '/sass/dist/fonts/font-awesome'         => File.join(FONTAWESOME_GEM_ROOT, 'assets', 'fonts', 'font-awesome'),
     '/sass/patternfly'                      => 'spec/html'
@@ -73,8 +73,6 @@ end
 desc "Install testing dependencies using bower"
 task :deps do
   system("bower install", out: $stdout, err: :out)
-  # This is a workaround for removing the obsoletely installed bootstrap and jquery
-  FileUtils.rm_rf 'spec/components/bootstrap'
 end
 
 desc "Clean up the test results"
