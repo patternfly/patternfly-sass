@@ -57,7 +57,6 @@ task :serve => :deps do
     '/sass/dist/fonts'                      => 'assets/fonts',
     '/sass/dist/fonts/bootstrap'            => File.join(BOOTSTRAP_GEM_ROOT, 'assets', 'fonts', 'bootstrap'),
     '/sass/dist/img'                        => 'assets/images/patternfly',
-    '/sass/dist/images'                     => 'assets/images',
     '/sass/dist/js'                         => 'assets/javascripts',
     '/sass/dist/css'                        => 'tmp',
     '/sass/components'                      => 'bower_components',
