@@ -21,3 +21,11 @@ after_failure:
 after_script:
   - kill -2 $PID
   - sleep 2
+env:
+  matrix:
+    - "TOLERANCE=0.01"
+    - "TOLERANCE=0.00"
+matrix:
+  fast_finish: true
+  allow_failures:
+    - env: TOLERANCE=0.00
