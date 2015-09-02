@@ -19,7 +19,7 @@ Please see the appropriate guide for your environment of choice:
 In your Gemfile you need to add the `patternfly-sass` gem, and ensure that the `sass-rails` gem is present - it is added to new Rails applications by default.
 
 ```ruby
-gem 'patternfly-sass', '~> 1.3.1'
+gem 'patternfly-sass', '~> 2.1.0'
 gem 'sass-rails', '>= 3.2'
 ```
 
