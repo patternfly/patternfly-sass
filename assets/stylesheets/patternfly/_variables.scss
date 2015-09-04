@@ -20,8 +20,13 @@ $dropdown-divider-margin:                                           4px 1px !def
 $dropdown-link-active-border-color:                                 #0076b7 !default;
 $dropdown-link-hover-border-color:                                  #b3d3e7 !default;
 $dropdown-link-focus-color:                                         #fff !default;
+$flyout-transition-pf:                                              all .2s cubic-bezier(.35,0,.25,1) !default;
 $font-family-monospace:                                             Menlo, Monaco, Consolas, monospace !default;
 $font-path:                                                         if($patternfly-sass-asset-helper, "patternfly", "../fonts/patternfly") !default;
+$footer-pf-alt-bg-color:                                            #030303 !default;
+$footer-pf-alt-padding-left:                                        25px !default;
+$footer-pf-alt-padding-top:                                         10px !default;
+$footer-pf-alt-height:                                              37px !default;
 $gray-light-pf:                                                     #aaa !default;
 $gray-pf:                                                           #4d5258 !default;
 $icon-font-name-fa:                                                 "FontAwesome" !default;
@@ -41,10 +46,37 @@ $login-container-bg-color:                                          #181818 !def
 $login-container-bg-color-rgba:                                     rgba(255, 255, 255, 0.055) !default;
 $modal-title-padding-horizontal:                                    18px !default;
 $modal-title-padding-vertical:                                      10px !default;
+$nav-pf-vertical-alt-active-color:                                  #39a5dc !default;
+$nav-pf-vertical-alt-bg-color:                                      #fff !default;
+$nav-pf-vertical-alt-badge-color:                                   #fff !default;
+$nav-pf-vertical-alt-collapsed-width:                               75px !default;
+$nav-pf-vertical-alt-color:                                         #464952 !default;
+$nav-pf-vertical-alt-link-height:                                   63px !default;
+$nav-pf-vertical-alt-link-padding:                                  17px 20px 17px 25px !default;
+$nav-pf-vertical-alt-width:                                         250px !default;
 $navbar-pf-active-color:                                            #f1f1f1 !default;
 $navbar-pf-bg-color:                                                #030303 !default; //#393F45
 $navbar-pf-border-color:                                            #199dde !default;
 $navbar-pf-color:                                                   #cfcfcf !default;
+$navbar-pf-alt-active-color:                                        #fff !default;
+$navbar-pf-alt-bg-color:                                            #030303 !default;
+$navbar-pf-alt-bg-img:                                              url("../img/bg-navbar-pf-alt.svg") !default;
+$navbar-pf-alt-bg-repeat:                                           no-repeat !default;
+$navbar-pf-alt-bg-size:                                             auto 100% !default;
+$navbar-pf-alt-border-style:                                        solid !default;
+$navbar-pf-alt-border-width:                                        2px !default;
+$navbar-pf-alt-color:                                               #cfcfcf !default;
+$navbar-pf-alt-height:                                              60px !default;
+$navbar-pf-alt-nav-item-iconic-padding:                             21px 12px !default;
+$navbar-pf-alt-navbar-brand-color:                                  #fff !default;
+$navbar-pf-alt-navbar-brand-icon-margin:                            0 15px 0 0 !default;
+$navbar-pf-alt-navbar-brand-margin:                                 0 0 0 25px !default;
+$navbar-pf-alt-navbar-brand-min-height:                             35px !default;
+$navbar-pf-alt-navbar-brand-name-breakpoint:                        480px !default;
+$navbar-pf-alt-navbar-brand-name-margin:                            0 15px 0 0 !default;
+$navbar-pf-alt-navbar-brand-padding:                                11px 0 12px !default;
+$navbar-pf-alt-navbar-toggle-margin:                                13px 15px !default;
+$navbar-pf-alt-navbar-toggle-icon-bar-hover-bg:                     #fff !default;
 $navbar-pf-icon-bar-bg-color:                                       #fff !default;
 $navbar-pf-navbar-navbar-brand-min-width:                           270px !default;
 $navbar-pf-navbar-navbar-brand-padding:                             8px 0 7px !default;
@@ -59,6 +91,8 @@ $table-cell-padding-bottom:                                         3px !default
 $table-cell-padding-top:                                            2px !default;
 // Reference variables declared in block above
 $img-path-alt:                                                      $img-path !default;
+$nav-pf-vertical-alt-border-color:                                  $sidebar-pf-border-color !default;
+$navbar-pf-alt-border-color:                                        $navbar-pf-border-color !default;
 $navbar-pf-navbar-header-border-color:                              lighten($navbar-pf-bg-color, 15%) !default;
 $navbar-pf-navbar-nav-active-active-bg-color:                       lighten($navbar-pf-bg-color, 8%) !default;
 $navbar-pf-navbar-nav-active-active-open-bg-color:                  lighten($navbar-pf-bg-color, 11%) !default;
@@ -221,6 +255,7 @@ $btn-primary-bg-img-start:                                          $brand-prima
 $btn-primary-bg-img-stop:                                           $btn-primary-bg !default;
 $dropdown-link-focus-bg:                                            $link-color !default;
 $line-height-computed:                                              floor(($font-size-base * $line-height-base)) !default;
+$notification-badge-color:                                          $brand-danger !default;
 $progress-sm:                                                       $line-height-computed - 6 !default;
 $progress-xs:                                                       $line-height-computed - 14 !default;
 $syntax-1:                                                          $btn-danger-bg !default;
