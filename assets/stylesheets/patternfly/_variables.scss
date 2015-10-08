@@ -6,11 +6,12 @@ $patternfly-sass-asset-helper: false !default;
 
 // PatternFly-specific
 // -------------------
+$bootstrap-switch-handle-default-bg-color:                          #fbfbfb !default;
 $btn-default-bg-img-start:                                          #fafafa !default;
 $btn-default-bg-img-stop:                                           #ededed !default;
 $btn-xs-font-weight:                                                400 !default;
 $card-pf-accented-border-top-color:                                 #39a5dc !default;
-$card-pf-aggregate-status-title-icon-color:                         #72767b !default;
+$card-pf-aggregate-status-title-icon-color:                         #333 !default;
 $card-pf-bg-color:                                                  #fff !default;
 $card-pf-border-color:                                              #d1d1d1 !default;
 $card-pf-border-top-color:                                          transparent !default;
@@ -90,6 +91,8 @@ $table-border-hover:                                                #a7cadf !def
 $table-cell-padding-bottom:                                         3px !default;
 $table-cell-padding-top:                                            2px !default;
 // Reference variables declared in block above
+$bootstrap-switch-bg-color-start:                                   $btn-default-bg-img-start !default;
+$bootstrap-switch-bg-color-stop:                                    $btn-default-bg-img-stop !default;
 $img-path-alt:                                                      $img-path !default;
 $nav-pf-vertical-alt-border-color:                                  $sidebar-pf-border-color !default;
 $navbar-pf-alt-border-color:                                        $navbar-pf-border-color !default;
@@ -249,6 +252,7 @@ $panel-warning-text:                                                $panel-prima
 
 // PatternFly-specific variables based on Bootstrap overides
 // ---------------------------------------------------------
+$bootstrap-switch-bg-color:                                         $btn-default-bg !default;
 $btn-danger-bg-img-start:                                           $brand-danger !default;
 $btn-danger-bg-img-stop:                                            $btn-danger-bg !default;
 $btn-primary-bg-img-start:                                          $brand-primary !default;

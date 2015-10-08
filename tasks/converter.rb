@@ -98,9 +98,7 @@ module Patternfly
           file = replace_rules(file, button_variant) do |rule, pos|
             ""
           end
-        when 'patternfly.less'
-          transforms = remove_xforms(transforms, :replace_spin)
-        when 'variables.less'
+        when 'patternfly.less', 'bootstrap-touchspin.less', 'variables.less'
           transforms = remove_xforms(transforms, :replace_spin)
         when 'spinner.less'
           transforms = remove_xforms(transforms, :replace_spin, :replace_image_urls)
@@ -130,8 +128,10 @@ module Patternfly
 
         when 'patternfly.less'
           file = fix_top_level(file)
-          add_to_dist('bootstrap-select')
           add_to_dist('bootstrap-combobox')
+          add_to_dist('bootstrap-select')
+          # add_to_dist('bootstrap-switch')
+          add_to_dist('bootstrap-touchspin', 'dist/jquery.bootstrap-touchspin')
           add_to_dist('bootstrap-datepicker', 'bootstrap-datepicker3')
           add_to_dist('c3')
         end
@@ -209,6 +209,8 @@ module Patternfly
       file = replace_all(file, /@import "([^\.]{2})/, '@import "patternfly/\1')
       file = replace_all(file, %r{../components/font-awesome/less/font-awesome}, "font-awesome")
       file = replace_all(file, %r{../components/bootstrap-select/less/bootstrap-select}, "patternfly/ext-bootstrap-select")
+      file = replace_all(file, %r{../components/bootstrap-touchspin/dist/jquery.bootstrap-touchspin.css}, "patternfly/ext-bootstrap-touchspin")
+      file = replace_all(file, %r{../components/bootstrap-switch/src/less/bootstrap3/bootstrap-switch}, "patternfly/ext-bootstrap-switch")
       file = replace_all(file, %r{@import\s+"../components/bootstrap/less/bootstrap";}, fetch_bootstrap_sass)
       file = replace_all(file, %r{../components/bootstrap-combobox/less/combobox}, "patternfly/ext-bootstrap-combobox")
       file = replace_all(file, %r{../components/bootstrap-datepicker/less/datepicker3}, "patternfly/ext-bootstrap-datepicker")
