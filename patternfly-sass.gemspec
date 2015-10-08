@@ -19,6 +19,8 @@ Gem::Specification.new do |s|
   s.add_development_dependency 'rails-assets-bootstrap-combobox', '~> 1.1.6'
   s.add_development_dependency 'rails-assets-bootstrap-datepicker', '~> 1.4.0'
   s.add_development_dependency 'rails-assets-bootstrap-select', '~> 1.7.3'
+  s.add_development_dependency 'rails-assets-bootstrap-switch', '~> 3.3.2'
+  s.add_development_dependency 'rails-assets-bootstrap-touchspin', '~> 3.0.3'
   s.add_development_dependency 'rails-assets-bootstrap-treeview', '~> 1.2.0'
   s.add_development_dependency 'rails-assets-c3', '~> 0.4.10'
   s.add_development_dependency 'rails-assets-datatables', '~> 1.10.7'
