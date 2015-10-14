@@ -2157,9 +2157,6 @@ fieldset[disabled] .combobox-container .input-group-addon.active {
 .treeview span.indent {
   margin-right: 5px;
 }
-.container-cards-pf {
-  margin-top: 20px;
-}
 .card-pf {
   background: #ffffff;
   border-top: 2px solid transparent;
@@ -2185,14 +2182,14 @@ fieldset[disabled] .combobox-container .input-group-addon.active {
 }
 .card-pf.card-pf-aggregate-status .card-pf-title a:hover,
 .card-pf.card-pf-aggregate-status .card-pf-aggregate-status-notifications a:hover {
-  color: #0099d3;
+  color: #00618a;
 }
-.card-pf.card-pf-aggregate-status,
-.card-pf.card-pf-status {
+.card-pf.card-pf-aggregate-status {
   padding: 0 10px;
   text-align: center;
 }
-.card-pf.card-pf-status {
+.card-pf.card-pf-aggregate-status-mini {
+  padding-bottom: 10px;
   position: relative;
 }
 @media (min-width: 768px) {
@@ -2208,15 +2205,18 @@ fieldset[disabled] .combobox-container .input-group-addon.active {
   font-size: 24px;
   font-weight: 300;
 }
-.card-pf-aggregate-status-notifications .fa,
-.card-pf-aggregate-status-notifications .pficon {
-  font-size: 18px;
-  margin-right: 7px;
+.card-pf-aggregate-status-mini .card-pf-aggregate-status-notifications {
+  line-height: 1;
 }
 .card-pf-aggregate-status-notifications .card-pf-aggregate-status-notification + .card-pf-aggregate-status-notification {
   border-left: 1px solid #d1d1d1;
   margin-left: 3px;
   padding-left: 10px;
+}
+.card-pf-aggregate-status-notifications .fa,
+.card-pf-aggregate-status-notifications .pficon {
+  font-size: 18px;
+  margin-right: 7px;
 }
 .card-pf-body {
   margin: 20px 0;
@@ -2225,6 +2225,14 @@ fieldset[disabled] .combobox-container .input-group-addon.active {
 .card-pf-aggregate-status .card-pf-body {
   margin-top: 10px;
   padding-bottom: 10px;
+}
+.card-pf-aggregate-status-mini .card-pf-body {
+  margin-bottom: 0;
+  margin-top: 0;
+  padding-bottom: 0;
+  position: absolute;
+  right: 20px;
+  top: 15px;
 }
 .card-pf-body > *:last-child {
   margin-bottom: 0;
@@ -2260,29 +2268,37 @@ fieldset[disabled] .combobox-container .input-group-addon.active {
   font-size: 16px;
   margin-right: 7px;
 }
-.card-pf-title .card-pf-aggregate-status-count,
-.card-pf-title .card-pf-status-count {
+.card-pf-title .card-pf-aggregate-status-count {
   font-size: 16px;
 }
-.card-pf-status .card-pf-title {
-  font-size: 12px;
-  margin: 10px 0 0;
-  padding: 0 0 10px;
-}
-.card-pf-status .card-pf-title .fa,
-.card-pf-status .card-pf-title .pficon {
-  color: #333333;
-  font-size: 28px;
-  position: absolute;
-  left: 10px;
-  margin-top: -14px;
-  top: 50%;
-}
-.card-pf-title .card-pf-status-count {
+.card-pf-aggregate-status-mini .card-pf-title .card-pf-aggregate-status-count {
   display: block;
+  font-size: 24px;
+  font-weight: 300;
+  margin-bottom: 3px;
+}
+.card-pf-aggregate-status-mini .card-pf-title {
+  font-size: 12px;
+  margin-top: 5px;
+}
+.card-pf-aggregate-status-mini .card-pf-title a {
+  display: inline-block;
+}
+.card-pf-aggregate-status-mini .card-pf-title .fa,
+.card-pf-aggregate-status-mini .card-pf-title .pficon {
+  font-size: 26px;
+  margin-right: 0;
+  min-width: 26px;
+  position: absolute;
+  left: 20px;
+  text-align: center;
+  top: 15px;
 }
 .cards-pf {
   background: #f5f5f5;
+}
+.container-cards-pf {
+  margin-top: 20px;
 }
 .row-cards-pf {
   margin-left: -10px;
@@ -2344,6 +2360,23 @@ fieldset[disabled] .combobox-container .input-group-addon.active {
 .c3-xgrid,
 .c3-ygrid {
   stroke-dasharray: 0 0;
+}
+.donut-title-big-pf {
+  color: #333333;
+  font-size: 30px;
+  font-weight: 300;
+}
+.donut-title-small-pf {
+  color: #333333;
+  font-size: 12px;
+  font-weight: 400;
+}
+.donut-tooltip-pf {
+  background: #434343;
+  color: #ffffff;
+  filter: alpha(opacity=90);
+  opacity: 0.9;
+  padding: 2px 6px;
 }
 .close {
   text-shadow: none;
@@ -2599,94 +2632,14 @@ table.datatable th:active {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
-.pficon-screen:before {
-  content: "\e600";
-}
-.pficon-save:before {
-  content: "\e601";
-}
-.pficon-ok:before {
-  color: #3f9c35;
-  content: "\e602";
-}
-.pficon-messages:before,
-.pficon-flag:before {
-  content: "\e603";
-}
-.pficon-info:before {
-  content: "\e604";
-}
-.pficon-help:before {
-  content: "\e605";
-}
-.pficon-folder-open:before {
-  content: "\e606";
-}
-.pficon-folder-close:before {
-  content: "\e607";
-}
-.pficon-topology:before {
-  content: "\e608";
-}
-.pficon-thumb-tack-o:before {
-  content: "\e609";
-}
-.pficon-edit:before {
-  content: "\e60a";
-}
-.pficon-close:before {
-  content: "\e60b";
-}
-.pficon-user:before {
-  content: "\e60e";
-}
-.pficon-users:before {
-  content: "\e60f";
-}
 .pficon-add-circle-o:before {
   content: "\e61b";
 }
-.pficon-warning-triangle-o:before {
-  color: #ec7a08;
-  content: "\e61c";
+.pficon-builder-image:before {
+  content: "\e800";
 }
-.pficon-error-circle-o:before {
-  color: #cc0000;
-  content: "\e61d";
-}
-.pficon-service:before {
-  content: "\e61e";
-}
-.pficon-image:before {
-  content: "\e61f";
-}
-.pficon-settings:before {
-  content: "\e610";
-}
-.pficon-delete:before {
-  content: "\e611";
-}
-.pficon-print:before {
-  content: "\e612";
-}
-.pficon-refresh:before,
-.pficon-restart:before {
-  content: "\e613";
-}
-.pficon-running:before {
-  content: "\e614";
-}
-.pficon-import:before {
-  content: "\e615";
-}
-.pficon-export:before {
-  content: "\e616";
-}
-.pficon-history:before {
-  content: "\e617";
-}
-.pficon-home:before {
-  content: "\e618";
+.pficon-close:before {
+  content: "\e60b";
 }
 .pficon-cluster:before {
   content: "\e620";
@@ -2694,8 +2647,66 @@ table.datatable th:active {
 .pficon-container-node:before {
   content: "\e621";
 }
+.pficon-delete:before {
+  content: "\e611";
+}
+.pficon-edit:before {
+  content: "\e60a";
+}
+.pficon-error-circle-o:before {
+  color: #cc0000;
+  content: "\e61d";
+}
+.pficon-export:before {
+  content: "\e616";
+}
+.pficon-flag:before,
+.pficon-messages:before {
+  content: "\e603";
+}
+.pficon-folder-close:before {
+  content: "\e607";
+}
+.pficon-folder-open:before {
+  content: "\e606";
+}
+.pficon-help:before {
+  content: "\e605";
+}
+.pficon-history:before {
+  content: "\e617";
+}
+.pficon-home:before {
+  content: "\e618";
+}
+.pficon-image:before {
+  content: "\e61f";
+}
+.pficon-import:before {
+  content: "\e615";
+}
+.pficon-info:before {
+  content: "\e604";
+}
+.pficon-kubernetes:before {
+  content: "\e627";
+}
+.pficon-ok:before {
+  color: #3f9c35;
+  content: "\e602";
+}
+.pficon-openshift:before {
+  content: "\e626";
+}
+.pficon-print:before {
+  content: "\e612";
+}
 .pficon-project:before {
   content: "\e622";
+}
+.pficon-refresh:before,
+.pficon-restart:before {
+  content: "\e613";
 }
 .pficon-registry:before {
   content: "\e623";
@@ -2706,11 +2717,36 @@ table.datatable th:active {
 .pficon-route:before {
   content: "\e625";
 }
-.pficon-openshift:before {
-  content: "\e626";
+.pficon-running:before {
+  content: "\e614";
 }
-.pficon-kubernetes:before {
-  content: "\e627";
+.pficon-save:before {
+  content: "\e601";
+}
+.pficon-screen:before {
+  content: "\e600";
+}
+.pficon-service:before {
+  content: "\e61e";
+}
+.pficon-settings:before {
+  content: "\e610";
+}
+.pficon-thumb-tack-o:before {
+  content: "\e609";
+}
+.pficon-topology:before {
+  content: "\e608";
+}
+.pficon-user:before {
+  content: "\e60e";
+}
+.pficon-users:before {
+  content: "\e60f";
+}
+.pficon-warning-triangle-o:before {
+  color: #ec7a08;
+  content: "\e61c";
 }
 .navbar-nav > li > .dropdown-menu.infotip {
   border-top-width: 1px !important;
