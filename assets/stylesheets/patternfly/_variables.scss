@@ -37,6 +37,10 @@ $icon-prefix:                                                       pficon !defa
 $img-bg-login:                                                      "bg-login.jpg" !default;
 $img-path:                                                          if($patternfly-sass-asset-helper, "patternfly", "../images/patternfly") !default;
 $img-spinner:                                                       "spinner.gif" !default;
+$img-spinner-inverse:                                               "spinner-inverse.gif" !default;
+$img-spinner-inverse-lg:                                            "spinner-inverse-lg.gif" !default;
+$img-spinner-inverse-sm:                                            "spinner-inverse-sm.gif" !default;
+$img-spinner-inverse-xs:                                            "spinner-inverse-xs.gif" !default;
 $img-spinner-lg:                                                    "spinner-lg.gif" !default;
 $img-spinner-sm:                                                    "spinner-sm.gif" !default;
 $img-spinner-xs:                                                    "spinner-xs.gif" !default;
@@ -85,6 +89,7 @@ $navbar-pf-navbar-navbar-brand-padding:                             8px 0 7px !d
 $navbar-pf-navbar-navbar-persistent-bg-color:                       #f6f6f6 !default;
 $navbar-pf-navbar-navbar-persistent-border-color:                   #cecdcd !default;
 $pagination-padding-small-vertical:                                 0 !default;
+$panel-default-border-color:                                        #bebdbd !default;
 $pficon-var-add-circle-o:                                           "\e61b" !default;
 $pficon-var-builder-image:                                          "\e800" !default;
 $pficon-var-close:                                                  "\e60b" !default;
@@ -122,7 +127,7 @@ $pficon-var-topology:                                               "\e608" !def
 $pficon-var-user:                                                   "\e60e" !default;
 $pficon-var-users:                                                  "\e60f" !default;
 $pficon-var-warning-triangle-o:                                     "\e61c" !default;
-$panel-default-border-color:                                        #bebdbd !default;
+$progress-description-label-width:                                  85px !default;
 $sidebar-pf-bg:                                                     #fafafa !default;
 $sidebar-pf-border-color:                                           #d0d0d0 !default;
 $table-border-hover:                                                #a7cadf !default;
@@ -174,9 +179,9 @@ $navbar-pf-navbar-primary-context-active-border-right-color:        $navbar-pf-n
 
 // Bootstrap overrides
 // -------------------
-$alert-info-border:                                                 #ccc !default;
+$alert-info-border:                                                 #8b8d8f !default;
 $alert-link-font-weight:                                            500 !default;
-$alert-padding:                                                     7px !default;
+$alert-padding:                                                     11px !default;
 $body-bg:                                                           #ffffff !default;
 $border-radius-base:                                                1px !default;
 $brand-danger:                                                      #cc0000 !default;
@@ -239,15 +244,15 @@ $tooltip-arrow-width:                                               8px !default
 $tooltip-bg:                                                        #434343 !default;
 $tooltip-max-width:                                                 220px !default;
 // Reference variables declared in block above
-$alert-danger-bg:                                                   $body-bg !default;
+$alert-danger-bg:                                                   #fbe7e7 !default;
 $alert-danger-border:                                               $brand-danger !default;
 $alert-danger-text:                                                 $gray-dark !default;
-$alert-info-bg:                                                     $body-bg !default;
+$alert-info-bg:                                                     #f2f2f2 !default;
 $alert-info-text:                                                   $gray-dark !default;
-$alert-success-bg:                                                  $body-bg !default;
+$alert-success-bg:                                                  #e8f9e7 !default;
 $alert-success-border:                                              $brand-success !default;
 $alert-success-text:                                                $gray-dark !default;
-$alert-warning-bg:                                                  $body-bg !default;
+$alert-warning-bg:                                                  #fdf4ea !default;
 $alert-warning-border:                                              $brand-warning !default;
 $alert-warning-text:                                                $gray-dark !default;
 $badge-border-radius:                                               $border-radius-base !default;
