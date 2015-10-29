@@ -23,7 +23,7 @@ Gem::Specification.new do |s|
   s.add_development_dependency 'rails-assets-bootstrap-touchspin', '~> 3.0.3'
   s.add_development_dependency 'rails-assets-bootstrap-treeview', '~> 1.2.0'
   s.add_development_dependency 'rails-assets-c3', '~> 0.4.10'
-  s.add_development_dependency 'rails-assets-datatables', '~> 1.10.7'
+  s.add_development_dependency 'rails-assets-datatables', '~> 1.10.9'
   s.add_development_dependency 'rails-assets-datatables-colreorder', '~> 1.1.3'
   s.add_development_dependency 'rails-assets-datatables-colvis', '~> 1.1.2'
   s.add_development_dependency 'rails-assets-google-code-prettify', '~> 1.0.4'
