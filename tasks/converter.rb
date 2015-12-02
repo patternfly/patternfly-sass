@@ -101,13 +101,17 @@ module Patternfly
         when 'patternfly.less', 'bootstrap-touchspin.less', 'variables.less'
           transforms = remove_xforms(transforms, :replace_spin)
         when 'spinner.less'
-          transforms = remove_xforms(transforms, :replace_spin, :replace_image_urls)
+          transforms = remove_xforms(transforms, :replace_spin)
         end
 
         file = convert_less(file, *transforms)
 
         # Special cases go here
         case name
+        when 'fonts.less', 'icons.less'
+          file = replace_rules(file, /\s*@font-face/) do |rule|
+            replace_asset_url rule, :font
+          end
         when 'mixins.less'
           NESTED_MIXINS.each do |selector, prefix|
             file = flatten_mixins(file, selector, prefix)

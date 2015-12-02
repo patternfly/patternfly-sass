@@ -6,49 +6,49 @@
   font-family: 'Open Sans';
   font-style: normal;
   font-weight: 300;
-  src: url('#{$font-path}/OpenSans-Light-webfont.eot');
-  src: url('#{$font-path}/OpenSans-Light-webfont.eot?#iefix') format('embedded-opentype'),
-       url('#{$font-path}/OpenSans-Light-webfont.woff') format('woff'),
-       url('#{$font-path}/OpenSans-Light-webfont.ttf') format('truetype'),
-       url('#{$font-path}/OpenSans-Light-webfont.svg#OpenSansLight') format('svg');
+  src: url(if($bootstrap-sass-asset-helper, twbs-font-path('#{$font-path}/OpenSans-Light-webfont.eot'), '#{$font-path}/OpenSans-Light-webfont.eot'));
+  src: url(if($bootstrap-sass-asset-helper, twbs-font-path('#{$font-path}/OpenSans-Light-webfont.eot?#iefix'), '#{$font-path}/OpenSans-Light-webfont.eot?#iefix')) format('embedded-opentype'),
+       url(if($bootstrap-sass-asset-helper, twbs-font-path('#{$font-path}/OpenSans-Light-webfont.woff'), '#{$font-path}/OpenSans-Light-webfont.woff')) format('woff'),
+       url(if($bootstrap-sass-asset-helper, twbs-font-path('#{$font-path}/OpenSans-Light-webfont.ttf'), '#{$font-path}/OpenSans-Light-webfont.ttf')) format('truetype'),
+       url(if($bootstrap-sass-asset-helper, twbs-font-path('#{$font-path}/OpenSans-Light-webfont.svg#OpenSansLight'), '#{$font-path}/OpenSans-Light-webfont.svg#OpenSansLight')) format('svg');
 }
 @font-face {
   font-family: 'Open Sans';
   font-style: normal;
   font-weight: 400;
-  src: url('#{$font-path}/OpenSans-Regular-webfont.eot');
-  src: url('#{$font-path}/OpenSans-Regular-webfont.eot?#iefix') format('embedded-opentype'),
-       url('#{$font-path}/OpenSans-Regular-webfont.woff') format('woff'),
-       url('#{$font-path}/OpenSans-Regular-webfont.ttf') format('truetype'),
-       url('#{$font-path}/OpenSans-Regular-webfont.svg#OpenSansRegular') format('svg');
+  src: url(if($bootstrap-sass-asset-helper, twbs-font-path('#{$font-path}/OpenSans-Regular-webfont.eot'), '#{$font-path}/OpenSans-Regular-webfont.eot'));
+  src: url(if($bootstrap-sass-asset-helper, twbs-font-path('#{$font-path}/OpenSans-Regular-webfont.eot?#iefix'), '#{$font-path}/OpenSans-Regular-webfont.eot?#iefix')) format('embedded-opentype'),
+       url(if($bootstrap-sass-asset-helper, twbs-font-path('#{$font-path}/OpenSans-Regular-webfont.woff'), '#{$font-path}/OpenSans-Regular-webfont.woff')) format('woff'),
+       url(if($bootstrap-sass-asset-helper, twbs-font-path('#{$font-path}/OpenSans-Regular-webfont.ttf'), '#{$font-path}/OpenSans-Regular-webfont.ttf')) format('truetype'),
+       url(if($bootstrap-sass-asset-helper, twbs-font-path('#{$font-path}/OpenSans-Regular-webfont.svg#OpenSansRegular'), '#{$font-path}/OpenSans-Regular-webfont.svg#OpenSansRegular')) format('svg');
 }
 @font-face {
   font-family: 'Open Sans';
   font-style: normal;
   font-weight: 600;
-  src: url('#{$font-path}/OpenSans-Semibold-webfont.eot');
-  src: url('#{$font-path}/OpenSans-Semibold-webfont.eot?#iefix') format('embedded-opentype'),
-       url('#{$font-path}/OpenSans-Semibold-webfont.woff') format('woff'),
-       url('#{$font-path}/OpenSans-Semibold-webfont.ttf') format('truetype'),
-       url('#{$font-path}/OpenSans-Semibold-webfont.svg#OpenSansSemibold') format('svg');
+  src: url(if($bootstrap-sass-asset-helper, twbs-font-path('#{$font-path}/OpenSans-Semibold-webfont.eot'), '#{$font-path}/OpenSans-Semibold-webfont.eot'));
+  src: url(if($bootstrap-sass-asset-helper, twbs-font-path('#{$font-path}/OpenSans-Semibold-webfont.eot?#iefix'), '#{$font-path}/OpenSans-Semibold-webfont.eot?#iefix')) format('embedded-opentype'),
+       url(if($bootstrap-sass-asset-helper, twbs-font-path('#{$font-path}/OpenSans-Semibold-webfont.woff'), '#{$font-path}/OpenSans-Semibold-webfont.woff')) format('woff'),
+       url(if($bootstrap-sass-asset-helper, twbs-font-path('#{$font-path}/OpenSans-Semibold-webfont.ttf'), '#{$font-path}/OpenSans-Semibold-webfont.ttf')) format('truetype'),
+       url(if($bootstrap-sass-asset-helper, twbs-font-path('#{$font-path}/OpenSans-Semibold-webfont.svg#OpenSansSemibold'), '#{$font-path}/OpenSans-Semibold-webfont.svg#OpenSansSemibold')) format('svg');
 }
 @font-face {
   font-family: 'Open Sans';
   font-style: normal;
   font-weight: 700;
-  src: url('#{$font-path}/OpenSans-Bold-webfont.eot');
-  src: url('#{$font-path}/OpenSans-Bold-webfont.eot?#iefix') format('embedded-opentype'),
-       url('#{$font-path}/OpenSans-Bold-webfont.woff') format('woff'),
-       url('#{$font-path}/OpenSans-Bold-webfont.ttf') format('truetype'),
-       url('#{$font-path}/OpenSans-Bold-webfont.svg#OpenSansBold') format('svg');
+  src: url(if($bootstrap-sass-asset-helper, twbs-font-path('#{$font-path}/OpenSans-Bold-webfont.eot'), '#{$font-path}/OpenSans-Bold-webfont.eot'));
+  src: url(if($bootstrap-sass-asset-helper, twbs-font-path('#{$font-path}/OpenSans-Bold-webfont.eot?#iefix'), '#{$font-path}/OpenSans-Bold-webfont.eot?#iefix')) format('embedded-opentype'),
+       url(if($bootstrap-sass-asset-helper, twbs-font-path('#{$font-path}/OpenSans-Bold-webfont.woff'), '#{$font-path}/OpenSans-Bold-webfont.woff')) format('woff'),
+       url(if($bootstrap-sass-asset-helper, twbs-font-path('#{$font-path}/OpenSans-Bold-webfont.ttf'), '#{$font-path}/OpenSans-Bold-webfont.ttf')) format('truetype'),
+       url(if($bootstrap-sass-asset-helper, twbs-font-path('#{$font-path}/OpenSans-Bold-webfont.svg#OpenSansBold'), '#{$font-path}/OpenSans-Bold-webfont.svg#OpenSansBold')) format('svg');
 }
 @font-face {
   font-family: 'Open Sans';
   font-style: normal;
   font-weight: 800;
-  src: url('#{$font-path}/OpenSans-ExtraBold-webfont.eot');
-  src: url('#{$font-path}/OpenSans-ExtraBold-webfont.eot?#iefix') format('embedded-opentype'),
-       url('#{$font-path}/OpenSans-ExtraBold-webfont.woff') format('woff'),
-       url('#{$font-path}/OpenSans-ExtraBold-webfont.ttf') format('truetype'),
-       url('#{$font-path}/OpenSans-ExtraBold-webfont.svg#OpenSansExtrabold') format('svg');
+  src: url(if($bootstrap-sass-asset-helper, twbs-font-path('#{$font-path}/OpenSans-ExtraBold-webfont.eot'), '#{$font-path}/OpenSans-ExtraBold-webfont.eot'));
+  src: url(if($bootstrap-sass-asset-helper, twbs-font-path('#{$font-path}/OpenSans-ExtraBold-webfont.eot?#iefix'), '#{$font-path}/OpenSans-ExtraBold-webfont.eot?#iefix')) format('embedded-opentype'),
+       url(if($bootstrap-sass-asset-helper, twbs-font-path('#{$font-path}/OpenSans-ExtraBold-webfont.woff'), '#{$font-path}/OpenSans-ExtraBold-webfont.woff')) format('woff'),
+       url(if($bootstrap-sass-asset-helper, twbs-font-path('#{$font-path}/OpenSans-ExtraBold-webfont.ttf'), '#{$font-path}/OpenSans-ExtraBold-webfont.ttf')) format('truetype'),
+       url(if($bootstrap-sass-asset-helper, twbs-font-path('#{$font-path}/OpenSans-ExtraBold-webfont.svg#OpenSansExtrabold'), '#{$font-path}/OpenSans-ExtraBold-webfont.svg#OpenSansExtrabold')) format('svg');
 }
