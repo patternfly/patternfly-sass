@@ -4,7 +4,7 @@ require 'pathname'
 
 module Patternfly
   class Converter < ::Converter
-    BOOTSTRAP_LESS_ROOT = 'components/bootstrap/less'
+    BOOTSTRAP_LESS_ROOT = 'bower_components/bootstrap/less'
     PATTERNFLY_LESS_ROOT = 'less'
     PATTERNFLY_COMPONENTS = "../components/patternfly/components"
 
@@ -24,7 +24,7 @@ module Patternfly
         :fonts => 'assets/fonts/patternfly'
       }
       @test_dir = options[:test_dir]
-      get_trees(PATTERNFLY_LESS_ROOT, BOOTSTRAP_LESS_ROOT, 'tests', 'dist')
+      get_trees(PATTERNFLY_LESS_ROOT, 'tests', 'dist')
     end
 
     def process_patternfly
@@ -324,11 +324,10 @@ module Patternfly
     end
 
     def load_shared
-      mixin_hash = {}
-      [BOOTSTRAP_LESS_ROOT, PATTERNFLY_LESS_ROOT].each do |root|
-        mixin_hash[root] = read_files(
-          get_paths_by_type(root, /mixins(\/)|(\.less)/)).values.join("\n")
-      end
+      mixin_hash = {
+        BOOTSTRAP_LESS_ROOT  => Dir["#{BOOTSTRAP_LESS_ROOT}/**/*.*"].select { |f| f =~ /mixins(\/)|(\.less)/ }.map { |f| File.read(f) }.join("\n"),
+        PATTERNFLY_LESS_ROOT => read_files(get_paths_by_type(PATTERNFLY_LESS_ROOT, /mixins(\/)|(\.less)/)).values.join("\n")
+      }
       @shared_mixins ||= begin
         read_mixins(mixin_hash.values.join("\n"), :nested => NESTED_MIXINS)
       end
