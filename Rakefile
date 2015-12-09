@@ -44,7 +44,7 @@ task :serve => :deps do
   require 'webrick'
   server = WEBrick::HTTPServer.new :Port => 9000, :DirectoryIndex => []
   {
-    '/'                                     => 'spec/html/main.html',
+    '/'                                     => 'spec/main.html',
     '/less/dist/css'                        => 'spec/html/dist/css',
     '/less/dist/fonts'                      => 'assets/fonts/patternfly',
     '/less/dist/img'                        => 'assets/images/patternfly',
