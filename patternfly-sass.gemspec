@@ -32,6 +32,7 @@ Gem::Specification.new do |s|
   # Converter's dependencies
   s.add_development_dependency 'rake', '~> 10.4'
   s.add_development_dependency 'term-ansicolor'
+  s.add_development_dependency 'rugged', '~> 0.23.2'
   # Testing dependencies
   s.add_development_dependency 'rspec', '~> 3.2'
   s.add_development_dependency 'nokogiri', '~> 1.6'

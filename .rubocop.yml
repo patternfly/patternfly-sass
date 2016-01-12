@@ -18,7 +18,9 @@ IfUnlessModifier:
   Enabled: false
 LineLength:
   Enabled: true
-  Max: 100
+  Max: 160
+Metrics/AbcSize:
+  Enabled: false
 MethodLength:
   Max: 50
   CountComments: false
