@@ -269,12 +269,12 @@ $caret-width-large:                                                 $caret-width
 $dropdown-fallback-border:                                          $dropdown-border !default;
 $dropdown-link-active-bg:                                           $link-color !default;
 $dropdown-link-hover-color:                                         $gray-pf !default;
-$font-size-h1:                                                      ceil($font-size-base * 2) !default; // ~24px
-$font-size-h2:                                                      ceil($font-size-base * 1.8333) !default; // ~22px
-$font-size-h3:                                                      ceil($font-size-base * 1.3333) !default; // ~16px
-$font-size-h5:                                                      ceil($font-size-base * 1.0833) !default; // ~13px
-$font-size-large:                                                   ceil($font-size-base * 1.1666) !default; // ~14px
-$font-size-small:                                                   ceil($font-size-base * .9166) !default; // ~11px
+$font-size-h1:                                                      ceil(($font-size-base * 2)) !default; // ~24px
+$font-size-h2:                                                      ceil(($font-size-base * 1.8333)) !default; // ~22px
+$font-size-h3:                                                      ceil(($font-size-base * 1.3333)) !default; // ~16px
+$font-size-h5:                                                      ceil(($font-size-base * 1.0833)) !default; // ~13px
+$font-size-large:                                                   ceil(($font-size-base * 1.1666)) !default; // ~14px
+$font-size-small:                                                   ceil(($font-size-base * .9166)) !default; // ~11px
 $input-color:                                                       $gray-dark !default;
 $nav-tabs-active-link-hover-color:                                  $link-color !default;
 $nav-tabs-justified-link-border-color:                              $nav-tabs-border-color !default;
@@ -306,8 +306,8 @@ $btn-primary-bg-img-stop:                                           $btn-primary
 $dropdown-link-focus-bg:                                            $link-color !default;
 $line-height-computed:                                              floor(($font-size-base * $line-height-base)) !default;
 $notification-badge-color:                                          $brand-danger !default;
-$progress-sm:                                                       $line-height-computed - 6 !default;
-$progress-xs:                                                       $line-height-computed - 14 !default;
+$progress-sm:                                                       ($line-height-computed - 6) !default;
+$progress-xs:                                                       ($line-height-computed - 14) !default;
 $syntax-1:                                                          $btn-danger-bg !default;
 $syntax-2:                                                          $gray-dark !default;
 $syntax-3:                                                          $brand-success !default;

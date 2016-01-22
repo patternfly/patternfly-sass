@@ -33,6 +33,15 @@
     <script src="../dist/js/patternfly.min.js"></script>
   </head>
 
+<div class="toast-pf toast-pf-max-width toast-pf-top-right alert alert-success alert-dismissable">
+          <button type="button" class="close" data-dismiss="alert" aria-hidden="true">
+          <span class="pficon pficon-close"></span>
+        </button>
+        <span class="pficon pficon-ok"></span>
+        The server configuration changed.
+ 
+</div>
+
   <body class="cards-pf">
     <nav class="navbar navbar-default navbar-pf" role="navigation">
       <div class="navbar-header">
@@ -494,6 +503,9 @@
           <script>
             var donutConfig = $().c3ChartDefaults().getDefaultDonutConfig('A');
             donutConfig.bindto = '#chart-pf-donut-1';
+            donutConfig.color =  {
+              pattern: ["#cc0000","#D1D1D1"]
+            };
             donutConfig.data = {
               type: "donut",
               columns: [
@@ -544,6 +556,9 @@
           <script>
             var donutConfig = $().c3ChartDefaults().getDefaultDonutConfig('A');
             donutConfig.bindto = '#chart-pf-donut-2';
+            donutConfig.color =  {
+              pattern: ["#3f9c35","#D1D1D1"]
+            };
             donutConfig.data = {
               type: "donut",
               columns: [
@@ -594,6 +609,9 @@
           <script>
             var donutConfig = $().c3ChartDefaults().getDefaultDonutConfig('A');
             donutConfig.bindto = '#chart-pf-donut-3';
+            donutConfig.color =  {
+              pattern: ["#EC7A08","#D1D1D1"]
+            };
             donutConfig.data = {
               type: "donut",
               columns: [
@@ -658,6 +676,9 @@
 
         var donutConfig = c3ChartDefaults.getDefaultDonutConfig('A');
         donutConfig.bindto = '#chart-pf-donut-4';
+        donutConfig.color =  {
+          pattern: ["#EC7A08","#D1D1D1"]
+        };
         donutConfig.data = {
           type: "donut",
           columns: [
