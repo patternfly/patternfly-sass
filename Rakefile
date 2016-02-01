@@ -2,14 +2,15 @@ require 'rake'
 require 'rspec/core/rake_task'
 require 'bundler/gem_tasks'
 
-BOOTSTRAP_GEM_ROOT = Gem::Specification.find_by_name("bootstrap-sass").gem_dir
-FONTAWESOME_GEM_ROOT = Gem::Specification.find_by_name("font-awesome-sass").gem_dir
+def gem_asset_path(package, path)
+  File.join(Gem::Specification.find_by_name(package).gem_dir, path)
+end
 
 desc "Convert LESS to SCSS"
 task :convert, [:branch] do |_, args|
   require './tasks/converter'
   branch = args.has_key?(:branch) ? args[:branch] : 'master'
-  Patternfly::Converter.new(:branch => branch).process_patternfly
+  Converter.new(:branch => branch).convert
 end
 
 desc "Compile patternfly-sass into CSS"
@@ -18,8 +19,13 @@ task :compile do
   require 'fileutils'
   require 'term/ansicolor'
 
-  Sass.load_paths << File.join(BOOTSTRAP_GEM_ROOT, 'assets', 'stylesheets')
-  Sass.load_paths << File.join(FONTAWESOME_GEM_ROOT, 'assets', 'stylesheets')
+  Sass.load_paths << File.join(gem_asset_path('bootstrap-sass', 'assets/stylesheets'))
+  Sass.load_paths << File.join(gem_asset_path('font-awesome-sass', 'assets/stylesheets'))
+  Sass.load_paths << File.join(gem_asset_path('rails-assets-bootstrap-combobox', 'app/assets/stylesheets'))
+  Sass.load_paths << File.join(gem_asset_path('rails-assets-bootstrap-datepicker', 'app/assets/stylesheets'))
+  Sass.load_paths << File.join(gem_asset_path('rails-assets-bootstrap-select', 'app/assets/stylesheets'))
+  Sass.load_paths << File.join(gem_asset_path('rails-assets-bootstrap-touchspin', 'app/assets/stylesheets'))
+  Sass.load_paths << File.join(gem_asset_path('rails-assets-c3', 'app/assets/stylesheets'))
   ::Sass::Script::Value::Number.precision = [8, ::Sass::Script::Value::Number.precision].max
 
   path = 'assets/stylesheets'
@@ -50,19 +56,19 @@ task :serve => :deps do
     '/less/dist/img'                        => 'assets/images/patternfly',
     '/less/dist/js'                         => 'assets/javascripts',
     '/less/components'                      => 'bower_components',
-    '/less/components/bootstrap/dist/js'    => File.join(BOOTSTRAP_GEM_ROOT, 'assets', 'javascripts'),
-    '/less/components/bootstrap/dist/fonts' => File.join(BOOTSTRAP_GEM_ROOT, 'assets', 'fonts', 'bootstrap'),
-    '/less/components/font-awesome/fonts'   => File.join(FONTAWESOME_GEM_ROOT, 'assets', 'fonts', 'font-awesome'),
+    '/less/components/bootstrap/dist/js'    => gem_asset_path('bootstrap-sass', 'assets/javascripts'),
+    '/less/components/bootstrap/dist/fonts' => gem_asset_path('bootstrap-sass', 'assets/fonts/bootstrap'),
+    '/less/components/font-awesome/fonts'   => gem_asset_path('font-awesome-sass', 'assets/fonts/font-awesome'),
     '/less/patternfly'                      => 'spec/html',
     '/sass/dist/fonts'                      => 'assets/fonts',
-    '/sass/dist/fonts/bootstrap'            => File.join(BOOTSTRAP_GEM_ROOT, 'assets', 'fonts', 'bootstrap'),
+    '/sass/dist/fonts/bootstrap'            => gem_asset_path('bootstrap-sass', 'assets/fonts/bootstrap'),
     '/sass/dist/img'                        => 'assets/images/patternfly',
     '/sass/dist/images'                     => 'assets/images',
     '/sass/dist/js'                         => 'assets/javascripts',
     '/sass/dist/css'                        => 'tmp',
     '/sass/components'                      => 'bower_components',
-    '/sass/components/bootstrap/dist/js'    => File.join(BOOTSTRAP_GEM_ROOT, 'assets', 'javascripts'),
-    '/sass/dist/fonts/font-awesome'         => File.join(FONTAWESOME_GEM_ROOT, 'assets', 'fonts', 'font-awesome'),
+    '/sass/components/bootstrap/dist/js'    => gem_asset_path('bootstrap-sass', 'assets/javascripts'),
+    '/sass/dist/fonts/font-awesome'         => gem_asset_path('font-awesome-sass', 'assets/fonts/font-awesome'),
     '/sass/patternfly'                      => 'spec/html'
   }.each { |http, local| server.mount http, WEBrick::HTTPServlet::FileHandler, local }
 
