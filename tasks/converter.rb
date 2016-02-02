@@ -17,7 +17,8 @@ class Converter
     :replace_escaping,
     :convert_less_ampersand,
     :deinterpolate_vararg_mixins,
-    :replace_calculation_semantics
+    :replace_calculation_semantics,
+    :remove_unnecessary_escaping
   ]
   TOP = <<-VAR.gsub(/^\s*/, '')
     // PatternFly SASS
@@ -55,6 +56,11 @@ class Converter
 
   def remove_button_variant(file)
     replace_rules(file, /.button-variant(.*?)/) { |_, _| "" }
+  end
+
+  # SASS doesn't require escaping in calc()
+  def remove_unnecessary_escaping(file)
+    file.gsub(/calc\(\~\'([^\']+)\'\)/, 'calc(\1)')
   end
 
   # Override
