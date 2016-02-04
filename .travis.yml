@@ -5,7 +5,7 @@ cache:
     - bower_components
 sudo: false
 rvm:
-  - 2.0.0
+  - 2.3.0
 before_script:
   - npm install bower
   - bundle exec rake compile

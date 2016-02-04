@@ -7,7 +7,7 @@ def gem_asset_path(package, path)
 end
 
 desc "Convert LESS to SCSS"
-task :convert, [:branch] do |_, args|
+task :convert, [:branch] => [:deps] do |_, args|
   require './tasks/converter'
   branch = args.has_key?(:branch) ? args[:branch] : 'master'
   Converter.new(:branch => branch).convert
@@ -21,11 +21,7 @@ task :compile do
 
   Sass.load_paths << File.join(gem_asset_path('bootstrap-sass', 'assets/stylesheets'))
   Sass.load_paths << File.join(gem_asset_path('font-awesome-sass', 'assets/stylesheets'))
-  Sass.load_paths << File.join(gem_asset_path('rails-assets-bootstrap-combobox', 'app/assets/stylesheets'))
-  Sass.load_paths << File.join(gem_asset_path('rails-assets-bootstrap-datepicker', 'app/assets/stylesheets'))
-  Sass.load_paths << File.join(gem_asset_path('rails-assets-bootstrap-select', 'app/assets/stylesheets'))
-  Sass.load_paths << File.join(gem_asset_path('rails-assets-bootstrap-touchspin', 'app/assets/stylesheets'))
-  Sass.load_paths << File.join(gem_asset_path('rails-assets-c3', 'app/assets/stylesheets'))
+
   ::Sass::Script::Value::Number.precision = [8, ::Sass::Script::Value::Number.precision].max
 
   path = 'assets/stylesheets'
@@ -46,7 +42,7 @@ task :compile do
 end
 
 desc "Start a web server with both the less and the sass version"
-task :serve => :deps do
+task :serve => :compile do
   require 'webrick'
   server = WEBrick::HTTPServer.new :Port => 9000, :DirectoryIndex => []
   {
