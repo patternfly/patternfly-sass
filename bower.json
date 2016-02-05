@@ -1,6 +1,6 @@
 {
   "name": "patternfly-sass",
-  "version": "2.10.0",
+  "version": "3.0.0",
   "license": "Apache-2.0",
   "homepage": "https://www.patternfly.org",
   "authors": [
@@ -25,10 +25,9 @@
     "pkg",
     "bower_components",
     "spec",
-    "tmp",
-    "package.json"
+    "tmp"
   ],
-  "devDependencies": {
+  "dependencies": {
     "bootstrap-sass": "~3.3.5",
     "bootstrap-combobox": "~1.1.6",
     "bootstrap-datepicker": "~1.4.0",

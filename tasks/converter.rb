@@ -80,7 +80,7 @@ class Converter
     file = super(file)
     file = replace_all(file, %r{"../img"}, '"../images"')
     file = replace_all(file, %r{(\$icon-font-path): (\s*)"(.*)" (!default);\n}, '')
-    file = replace_all(file, %r{(\$fa-font-path): (\s*)"(.*)" (!default);\n}, '')
+    file = replace_all(file, %r{\$fa-font-path: .* (!default);\n}, '')
     file = replace_all(
       file,
       %r{(\$(font|img)-path):(\s*)"(.*)" (!default);},
@@ -106,35 +106,44 @@ class Converter
     file = replace_all(file, %r{@import\s+"variables";}, "")
     file = replace_all(file, /@import "([^\.]{2})/, '@import "patternfly/\1')
 
-    file = replace_all(file, "@import \"../components/bootstrap/less/bootstrap\";", fetch_bootstrap_top)
-    file = replace_all(file, "@import \"../components/bootstrap/less/variables\";\n", '')
-    file = replace_all(file, "@import \"../components/bootstrap/less/mixins\";\n", '')
+    file = replace_all(file, "@import \"patternfly/lib/bootstrap/bootstrap\";", fetch_bootstrap_top)
+    file = replace_all(file, "@import \"patternfly/lib/bootstrap/variables\";\n", '')
+    file = replace_all(file, "@import \"patternfly/lib/bootstrap/mixins\";\n", '')
+    file = replace_all(file, "@import \"patternfly/lib/font-awesome/variables\";\n", '')
+    file = replace_all(file, 'patternfly/lib/font-awesome/font-awesome', 'font-awesome')
 
-    file = replace_all(file, "@import \"../components/font-awesome/less/variables\";\n", '')
-    file = replace_all(file, '../components/font-awesome/less/font-awesome', 'font-awesome')
-    file = replace_all(file, '../components/bootstrap-combobox/less/combobox', 'bootstrap-combobox')
-    file = replace_all(file, '../components/bootstrap-select/less/bootstrap-select', 'bootstrap-select')
-    file = replace_all(file, '../components/bootstrap-touchspin/dist/jquery.bootstrap-touchspin.css', 'bootstrap-touchspin/dist/jquery.bootstrap-touchspin')
-    file = replace_all(file, '../components/c3/c3.css', 'c3')
-    file = replace_all(file, '../components/bootstrap-datepicker/less/datepicker3', 'bootstrap-datepicker/bootstrap-datepicker3')
+    bower_contrib('bootstrap-combobox/css/bootstrap-combobox.css', 'bootstrap-combobox.scss', false)
+    file = replace_all(file, 'patternfly/lib/bootstrap-combobox/combobox', 'patternfly/lib/bootstrap-combobox')
 
-    sass_contrib('bootstrap-switch/src/less/bootstrap3/bootstrap-switch.less', 'bootstrap-switch.scss')
-    file = replace_all(file, '../components/bootstrap-switch/src/less/bootstrap3/bootstrap-switch', 'patternfly/sass-contrib/bootstrap-switch')
+    bower_contrib('bootstrap-select/dist/css/bootstrap-select.css', 'bootstrap-select.scss', false)
+    file = replace_all(file, 'patternfly/lib/bootstrap-select/bootstrap-select', 'patternfly/lib/bootstrap-select')
+
+    bower_contrib('bootstrap-touchspin/dist/jquery.bootstrap-touchspin.css', 'bootstrap-touchspin.scss', false)
+    file = replace_all(file, 'patternfly/lib/bootstrap-touchspin/jquery.bootstrap-touchspin.css', 'patternfly/lib/bootstrap-touchspin')
+
+    bower_contrib('c3/c3.css', 'c3.scss', false)
+    file = replace_all(file, 'patternfly/lib/c3/c3.css', 'patternfly/lib/c3')
+
+    bower_contrib('bootstrap-datepicker/dist/css/bootstrap-datepicker3.css', 'bootstrap-datepicker.scss', false)
+    file = replace_all(file, 'patternfly/lib/bootstrap-datepicker/datepicker3', 'patternfly/lib/bootstrap-datepicker')
+
+    bower_contrib('bootstrap-switch/src/less/bootstrap3/bootstrap-switch.less', 'bootstrap-switch.scss')
+    file = replace_all(file, 'patternfly/lib/bootstrap-switch/bootstrap-switch', 'patternfly/lib/bootstrap-switch')
 
     TOP + remove_comments_and_whitespace(file)
   end
 
-  def sass_contrib(src, dst)
-    base = 'assets/stylesheets/patternfly/sass-contrib'
+  def bower_contrib(src, dst, convert=true)
+    base = 'assets/stylesheets/patternfly/lib'
     less = File.read(File.join('bower_components', src))
-    sass = less_to_sass(nil, less)
+    sass = convert ? less_to_sass(nil, less) : less
     FileUtils.mkdir_p(base) unless File.exist?(base)
     File.open(File.join(base, dst), 'w') { |f| f.write(sass) }
   end
 
   def shared_mixins
     @shared_mixins ||= begin
-      mixins = retrieve_files(File.join(@source, 'components', 'bootstrap', 'less', 'mixins'), /\.less$/)
+      mixins = retrieve_files(File.join(@source, 'less', 'lib', 'bootstrap', 'mixins'), /\.less$/)
       mixins.unshift File.join(@source, 'less', 'mixins.less')
       read_mixins(mixins.map { |f| File.read(f) }.join("\n"), :nested => NESTED_MIXINS)
     end
