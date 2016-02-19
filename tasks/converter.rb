@@ -112,22 +112,27 @@ class Converter
 
     file = replace_all(file, "@import \"../components/font-awesome/less/variables\";\n", '')
     file = replace_all(file, '../components/font-awesome/less/font-awesome', 'font-awesome')
-    file = replace_all(file, '../components/bootstrap-combobox/less/combobox', 'bootstrap-combobox')
-    file = replace_all(file, '../components/bootstrap-select/less/bootstrap-select', 'bootstrap-select')
-    file = replace_all(file, '../components/bootstrap-touchspin/dist/jquery.bootstrap-touchspin.css', 'bootstrap-touchspin/dist/jquery.bootstrap-touchspin')
-    file = replace_all(file, '../components/c3/c3.css', 'c3')
-    file = replace_all(file, '../components/bootstrap-datepicker/less/datepicker3', 'bootstrap-datepicker/bootstrap-datepicker3')
 
     sass_contrib('bootstrap-switch/src/less/bootstrap3/bootstrap-switch.less', 'bootstrap-switch.scss')
     file = replace_all(file, '../components/bootstrap-switch/src/less/bootstrap3/bootstrap-switch', 'patternfly/sass-contrib/bootstrap-switch')
+    sass_contrib('bootstrap-combobox/css/bootstrap-combobox.css', 'bootstrap-combobox.scss', false)
+    file = replace_all(file, '../components/bootstrap-combobox/less/combobox', 'patternfly/sass-contrib/bootstrap-combobox')
+    sass_contrib('bootstrap-select/dist/css/bootstrap-select.css', 'bootstrap-select.scss', false)
+    file = replace_all(file, '../components/bootstrap-select/less/bootstrap-select', 'patternfly/sass-contrib/bootstrap-select')
+    sass_contrib('bootstrap-touchspin/dist/jquery.bootstrap-touchspin.css', 'bootstrap-touchspin.scss', false)
+    file = replace_all(file, '../components/bootstrap-touchspin/dist/jquery.bootstrap-touchspin.css', 'patternfly/sass-contrib/bootstrap-touchspin')
+    sass_contrib('c3/c3.css', 'c3.scss', false)
+    file = replace_all(file, '../components/c3/c3.css', 'patternfly/sass-contrib/c3')
+    sass_contrib('bootstrap-datepicker/dist/css/bootstrap-datepicker3.css', 'bootstrap-datepicker.scss', false)
+    file = replace_all(file, '../components/bootstrap-datepicker/less/datepicker3', 'patternfly/sass-contrib/bootstrap-datepicker')
 
     TOP + remove_comments_and_whitespace(file)
   end
 
-  def sass_contrib(src, dst)
+  def sass_contrib(src, dst, convert=true)
     base = 'assets/stylesheets/patternfly/sass-contrib'
     less = File.read(File.join('bower_components', src))
-    sass = less_to_sass(nil, less)
+    sass = convert ? less_to_sass(nil, less) : less
     FileUtils.mkdir_p(base) unless File.exist?(base)
     File.open(File.join(base, dst), 'w') { |f| f.write(sass) }
   end
