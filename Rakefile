@@ -21,11 +21,6 @@ task :compile do
 
   Sass.load_paths << File.join(gem_asset_path('bootstrap-sass', 'assets/stylesheets'))
   Sass.load_paths << File.join(gem_asset_path('font-awesome-sass', 'assets/stylesheets'))
-  Sass.load_paths << File.join(gem_asset_path('rails-assets-bootstrap-combobox', 'app/assets/stylesheets'))
-  Sass.load_paths << File.join(gem_asset_path('rails-assets-bootstrap-datepicker', 'app/assets/stylesheets'))
-  Sass.load_paths << File.join(gem_asset_path('rails-assets-bootstrap-select', 'app/assets/stylesheets'))
-  Sass.load_paths << File.join(gem_asset_path('rails-assets-bootstrap-touchspin', 'app/assets/stylesheets'))
-  Sass.load_paths << File.join(gem_asset_path('rails-assets-c3', 'app/assets/stylesheets'))
   ::Sass::Script::Value::Number.precision = [8, ::Sass::Script::Value::Number.precision].max
 
   path = 'assets/stylesheets'

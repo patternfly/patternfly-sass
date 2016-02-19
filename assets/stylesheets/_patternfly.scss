@@ -61,12 +61,12 @@
 @import "patternfly/tabs";
 @import "patternfly/tooltip";
 @import "patternfly/type";
-@import "bootstrap-combobox";
-@import "bootstrap-datepicker/bootstrap-datepicker3";
-@import "bootstrap-select";
+@import "patternfly/sass-contrib/bootstrap-combobox";
+@import "patternfly/sass-contrib/bootstrap-datepicker";
+@import "patternfly/sass-contrib/bootstrap-select";
 @import "patternfly/sass-contrib/bootstrap-switch";
-@import "bootstrap-touchspin/dist/jquery.bootstrap-touchspin";
-@import "c3";
+@import "patternfly/sass-contrib/bootstrap-touchspin";
+@import "patternfly/sass-contrib/c3";
 @import "patternfly/mixins";
 @import "patternfly/blank-slate";
 @import "patternfly/bootstrap-combobox";
