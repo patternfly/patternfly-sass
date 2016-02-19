@@ -3,6 +3,7 @@
 [![Gem Version](https://badge.fury.io/rb/patternfly-sass.svg)](http://badge.fury.io/rb/patternfly-sass)
 [![Dependency Status](https://gemnasium.com/patternfly/patternfly-sass.svg)](https://gemnasium.com/patternfly/patternfly-sass)
 [![Build Status](https://travis-ci.org/patternfly/patternfly-sass.svg)](https://travis-ci.org/patternfly/patternfly-sass)
+[![Chat](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/patternfly/patternfly-sass?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
 `patternfly-sass` is a Sass-powered version of [PatternFly](http://github.com/patternfly/patternfly), ready to drop right into your Sass powered applications.
 

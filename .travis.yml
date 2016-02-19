@@ -29,3 +29,10 @@ matrix:
   fast_finish: true
   allow_failures:
     - env: TOLERANCE=0.00
+notifications:
+  webhooks:
+    urls:
+      - https://webhooks.gitter.im/e/1184f6f283ba9823f662
+    on_success: change
+    on_failure: always
+    on_start: never
