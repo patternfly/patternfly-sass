@@ -6,17 +6,19 @@ $patternfly-sass-asset-helper: false !default;
 
 // PatternFly-specific
 // -------------------
+@import "color-variables";
+
 $bootstrap-switch-handle-default-bg-color:                          #fbfbfb !default;
-$btn-default-bg-img-start:                                          #fafafa !default;
+$btn-default-bg-img-start:                                          $color-pf-black-100 !default;
 $btn-default-bg-img-stop:                                           #ededed !default;
 $btn-xs-font-weight:                                                400 !default;
-$card-pf-accented-border-top-color:                                 #39a5dc !default;
+$card-pf-accented-border-top-color:                                 $color-pf-blue-300 !default;
 $card-pf-aggregate-status-title-icon-color:                         #333 !default;
 $card-pf-bg-color:                                                  #fff !default;
-$card-pf-border-color:                                              #d1d1d1 !default;
+$card-pf-border-color:                                              $color-pf-black-300 !default;
 $card-pf-border-top-color:                                          transparent !default;
 $card-pf-container-bg-color:                                        #f5f5f5 !default;
-$card-pf-footer-bg-color:                                           #fafafa !default;
+$card-pf-footer-bg-color:                                           $color-pf-black-100 !default;
 $donut-font-size-big:                                               30px !default;
 $dropdown-divider-margin:                                           4px 1px !default;
 $dropdown-link-active-border-color:                                 #0076b7 !default;
@@ -25,12 +27,12 @@ $dropdown-link-focus-color:                                         #fff !defaul
 $flyout-transition-pf:                                              all .2s cubic-bezier(.35,0,.25,1) !default;
 $font-family-monospace:                                             Menlo, Monaco, Consolas, monospace !default;
 $font-path:                                                         if($patternfly-sass-asset-helper, "patternfly", "../fonts/patternfly") !default;
-$footer-pf-bg-color:                                                #030303 !default;
+$footer-pf-bg-color:                                                $color-pf-black !default;
 $footer-pf-padding-left:                                            25px !default;
 $footer-pf-padding-top:                                             10px !default;
 $footer-pf-height:                                                  37px !default;
 $gray-light-pf:                                                     #aaa !default;
-$gray-pf:                                                           #4d5258 !default;
+$gray-pf:                                                           $color-pf-black-700 !default;
 $icon-font-name-fa:                                                 "FontAwesome" !default;
 $icon-font-name-pf:                                                 "PatternFlyIcons-webfont" !default;
 $icon-prefix:                                                       pficon !default;
@@ -46,9 +48,9 @@ $img-spinner-sm:                                                    "spinner-sm.
 $img-spinner-xs:                                                    "spinner-xs.gif" !default;
 $input-border-disabled:                                             #d4d4d4 !default;
 $input-border-hover:                                                #7BB2DD !default;
-$list-view-accented-border:                                          #39a5dc !default;
+$list-view-accented-border:                                          $color-pf-blue-300 !default;
 $list-view-active-bg:                                               #def3ff !default;
-$list-view-divider:                                                 #d1d1d1 !default;
+$list-view-divider:                                                 $color-pf-black-300 !default;
 $list-view-hover-bg:                                                #ededed !default;
 $list-group-top-border:                                             #e9e8e8 !default;
 $login-bg-color:                                                    #080808 !default;
@@ -58,9 +60,9 @@ $modal-title-padding-horizontal:                                    18px !defaul
 $modal-title-padding-vertical:                                      10px !default;
 $navbar-pf-active-color:                                            #f1f1f1 !default;
 $navbar-pf-alt-active-color:                                        #fff !default;
-$navbar-pf-alt-bg-color:                                            #030303 !default;
+$navbar-pf-alt-bg-color:                                            $color-pf-black !default;
 $navbar-pf-alt-bg-img:                                              url("../img/bg-navbar-pf-alt.svg") !default;
-$navbar-pf-bg-color:                                                #030303 !default; //#393F45
+$navbar-pf-bg-color:                                                $color-pf-black !default;
 $navbar-pf-border-color:                                            #199dde !default;
 $navbar-pf-color:                                                   #cfcfcf !default;
 $navbar-pf-height:                                                  60px !default;
@@ -91,30 +93,30 @@ $navbar-pf-vertical-navbar-toggle-icon-bar-hover-bg:                #fff !defaul
 $navbar-pf-vertical-nav-item-iconic-padding:                        21px 12px !default;
 $nav-pf-vertical-active-color:                                      #fff !default;
 $nav-pf-vertical-active-before-color:                               #199dde !default;
-$nav-pf-vertical-active-bg-color:                                   #393f44 !default;
+$nav-pf-vertical-active-bg-color:                                   $color-pf-black-800 !default;
 $nav-pf-vertical-active-border-color:                               #303030 !default;
 $nav-pf-vertical-active-font-weight:                                600 !default;
 $nav-pf-vertical-active-icon-color:                                 #199dde !default;
 $nav-pf-vertical-badge-color:                                       #fff !default;
-$nav-pf-vertical-bg-color:                                          #292e34 !default;
+$nav-pf-vertical-bg-color:                                          $color-pf-black-900 !default;
 $nav-pf-vertical-border-color:                                      #262626 !default;
 $nav-pf-vertical-collapsed-width:                                   75px !default;
 $nav-pf-vertical-color:                                             #dbdada !default;
 $nav-pf-vertical-font-weight:                                       400 !default;
-$nav-pf-vertical-icon-color:                                        #72767b !default;
+$nav-pf-vertical-icon-color:                                        $color-pf-black-600 !default;
 $nav-pf-vertical-icon-width:                                        24px !default;
 $nav-pf-vertical-item-border-color:                                 #000000 !default;
 $nav-pf-vertical-link-height:                                       63px !default;
 $nav-pf-vertical-link-padding:                                      17px 20px 17px 25px !default;
 $nav-pf-vertical-secondary-active-color:                            #fff !default;
-$nav-pf-vertical-secondary-active-bg-color:                         #4d5258 !default;
+$nav-pf-vertical-secondary-active-bg-color:                         $color-pf-black-700 !default;
 $nav-pf-vertical-secondary-active-icon-color:                       #199dde !default;
 $nav-pf-vertical-secondary-badge-color:                             #fff !default;
-$nav-pf-vertical-secondary-badge-bg-color:                          #292e34 !default;
+$nav-pf-vertical-secondary-badge-bg-color:                          $color-pf-black-900 !default;
 $nav-pf-vertical-secondary-border-color:                            #199dde !default;
 $nav-pf-vertical-secondary-color:                                   #fff !default;
 $nav-pf-vertical-secondary-header-margin:                           18px 20px 10px 20px !default;
-$nav-pf-vertical-secondary-indicator-color:                         #72767b !default;
+$nav-pf-vertical-secondary-indicator-color:                         $color-pf-black-600 !default;
 $nav-pf-vertical-secondayr-indicator-padding:                       17px 0 !default;
 $nav-pf-vertical-secondary-item-color:                              #dbdada !default;
 $nav-pf-vertical-secondary-item-padding:                            0 0 5px 0 !default;
@@ -181,7 +183,7 @@ $pficon-var-volume:                                                 "\e910" !def
 $pficon-var-warning-triangle-o:                                     "\e61c" !default;
 $pficon-var-zone:                                                   "\e911" !default;
 $progress-description-label-width:                                  85px !default;
-$sidebar-pf-bg:                                                     #fafafa !default;
+$sidebar-pf-bg:                                                     $color-pf-black-100 !default;
 $sidebar-pf-border-color:                                           #d0d0d0 !default;
 $table-border-hover:                                                #a7cadf !default;
 $table-cell-padding-bottom:                                         3px !default;
@@ -235,7 +237,7 @@ $footer-pf-alt-padding-left:                                        $footer-pf-p
 $footer-pf-alt-padding-top:                                         $footer-pf-padding-top !default;
 $footer-pf-alt-height:                                              $footer-pf-height !default;
 $img-path-alt:                                                      $img-path !default;
-$nav-pf-vertical-alt-active-color:                                  #39a5dc !default;
+$nav-pf-vertical-alt-active-color:                                  $color-pf-blue-300 !default;
 $nav-pf-vertical-alt-bg-color:                                      #fff !default;
 $nav-pf-vertical-alt-badge-color:                                   #fff !default;
 $nav-pf-vertical-alt-border-color:                                  $sidebar-pf-border-color !default;
@@ -264,19 +266,19 @@ $navbar-pf-alt-navbar-toggle-icon-bar-hover-bg:                     $navbar-pf-v
 
 // Bootstrap overrides
 // -------------------
-$alert-info-border:                                                 #8b8d8f !default;
+$alert-info-border:                                                 $color-pf-black-500 !default;
 $alert-link-font-weight:                                            500 !default;
 $alert-padding:                                                     11px !default;
 $body-bg:                                                           #ffffff !default;
 $border-radius-base:                                                1px !default;
-$brand-danger:                                                      #cc0000 !default;
+$brand-danger:                                                      $color-pf-red !default;
 $brand-info:                                                        #006e9c !default;
 $brand-primary:                                                     #00a8e1 !default;
-$brand-success:                                                     #3f9c35 !default;
-$brand-warning:                                                     #ec7a08 !default;
+$brand-success:                                                     $color-pf-green !default;
+$brand-warning:                                                     $color-pf-orange !default;
 $breadcrumb-bg:                                                     transparent !default;
 $breadcrumb-separator:                                              "\f105" !default;
-$btn-danger-bg:                                                     #a30000 !default;
+$btn-danger-bg:                                                     $color-pf-red-200 !default;
 $btn-danger-border:                                                 #781919 !default;
 $btn-default-border:                                                #b7b7b7 !default;
 $btn-font-weight:                                                   600 !default;
@@ -311,19 +313,19 @@ $padding-large-vertical:                                            6px !default
 $pager-border-radius:                                               0 !default;
 $pager-disabled-color:                                              #969696 !default;
 $pagination-bg:                                                     #f5f5f5 !default;
-$pagination-border:                                                 #bbbbbb !default;
+$pagination-border:                                                 $color-pf-black-400 !default;
 $pagination-hover-bg:                                               #ededed !default;
 $panel-inner-border:                                                #cecdcd !default;
 $popover-arrow-color:                                               #fff !default;
-$popover-arrow-outer-color:                                         #bbb !default;
-$popover-border-color:                                              #bbb !default;
+$popover-arrow-outer-color:                                         $color-pf-black-400 !default;
+$popover-border-color:                                              $color-pf-black-400 !default;
 $popover-max-width:                                                 220px !default;
 $popover-title-bg:                                                  #f5f5f5 !default;
 $pre-bg:                                                            #fcfcfc !default;
 $progress-bg:                                                       #ededed !default;
 $table-bg-accent:                                                   #f5f5f5 !default;
 $table-bg-hover:                                                    #d5ecf9 !default;
-$table-border-color:                                                #d1d1d1 !default;
+$table-border-color:                                                $color-pf-black-300 !default;
 $table-cell-padding:                                                10px !default;
 $tooltip-arrow-width:                                               8px !default;
 $tooltip-bg:                                                        #434343 !default;
