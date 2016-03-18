@@ -14,11 +14,11 @@ class Converter
     :replace_spin,
     # :replace_fadein,
     :replace_image_urls,
+    :remove_unnecessary_escaping,
     :replace_escaping,
     :convert_less_ampersand,
     :deinterpolate_vararg_mixins,
-    :replace_calculation_semantics,
-    :remove_unnecessary_escaping
+    :replace_calculation_semantics
   ]
   TOP = <<-VAR.gsub(/^\s*/, '')
     // PatternFly SASS
@@ -60,7 +60,7 @@ class Converter
 
   # SASS doesn't require escaping in calc()
   def remove_unnecessary_escaping(file)
-    file.gsub(/calc\(\~\'([^\']+)\'\)/, 'calc(\1)')
+    file.gsub(/calc\(\~\'([^\']+)\'\)/, 'calc(\1)').gsub(/calc\(\~\"([^\"]+)\"\)/, 'calc(\1)')
   end
 
   # Override
@@ -129,6 +129,9 @@ class Converter
 
     bower_contrib('bootstrap-switch/src/less/bootstrap3/bootstrap-switch.less', 'bootstrap-switch.scss')
     file = replace_all(file, 'patternfly/lib/bootstrap-switch/bootstrap-switch', 'patternfly/lib/bootstrap-switch')
+
+    bower_contrib('eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.css', 'bootstrap-datetimepicker.scss', false)
+    file = replace_all(file, 'patternfly/lib/eonasdan-bootstrap-datetimepicker/bootstrap-datetimepicker-build', 'patternfly/lib/bootstrap-datetimepicker')
 
     TOP + remove_comments_and_whitespace(file)
   end
