@@ -291,7 +291,7 @@ class Converter
   end
 
   def top_level_files
-    retrieve_files(File.join(@source, 'less'), /patternfly(\-additions)?\.less$/)
+    retrieve_files(File.join(@source, 'less'), /patternfly(\-additions)?\.less$/).reverse
   end
 
   def store_version
