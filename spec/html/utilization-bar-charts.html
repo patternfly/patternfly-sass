@@ -4,7 +4,7 @@
 <html lang="en-us">
 <!--<![endif]-->
   <head>
-    <title>Area Charts - PatternFly</title>
+    <title>Utilization Bar Charts - PatternFly</title>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=Edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -36,63 +36,29 @@
   <body>
     <div class="container">
       <div class="page-header">
-        <h1>Area Charts</h1>
+        <h1>Utilization Bar Charts</h1>
       </div>
       <div class="alert alert-warning">
         <span class="pficon pficon-warning-triangle-o"></span>
         These examples are included for development testing purposes.  For official documentation, see <a href="https://www.patternfly.org" class="alert-link">https://www.patternfly.org</a>, <a href="http://getbootstrap.com" class="alert-link">http://getbootstrap.com</a>, and <a href="http://c3js.org/">http://c3js.org/</a>
       </div>
       <hr>
-<h2>Area Chart</h2>
+<h2>Utilization Bar Chart</h2>
 <div class="row">
-  <div class="col-lg-6 col-sm-12">
-    <div id="areaChart" class="line-chart-pf"></div>
-<script>
-  var areaChartDataColumns = [
-    ['data1', 350, 400, 350, 0],
-    ['data2', 140, 100, 150, 205, 145, 50],
-    ['data3', 10, 60, 90, 10, 325, 400],
-    ['data4', 260, 10, 305, 100, 50, 150]
-  ];
-  var singleAreaChartDataColumns = [
-    ['data2', 140, 100, 150, 205, 145, 50]
-  ];
-
-  var c3ChartDefaults = $().c3ChartDefaults();
-  var areaChartConfig = c3ChartDefaults.getDefaultAreaConfig();
-  areaChartConfig.bindto = '#areaChart';
-  areaChartConfig.data = {
-    columns: areaChartDataColumns,
-    type: 'area-spline'
-  };
-  var areaChart = c3.generate(areaChartConfig);
-</script>
-
+  <div class="col-xs-8 col-sm-6 col-md-6">
+    <div class="progress">
+  <div class="progress-bar" role="progressbar" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100" style="width: 25%;" data-toggle="tooltip" title="25% Used">
+    <span class="sr-only">25% Used</span>
+  </div>
+  <div class="progress-bar progress-bar-remaining" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 75%;" data-toggle="tooltip" title="75% Available">
+    <span class="sr-only">75% Available</span>
   </div>
 </div>
-<h2>Single Area Chart</h2>
-<div class="row">
-  <div class="col-lg-6 col-sm-12">
-    <div id="singleAreaChart" class="line-chart-pf"></div>
 <script>
-  var areaChartDataColumns = [
-    ['data1', 350, 400, 350, 0],
-    ['data2', 140, 100, 150, 205, 145, 50],
-    ['data3', 10, 60, 90, 10, 325, 400],
-    ['data4', 260, 10, 305, 100, 50, 150]
-  ];
-  var singleAreaChartDataColumns = [
-    ['data2', 140, 100, 150, 205, 145, 50]
-  ];
-
-  var c3ChartDefaults = $().c3ChartDefaults();
-  var singleAreaChartConfig = c3ChartDefaults.getDefaultSingleAreaConfig();
-  singleAreaChartConfig.bindto = '#singleAreaChart';
-  singleAreaChartConfig.data = {
-    columns: singleAreaChartDataColumns,
-    type: 'area-spline'
-  };
-  var singleAreaChart = c3.generate(singleAreaChartConfig);
+  // Initialize Tooltip
+  jQuery(document).ready(function() {
+    jQuery('[data-toggle="tooltip"]').tooltip();
+  });
 </script>
 
   </div>
