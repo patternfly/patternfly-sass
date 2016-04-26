@@ -140,6 +140,7 @@ class Converter
     base = 'assets/stylesheets/patternfly/lib'
     less = File.read(File.join('bower_components', src))
     sass = convert ? less_to_sass(nil, less) : less
+    sass = remove_map_comments(sass)
     FileUtils.mkdir_p(base) unless File.exist?(base)
     File.open(File.join(base, dst), 'w') { |f| f.write(sass) }
   end
@@ -225,6 +226,10 @@ class Converter
     less.gsub!(/\$\{([\w\-]+)\}/, '#{$\1}')
     less.gsub!(/\$\{([^}]+)\}/, '$\1')
     less.gsub(/(\W)e\(%\("?([^"]*)"?\)\)/, '\1\2')
+  end
+
+  def remove_map_comments(less)
+    less.gsub(%r{\s*(#|@) sourceMappingURL=[^\s]+}, '')
   end
 
   def less_to_sass(file, input)
