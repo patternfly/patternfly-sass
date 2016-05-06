@@ -197,8 +197,8 @@ $navbar-pf-navbar-header-border-color:                              lighten($nav
 $navbar-pf-navbar-nav-active-active-bg-color:                       lighten($navbar-pf-bg-color, 8%) !default;
 $navbar-pf-navbar-nav-active-active-open-bg-color:                  lighten($navbar-pf-bg-color, 11%) !default;
 $navbar-pf-navbar-nav-active-bg-color:                              lighten($navbar-pf-bg-color, 12.5%) !default;
-$navbar-pf-navbar-primary-bg-color-start:                           lighten($navbar-pf-bg-color, 10%); // #474C50 !default;
-$navbar-pf-navbar-primary-bg-color-stop:                            $navbar-pf-bg-color; // #383F43 !default;
+$navbar-pf-navbar-primary-bg-color-start:                           lighten($navbar-pf-bg-color, 10%) !default; // #474C50
+$navbar-pf-navbar-primary-bg-color-stop:                            $navbar-pf-bg-color !default; // #383F43
 $navbar-pf-navbar-utility-border-color:                             lighten($navbar-pf-bg-color, 15.5%) !default;
 $navbar-pf-navbar-utility-color:                                    $navbar-pf-color !default;
 $navbar-pf-navbar-utility-hover-bg-color:                           lighten($navbar-pf-bg-color, 12.5%) !default;
@@ -376,6 +376,7 @@ $panel-success-heading-bg:                                          $brand-succe
 $panel-warning-border:                                              $brand-warning !default;
 $panel-warning-heading-bg:                                          $brand-warning !default;
 $state-warning-text:                                                $brand-warning !default;
+$state-danger-text:                                                 $brand-danger !default;
 // Reference variable declared in block above
 $panel-danger-text:                                                 $panel-primary-text !default;
 $panel-info-text:                                                   $panel-primary-text !default;
