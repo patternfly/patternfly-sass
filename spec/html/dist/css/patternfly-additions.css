@@ -1,13 +1,15 @@
 /* PatternFly additions to Bootstrap */
-.form-search .combobox-container,
-.form-inline .combobox-container {
-  display: inline-block;
-  margin-bottom: 0;
-  vertical-align: top;
-}
-.form-search .combobox-container .input-group-addon,
-.form-inline .combobox-container .input-group-addon {
-  width: auto;
+@media (min-width: 768px) {
+  .form-search .combobox-container,
+  .form-inline .combobox-container {
+    display: inline-block;
+    margin-bottom: 0;
+    vertical-align: top;
+  }
+  .form-search .combobox-container .input-group-addon,
+  .form-inline .combobox-container .input-group-addon {
+    width: auto;
+  }
 }
 .combobox-selected .caret {
   display: none;
@@ -1426,6 +1428,7 @@ select.mobile-device {
 /*-- Chart --*/
 .c3 svg {
   font: 10px sans-serif;
+  -webkit-tap-highlight-color: transparent;
 }
 .c3 path,
 .c3 line {
@@ -1502,11 +1505,11 @@ select.mobile-device {
 /*-- Region --*/
 .c3-region {
   fill: steelblue;
-  fill-opacity: 0.1;
+  fill-opacity: .1;
 }
 /*-- Brush --*/
 .c3-brush .extent {
-  fill-opacity: 0.1;
+  fill-opacity: .1;
 }
 /*-- Select - Drag --*/
 /*-- Legend --*/
@@ -1521,6 +1524,10 @@ select.mobile-device {
   fill: white;
   stroke: lightgray;
   stroke-width: 1;
+}
+/*-- Title --*/
+.c3-title {
+  font: 14px sans-serif;
 }
 /*-- Tooltip --*/
 .c3-tooltip-container {
@@ -2908,6 +2915,9 @@ table.datatable th:active {
 .pficon-builder-image:before {
   content: "\e800";
 }
+.pficon-blueprint:before {
+  content: "\e915";
+}
 .pficon-close:before {
   content: "\e60b";
 }
@@ -2986,6 +2996,9 @@ table.datatable th:active {
 .pficon-print:before {
   content: "\e612";
 }
+.pficon-private:before {
+  content: "\e914";
+}
 .pficon-project:before {
   content: "\e622";
 }
@@ -3037,6 +3050,9 @@ table.datatable th:active {
 }
 .pficon-storage-domain:before {
   content: "\e90e";
+}
+.pficon-tenant:before {
+  content: "\e916";
 }
 .pficon-thumb-tack-o:before {
   content: "\e609";
