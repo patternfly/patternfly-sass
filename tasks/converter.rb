@@ -13,6 +13,7 @@ class Converter
     :replace_mixins,
     :replace_spin,
     # :replace_fadein,
+    :replace_fade,
     :replace_image_urls,
     :remove_unnecessary_escaping,
     :replace_escaping,
@@ -220,6 +221,11 @@ class Converter
       File.join(@source, 'less', 'mixin_overrides.less')
     )
   end
+
+  def replace_fade(less)
+    less.gsub(/(?![\-$@.])fade\((.*?),\s*(.*?)%\)/) { "rgba(#{$1}, #{$2.to_f / 100.0})" }
+  end
+
 
   def replace_escaping(less)
     less = less.gsub(/~"([^"]+)"/, '#{\1}')
