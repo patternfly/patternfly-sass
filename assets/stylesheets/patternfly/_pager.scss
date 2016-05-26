@@ -23,7 +23,7 @@
     }
     a:active {
       background-image: none;
-      @include box-shadow(inset 0 3px 5px rgba(0,0,0,.125));
+      @include box-shadow(inset 0 3px 5px rgba($color-pf-black, 0.125));
       outline: 0;
     }
   }

@@ -145,7 +145,7 @@
   }
   &.hidden {
     &.show-mobile-nav {
-      box-shadow: 0 0 3px rgba(0,0,0,0.15);
+      box-shadow: 0 0 3px rgba($color-pf-black, 0.15);
       display: block !important;
     }
     > .list-group {
@@ -300,7 +300,7 @@
           font-family: "FontAwesome";
           font-size: ($font-size-base * 2);
           line-height: 30px;
-          padding: $nav-pf-vertical-secondayr-indicator-padding;
+          padding: $nav-pf-vertical-secondary-indicator-padding;
           position: absolute;
           right: 20px;
           top: 0;
