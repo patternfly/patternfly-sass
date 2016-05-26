@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <!--[if IE 9]><html lang="en-us" class="ie9 layout-pf layout-pf-fixed"><![endif]-->
 <!--[if gt IE 9]><!-->
-<html lang="en-us" class="layout-pf layout-pf-fixed">
-  <!--<![endif]-->
+<html lang="en-us" class="layout-pf">
+<!--<![endif]-->
     <head>
-    <title>Vertical Navigation with Persistent Secondary (no icons) - PatternFly</title>
+    <title>Horizontal Navigation - PatternFly</title>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=Edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -41,298 +41,93 @@
   </div>
 
   <body class="cards-pf">
-    <nav class="navbar navbar-pf-vertical">
+    <nav class="navbar navbar-default navbar-pf" role="navigation">
   <div class="navbar-header">
-    <button type="button" class="navbar-toggle">
+    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse-1">
       <span class="sr-only">Toggle navigation</span>
       <span class="icon-bar"></span>
       <span class="icon-bar"></span>
       <span class="icon-bar"></span>
     </button>
-    <a href="/" class="navbar-brand">
-      <img class="navbar-brand-icon" src="../dist/img/logo-alt.svg" alt=""/><img class="navbar-brand-name" src="../dist/img/brand-alt.svg" alt="PatternFly Enterprise Application" />
+    <a class="navbar-brand" href="/">
+      <img src="../dist/img/brand.svg" alt="PatternFly Enterprise Application" />
     </a>
   </div>
-  <nav class="collapse navbar-collapse">
-    <ul class="nav navbar-nav">
-      <li><a href="#" target="_blank" class="nav-item-iconic nav-item-iconic-new-window"><span title="Launch" class="fa fa-external-link"></span></a></li>
-    </ul>
-    <ul class="nav navbar-nav navbar-right navbar-iconic">
-      <li class="dropdown">
-        <a class="dropdown-toggle nav-item-iconic" id="notifications" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-          <span title="Notifications" class="fa pficon-flag"></span>
-          <span class="badge">2</span>
-        </a>
-        <div class="dropdown-menu infotip bottom-right">
-          <div class="arrow"></div>
-          <ul class="list-group">
-            <li class="list-group-item">
-              <span class="i pficon pficon-info"></span> Modified Datasources ExampleDS
-            </li>
-            <li class="list-group-item">
-              <span class="i pficon pficon-info"></span> Error: System Failure
-            </li>
-          </ul>
-          <div class="footer">
-            <a>Clear Messages</a>
-          </div>
-        </div>
+  <div class="collapse navbar-collapse navbar-collapse-1">
+    <ul class="nav navbar-nav navbar-utility">
+      <li>
+        <a href="#">Status</a>
       </li>
       <li class="dropdown">
-        <a class="dropdown-toggle nav-item-iconic" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-          <span title="Help" class="fa pficon-help"></span>
-          <span class="caret"></span>
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+          <span class="pficon pficon-user"></span>
+          Brian Johnson <b class="caret"></b>
         </a>
-        <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-          <li><a href="#">Help</a></li>
-          <li><a href="#">About</a></li>
+        <ul class="dropdown-menu">
+          <li>
+            <a href="#">Link</a>
+          </li>
+          <li>
+            <a href="#">Another link</a>
+          </li>
+          <li>
+            <a href="#">Something else here</a>
+          </li>
+          <li class="divider"></li>
+          <li class="dropdown-submenu">
+            <a tabindex="-1" href="#">More options</a>
+            <ul class="dropdown-menu">
+              <li>
+                <a href="#">Link</a>
+              </li>
+              <li>
+                <a href="#">Another link</a>
+              </li>
+              <li>
+                <a href="#">Something else here</a>
+              </li>
+              <li class="divider"></li>
+              <li class="dropdown-header">Nav header</li>
+              <li>
+                <a href="#">Separated link</a>
+              </li>
+              <li class="divider"></li>
+              <li>
+                <a href="#">One more separated link</a>
+              </li>
+            </ul>
+          </li>
+          <li class="divider"></li>
+          <li>
+            <a href="#">One more separated link</a>
+          </li>
         </ul>
       </li>
-      <li class="dropdown">
-        <a class="dropdown-toggle nav-item-iconic" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-          <span title="Username" class="fa pficon-user"></span>
-          <span class="caret"></span>
-        </a>
-        <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
-          <li><a href="#">Preferences</a></li>
-          <li><a href="#">Logout</a></li>
-        </ul>
+    </ul>
+    <ul class="nav navbar-nav navbar-primary">
+      <li>
+        <a href="#">First Link</a>
+      </li>
+      <li class="active">
+        <a href="#">Another Link</a>
+      </li>
+      <li>
+        <a href="#">And Another</a>
+      </li>
+      <li>
+        <a href="#">As a General Rule</a>
+      </li>
+      <li>
+        <a href="#">Five to Seven Links</a>
+      </li>
+      <li>
+        <a href="#">Is Good</a>
       </li>
     </ul>
-  </nav>
-</nav> <!--/.navbar-->
-
-<div class="nav-pf-vertical nav-pf-vertical-with-secondary-nav hidden-icons-pf">
-  <ul class="list-group">
-    <li class="list-group-item active">
-      <a href="#">
-        <span class="fa fa-dashboard"></span>
-        <span class="list-group-item-value">Dashboard</span>
-      </a>
-    </li>
-    <li class="list-group-item">
-      <a href="#">
-        <span class="pficon pficon-cluster"></span>
-        <span class="list-group-item-value">Clusters</span>
-      </a>
-    </li>
-    <li class="list-group-item">
-      <a href="#">
-        <span class="pficon pficon-screen"></span>
-        <span class="list-group-item-value">Hosts</span>
-      </a>
-    </li>
-    <li class="list-group-item persistent-secondary" data-target="#storage-secondary">
-      <a href="#">
-        <span class="pficon pficon-container-node"></span>
-        <span class="list-group-item-value">Storage</span>
-      </a>
-      <div id="storage-secondary" class="nav-pf-persistent-secondary">
-  <div class="persistent-secondary-header">
-    <a class="secondary-collapse-toggle-pf" href="#" data-toggle="collapse-secondary-nav"></a>
-    <span>Storage</span>
   </div>
-  <h5>File</h5>
-  <ul class="list-group">
-    <li class="list-group-item active">
-      <a href="#">
-        <span class="list-group-item-value">Volumes</span>
-        <div class="badge-container-pf">
-          <div class="badge">
-            <span class="pficon pficon-error-circle-o"></span>
-            <span>1</span>
-          </div>
-          <div class="badge">
-            <span class="pficon pficon-warning-triangle-o"></span>
-            <span>3</span>
-          </div>
-        </div>
-      </a>
-    </li>
-    <li class="list-group-item">
-      <a href="#">
-        <span class="list-group-item-value">Bricks</span>
-        <div class="badge-container-pf">
-          <div class="badge">
-            <span class="pficon pficon-warning-triangle-o"></span>
-            <span>3</span>
-          </div>
-          <span class="badge">12</span>
-        </div>
-      </a>
-    </li>
-    <li class="list-group-item">
-      <a href="#">
-        <span class="list-group-item-value">Quotas</span>
-        <div class="badge-container-pf">
-          <span class="badge">3</span>
-        </div>
-      </a>
-    </li>
-    <li class="list-group-item">
-      <a href="#">
-        <span class="list-group-item-value">Logical Volumes</span>
-        <div class="badge-container-pf">
-          <div class="badge">
-            <span class="pficon pficon-error-circle-o"></span>
-            <span>1</span>
-          </div>
-          <span class="badge">10</span>
-        </div>
-      </a>
-    </li>
-  </ul>
-  <h5>Object</h5>
-  <ul class="list-group">
-    <li class="list-group-item">
-      <a href="#">
-        <span class="list-group-item-value">Pools</span>
-        <div class="badge-container-pf">
-          <span class="badge">10</span>
-        </div>
-      </a>
-    </li>
-    <li class="list-group-item">
-      <a href="#">
-        <span class="list-group-item-value">OSDs</span>
-        <div class="badge-container-pf">
-          <div class="badge">
-            <span class="pficon pficon-error-circle-o"></span>
-            <span>1</span>
-          </div>
-          <div class="badge">
-            <span class="pficon pficon-warning-triangle-o"></span>
-            <span>3</span>
-          </div>
-        </div>
-      </a>
-    </li>
-  </ul>
-  <h5>Block</h5>
-  <ul class="list-group">
-    <li class="list-group-item">
-      <a href="#">
-        <span class="list-group-item-value">RBDs</span>
-        <div class="badge-container-pf">
-          <div class="badge">
-            <span class="pficon pficon-warning-triangle-o"></span>
-            <span>2</span>
-          </div>
-          <span class="badge">14</span>
-        </div>
-      </a>
-    </li>
-    <li class="list-group-item">
-      <a href="#">
-        <span class="list-group-item-value">Quotas</span>
-        <div class="badge-container-pf">
-          <span class="badge">0</span>
-        </div>
-      </a>
-    </li>
-    <li class="list-group-item">
-      <a href="#">
-        <span class="list-group-item-value">Snapshots</span>
-        <div class="badge-container-pf">
-          <div class="badge">
-            <span class="pficon pficon-warning-triangle-o"></span>
-            <span>3</span>
-          </div>
-          <span class="badge">9</span>
-        </div>
-      </a>
-    </li>
-    <li class="list-group-item">
-      <a href="#">
-        <span class="list-group-item-value">Storage Profiles</span>
-        <div class="badge-container-pf">
-          <span class="badge">7</span>
-        </div>
-      </a>
-    </li>
-  </ul>
-</div>
-
-    </li>
-    <li class="list-group-item persistent-secondary" data-target="#admin-secondary">
-      <a href="#">
-        <span class="fa fa-cog"></span>
-        <span class="list-group-item-value">Admin</span>
-      </a>
-      <div id="admin-secondary" class="nav-pf-persistent-secondary">
-  <div class="persistent-secondary-header">
-    <a class="secondary-collapse-toggle-pf" href="#" data-toggle="collapse-secondary-nav"></a>
-    <span>Admin</span>
-  </div>
-  <h5>User Administration</h5>
-  <ul class="list-group">
-    <li class="list-group-item active">
-      <a href="#">
-        <span class="list-group-item-value">Users</span>
-        <div class="badge-container-pf">
-          <span class="badge">10</span>
-        </div>
-      </a>
-    </li>
-    <li class="list-group-item">
-      <a href="#">
-        <span class="list-group-item-value">Groups</span>
-        <div class="badge-container-pf">
-          <span class="badge">3</span>
-        </div>
-      </a>
-    </li>
-    <li class="list-group-item">
-      <a href="#">
-        <span class="list-group-item-value">Roles</span>
-        <div class="badge-container-pf">
-          <span class="badge">5</span>
-        </div>
-      </a>
-    </li>
-  </ul>
-  <h5>Storage</h5>
-  <ul class="list-group">
-    <li class="list-group-item">
-      <a href="#">
-        <span class="list-group-item-value">Local Storage</span>
-      </a>
-    </li>
-    <li class="list-group-item">
-      <a href="#">
-        <span class="list-group-item-value">History</span>
-        <div class="badge-container-pf">
-          <span class="badge">0</span>
-        </div>
-      </a>
-    </li>
-  </ul>
-
-  <h5>Preferences</h5>
-  <ul class="list-group">
-    <li class="list-group-item">
-      <a href="#">
-        <span class="list-group-item-value">Appearance</span>
-      </a>
-    </li>
-    <li class="list-group-item">
-      <a href="#">
-        <span class="list-group-item-value">Notifications</span>
-      </a>
-    </li>
-    <li class="list-group-item">
-      <a href="#">
-        <span class="list-group-item-value">Sound</span>
-      </a>
-    </li>
-  </ul>
-</div>
-
-    </li>
-  </ul>
-</div>
-<div class="container-fluid container-cards-pf container-pf-nav-pf-vertical container-pf-nav-pf-vertical-with-secondary hidden-icons-pf">
-        <div class="row row-cards-pf">
+</nav>
+<div class="container-fluid container-cards-pf">
+      <div class="row row-cards-pf">
       <!-- Important:  if you need to nest additional .row within a .row.row-cards-pf, do *not* use .row-cards-pf on the nested .row  -->
         <div class="col-xs-12 col-sm-6 col-md-3">
 <div class="card-pf card-pf-accented card-pf-aggregate-status">
@@ -960,7 +755,5 @@
     $().setupVerticalNavigation(true);
   });
 </script>
-
-
   </body>
 </html>
