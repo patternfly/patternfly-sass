@@ -19,7 +19,8 @@ class Converter
     :replace_escaping,
     :convert_less_ampersand,
     :deinterpolate_vararg_mixins,
-    :replace_calculation_semantics
+    :replace_calculation_semantics,
+    :space_self_parent
   ]
   TOP = <<-VAR.gsub(/^\s*/, '')
     // PatternFly SASS
@@ -55,8 +56,16 @@ class Converter
     super(file, mixins)
   end
 
+  def space_self_parent(file)
+    file.gsub(/\&\&/, '& &')
+  end
+
   def remove_button_variant(file)
-    replace_rules(file, /.button-variant(.*?)/) { |_, _| "" }
+    replace_rules(file, /.button-variant\(.*?\)/) { |a, b| "" }
+  end
+
+  def update_button_variant(file)
+    replace_all(file, /^(\s+)\.button-variant\((.+?),(.+?),(.+?)\);$/, '\1.button-variant(\2,\3,\3,\3,\4);')
   end
 
   # SASS doesn't require escaping in calc()
@@ -125,7 +134,7 @@ class Converter
     bower_contrib('c3/c3.css', 'c3.scss', false)
     file = replace_all(file, 'patternfly/lib/c3/c3.css', 'patternfly/lib/c3')
 
-    bower_contrib('bootstrap-datepicker/dist/css/bootstrap-datepicker3.css', 'bootstrap-datepicker.scss', false)
+    bower_contrib('bootstrap-datepicker/less/datepicker3.less', 'bootstrap-datepicker.scss', true)
     file = replace_all(file, 'patternfly/lib/bootstrap-datepicker/datepicker3', 'patternfly/lib/bootstrap-datepicker')
 
     bower_contrib('bootstrap-switch/src/less/bootstrap3/bootstrap-switch.less', 'bootstrap-switch.scss')
@@ -140,7 +149,7 @@ class Converter
   def bower_contrib(src, dst, convert=true)
     base = 'assets/stylesheets/patternfly/lib'
     less = File.read(File.join('bower_components', src))
-    sass = convert ? less_to_sass(nil, less) : less
+    sass = convert ? less_to_sass(dst, less) : less
     sass = remove_map_comments(sass)
     FileUtils.mkdir_p(base) unless File.exist?(base)
     File.open(File.join(base, dst), 'w') { |f| f.write(sass) }
@@ -249,6 +258,8 @@ class Converter
     when 'mixin_overrides.less'
       transforms.unshift(:remove_button_variant)
       transforms << :flatten_mixins
+    when 'bootstrap-datepicker.scss'
+      transforms.unshift(:update_button_variant)
     when 'variables.less'
       transforms.delete(:replace_spin)
       transforms << :insert_default_vars
