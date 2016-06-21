@@ -74,7 +74,7 @@ end
 
 desc "Install testing dependencies using bower"
 task :deps do
-  system("bower install", out: $stdout, err: :out)
+  system("bower update", out: $stdout, err: :out)
 end
 
 desc "Clean up the test results"
