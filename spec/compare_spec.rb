@@ -7,8 +7,9 @@ RSpec.describe "compare SASS with LESS screenshots" do
   RESOLUTIONS = [[320, 480], [768, 1024], [1280, 1024]]
   CONTEXTS = %w(less sass)
   TOLERANCE = ENV['TOLERANCE'].to_f || 0.00
+  BROWSER = (ENV['BROWSER'] || :chrome).to_sym
 
-  before(:all) { @browser = Selenium::WebDriver.for(:firefox) }
+  before(:all) { @browser = Selenium::WebDriver.for(BROWSER) }
 
   puts "Starting tests with TOLERANCE=#{TOLERANCE}"
   html = File.read('spec/html/index.html')
@@ -22,10 +23,10 @@ RSpec.describe "compare SASS with LESS screenshots" do
         it "#{w}x#{h}" do
           @browser.manage.window.resize_to(w, h)
           CONTEXTS.each do |ctx|
-            @browser.navigate.to("#{BASEURL}/#{ctx}/patternfly/#{file}")
+            @browser.navigate.to("#{BASEURL}/#{ctx}/pages/patternfly/#{file}")
             @browser.execute_script("
               var style = document.createElement('style');
-              style.innerHTML = '* { -moz-animation: none !important; -moz-transition: none !important;';
+              style.innerHTML = '* { -moz-animation: none !important; -moz-transition: none !important; -webkit-animation: none !important; -webkit-transition: none !important; }';
               document.body.appendChild(style);
             ")
             sleep(1)
