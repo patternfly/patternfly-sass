@@ -44,28 +44,23 @@ end
 desc "Start a web server with both the less and the sass version"
 task :serve => :compile do
   require 'webrick'
-  server = WEBrick::HTTPServer.new :Port => 9000, :DirectoryIndex => []
+  server = WEBrick::HTTPServer.new :Port => 9000
   {
-    '/'                                     => 'spec/main.html',
-    '/less/dist/css'                        => 'spec/html/dist/css',
-    '/less/dist/fonts'                      => 'assets/fonts/patternfly',
-    '/less/dist/img'                        => 'assets/images/patternfly',
-    '/less/dist/js'                         => 'assets/javascripts',
-    '/less/components'                      => 'bower_components',
-    '/less/components/bootstrap/dist/js'    => gem_asset_path('bootstrap-sass', 'assets/javascripts'),
-    '/less/components/bootstrap/dist/fonts' => gem_asset_path('bootstrap-sass', 'assets/fonts/bootstrap'),
-    '/less/components/font-awesome/fonts'   => gem_asset_path('font-awesome-sass', 'assets/fonts/font-awesome'),
-    '/less/patternfly'                      => 'spec/html',
-    '/sass/dist/fonts'                      => 'assets/fonts',
-    '/sass/dist/fonts/bootstrap'            => gem_asset_path('bootstrap-sass', 'assets/fonts/bootstrap'),
-    '/sass/dist/img'                        => 'assets/images/patternfly',
-    '/sass/dist/images'                     => 'assets/images',
-    '/sass/dist/js'                         => 'assets/javascripts',
-    '/sass/dist/css'                        => 'tmp',
-    '/sass/components'                      => 'bower_components',
-    '/sass/components/bootstrap/dist/js'    => gem_asset_path('bootstrap-sass', 'assets/javascripts'),
-    '/sass/dist/fonts/font-awesome'         => gem_asset_path('font-awesome-sass', 'assets/fonts/font-awesome'),
-    '/sass/patternfly'                      => 'spec/html'
+    '/'                             => 'spec/main.html',
+    '/less/dist/css'                => 'spec/html/dist/css',
+    '/less/dist/fonts'              => 'assets/fonts/patternfly',
+    '/less/dist/img'                => 'assets/images/patternfly',
+    '/less/dist/js'                 => 'assets/javascripts',
+    '/less/pages/patternfly'        => 'spec/html',
+    '/sass/dist/fonts'              => 'assets/fonts',
+    '/sass/dist/fonts/bootstrap'    => gem_asset_path('bootstrap-sass', 'assets/fonts/bootstrap'),
+
+    '/sass/dist/img'                => 'assets/images/patternfly',
+    '/sass/dist/images'             => 'assets/images',
+    '/sass/dist/js'                 => 'assets/javascripts',
+    '/sass/dist/css'                => 'tmp',
+    '/sass/dist/fonts/font-awesome' => gem_asset_path('font-awesome-sass', 'assets/fonts/font-awesome'),
+    '/sass/pages/patternfly'        => 'spec/html',
   }.each { |http, local| server.mount http, WEBrick::HTTPServlet::FileHandler, local }
 
   trap('INT') { server.stop }
