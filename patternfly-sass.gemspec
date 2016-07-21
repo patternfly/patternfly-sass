@@ -20,6 +20,7 @@ Gem::Specification.new do |s|
   s.add_development_dependency 'term-ansicolor'
   s.add_development_dependency 'rugged', '~> 0.23.2'
   # Testing dependencies
+  s.add_development_dependency 'jekyll', '~> 3.1.6'
   s.add_development_dependency 'rspec', '~> 3.2'
   s.add_development_dependency 'nokogiri', '~> 1.6'
   s.add_development_dependency 'rmagick', '~> 2.15'

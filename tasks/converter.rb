@@ -1,6 +1,7 @@
 BOOTSTRAP_GEM_ROOT = Gem::Specification.find_by_name("bootstrap-sass").gem_dir
 require "#{BOOTSTRAP_GEM_ROOT}/tasks/converter/less_conversion"
 require 'rugged'
+require 'jekyll'
 
 class Converter
   include Converter::LessConversion
@@ -38,6 +39,7 @@ class Converter
 
   def convert
     checkout_upstream
+    build_tests
     copy_non_less
     process_stylesheets
     store_version
@@ -188,6 +190,16 @@ class Converter
     less_to_sass('patternfly.less', top_level_files.map { |f| File.read(f) }.join("\n"))
   end
 
+  def build_tests
+    tsrc = File.join(@source, 'tests', 'pages')
+    conf = Jekyll.configuration(
+      'config'      => File.join(tsrc, '_config.yml'),
+      'source'      => tsrc,
+      'destination' => TEST_DIR
+    )
+    Jekyll::Site.new(conf).process
+  end
+
   def copy_non_less
     copy_config.each do |asset|
       FileUtils.rm_rf(asset[:destination])
@@ -281,12 +293,6 @@ class Converter
         :select      => /\.js$/,
         :reject      => nil,
         :destination => File.join(@destination, 'javascripts')
-      },
-      {
-        :source      => File.join(@source, 'tests'),
-        :select      => /.*/,
-        :reject      => nil,
-        :destination => TEST_DIR
       },
       {
         :source      => File.join(@source, 'dist', 'css'),
