@@ -12,8 +12,8 @@ Gem::Specification.new do |s|
   s.license  = 'Apache-2.0'
 
   s.add_runtime_dependency 'sass', '~> 3.4.15'
-  s.add_runtime_dependency 'bootstrap-sass', '~> 3.3.6'
-  s.add_runtime_dependency 'font-awesome-sass', '~> 4.5.0'
+  s.add_runtime_dependency 'bootstrap-sass', '~> 3.3.7'
+  s.add_runtime_dependency 'font-awesome-sass', '~> 4.6.2'
 
   # Converter's dependencies
   s.add_development_dependency 'rake', '~> 10.4'

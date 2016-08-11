@@ -61,7 +61,7 @@ $modal-title-padding-vertical:                                      10px !defaul
 $navbar-pf-active-color:                                            $color-pf-black-150 !default;
 $navbar-pf-alt-active-color:                                        $color-pf-white !default;
 $navbar-pf-alt-bg-color:                                            $color-pf-black !default;
-$navbar-pf-alt-bg-img:                                              url("../img/bg-navbar-pf-alt.svg") !default;
+$navbar-pf-alt-bg-img:                                              "bg-navbar-pf-alt.svg" !default;
 $navbar-pf-bg-color:                                                $color-pf-black !default;
 $navbar-pf-border-color:                                            $color-pf-blue-300 !default;
 $navbar-pf-color:                                                   $color-pf-black-300 !default;
@@ -91,6 +91,8 @@ $navbar-pf-vertical-navbar-brand-padding:                           11px 0 12px 
 $navbar-pf-vertical-navbar-toggle-margin:                           13px 15px !default;
 $navbar-pf-vertical-navbar-toggle-icon-bar-hover-bg:                $color-pf-white !default;
 $navbar-pf-vertical-nav-item-iconic-padding:                        21px 12px !default;
+$nav-pf-container-transition-period:                                0.25s !default;
+$nav-pf-menu-transition-period:                                     0.1s !default;
 $nav-pf-vertical-active-color:                                      $color-pf-white !default;
 $nav-pf-vertical-active-before-color:                               $color-pf-blue-300 !default;
 $nav-pf-vertical-active-bg-color:                                   $color-pf-black-800 !default;
@@ -98,6 +100,7 @@ $nav-pf-vertical-active-border-color:                               $color-pf-bl
 $nav-pf-vertical-active-font-weight:                                600 !default;
 $nav-pf-vertical-active-icon-color:                                 $color-pf-blue-300 !default;
 $nav-pf-vertical-badge-color:                                       $color-pf-white !default;
+$nav-pf-vertical-badge-bg-color:                                    $color-pf-black-900 !default;
 $nav-pf-vertical-bg-color:                                          $color-pf-black-900 !default;
 $nav-pf-vertical-border-color:                                      $color-pf-black-900 !default;
 $nav-pf-vertical-collapsed-width:                                   75px !default;
@@ -117,13 +120,25 @@ $nav-pf-vertical-secondary-border-color:                            $color-pf-bl
 $nav-pf-vertical-secondary-color:                                   $color-pf-white !default;
 $nav-pf-vertical-secondary-header-margin:                           18px 20px 10px 20px !default;
 $nav-pf-vertical-secondary-indicator-color:                         $color-pf-black-600 !default;
-$nav-pf-vertical-secondary-indicator-padding:                       17px 0 !default;
+$nav-pf-vertical-secondary-indicator-padding:                       14px 0 !default;
 $nav-pf-vertical-secondary-item-color:                              $color-pf-black-300 !default;
 $nav-pf-vertical-secondary-item-padding:                            0 0 5px 0 !default;
 $nav-pf-vertical-secondary-link-height:                             63px !default;
-$nav-pf-vertical-secondary-link-padding:                            0 15px 0 20px !default;
+$nav-pf-vertical-secondary-link-padding:                            4px 0 2px 0 !default;
 $nav-pf-vertical-secondary-list-header-margin:                      30px 20px 10px 20px !default;
-$nav-pf-vertical-secondary-width:                                   250px !default;
+$nav-pf-vertical-tertiary-active-color:                            $color-pf-white !default;
+$nav-pf-vertical-tertiary-active-bg-color:                          $color-pf-black-800 !default;
+$nav-pf-vertical-tertiary-indicator-padding:                        0 !default;
+$nav-pf-vertical-tertiary-bg-color:                                 $color-pf-black-700 !default;
+$nav-pf-vertical-tertiary-color:                                    #fff !default;
+$nav-pf-vertical-tertiary-header-margin:                            18px 20px 10px 20px !default;
+$nav-pf-vertical-tertiary-list-header-margin:                       30px 20px 10px 20px !default;
+$nav-pf-vertical-tertiary-item-padding:                             0 0 5px 0 !default;
+$nav-pf-vertical-tertiary-item-color:                               $color-pf-black-300 !default;
+$nav-pf-vertical-tertiary-link-margin:                              0 20px 0 20px !default;
+$nav-pf-vertical-tertiary-link-padding:                             4px 0 2px 0 !default;
+$nav-pf-vertical-tertiary-badge-color:                              $color-pf-white !default;
+$nav-pf-vertical-tertiary-badge-bg-color:                           $color-pf-black-900 !default;
 $nav-pf-vertical-width:                                             200px !default;
 $pagination-padding-small-vertical:                                 0 !default;
 $panel-default-border-color:                                        $color-pf-black-400 !default;
@@ -205,7 +220,6 @@ $navbar-pf-navbar-primary-bg-color-stop:                            $navbar-pf-b
 $navbar-pf-navbar-utility-border-color:                             lighten($navbar-pf-bg-color, 15.5%) !default;
 $navbar-pf-navbar-utility-color:                                    $navbar-pf-color !default;
 $navbar-pf-navbar-utility-hover-bg-color:                           lighten($navbar-pf-bg-color, 12.5%) !default;
-$nav-pf-vertical-hidden-icons-width:                                ($nav-pf-vertical-width - $nav-pf-vertical-icon-width) !default;
 $nav-pf-vertical-secondary-bg-color:                                $nav-pf-vertical-active-bg-color !default;
 $nav-tabs-color:                                                    $gray-pf !default;
 // Reference variables declared in block above
@@ -382,6 +396,7 @@ $panel-warning-heading-bg:                                          $brand-warni
 $state-warning-text:                                                $brand-warning !default;
 $state-danger-text:                                                 $brand-danger !default;
 // Reference variable declared in block above
+$nav-pf-vertical-icon-size:                                         ($font-size-base + 8) !default;
 $panel-danger-text:                                                 $panel-primary-text !default;
 $panel-info-text:                                                   $panel-primary-text !default;
 $panel-success-text:                                                $panel-primary-text !default;
