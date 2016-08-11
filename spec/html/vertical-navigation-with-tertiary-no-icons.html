@@ -4,7 +4,7 @@
 <html lang="en-us" class="layout-pf layout-pf-fixed">
   <!--<![endif]-->
     <head>
-    <title>Vertical Navigation with Persistent Secondary (no icons) - PatternFly</title>
+    <title>Vertical Navigation with Tertiary Navigation (no icons) - PatternFly</title>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=Edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -26,10 +26,10 @@
     <link rel="stylesheet" href="../../dist/css/patternfly.min.css" >
     <link rel="stylesheet" href="../../dist/css/patternfly-additions.min.css" >
     <script src="//code.jquery.com/jquery-2.1.4.min.js"></script>
-    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery.matchHeight/0.6.0/jquery.matchHeight-min.js"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/c3/0.4.10/c3.min.js"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/d3/3.5.0/d3.min.js"></script>
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery.matchHeight/0.7.0/jquery.matchHeight-min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/c3/0.4.11/c3.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/d3/3.5.17/d3.min.js"></script>
     <script src="../../dist/js/patternfly.min.js"></script>
   </head>
   <div class="toast-pf toast-pf-max-width toast-pf-top-right alert alert-warning alert-dismissable">
@@ -41,7 +41,8 @@
   </div>
 
   <body class="cards-pf">
-    <nav class="navbar navbar-pf-vertical">
+    
+  <nav class="navbar navbar-pf-vertical">
   <div class="navbar-header">
     <button type="button" class="navbar-toggle">
       <span class="sr-only">Toggle navigation</span>
@@ -102,236 +103,295 @@
   </nav>
 </nav> <!--/.navbar-->
 
-<div class="nav-pf-vertical nav-pf-vertical-with-secondary-nav hidden-icons-pf">
+
+<div class="nav-pf-vertical
+     nav-pf-vertical-with-sub-menus hide-nav-pf
+     
+     
+     hidden-icons-pf">
   <ul class="list-group">
-    <li class="list-group-item active">
-      <a href="#">
-        <span class="fa fa-dashboard"></span>
+    <li class="list-group-item">
+      <a>
+        <span class="fa fa-dashboard" data-toggle="tooltip" title="Dashboard"></span>
         <span class="list-group-item-value">Dashboard</span>
       </a>
     </li>
     <li class="list-group-item">
-      <a href="#">
-        <span class="pficon pficon-cluster"></span>
-        <span class="list-group-item-value">Clusters</span>
+      <a>
+        <span class="fa fa-shield" data-toggle="tooltip" title="Dolor"></span>
+        <span class="list-group-item-value">Dolor</span>
       </a>
     </li>
-    <li class="list-group-item">
-      <a href="#">
-        <span class="pficon pficon-screen"></span>
-        <span class="list-group-item-value">Hosts</span>
+    <li class="list-group-item active secondary-nav-item-pf" data-target="#ipsum-secondary">
+      <a>
+        <span class="fa fa-space-shuttle" data-toggle="tooltip" title="Ipsum"></span>
+        <span class="list-group-item-value">Ipsum</span>
       </a>
-    </li>
-    <li class="list-group-item persistent-secondary" data-target="#storage-secondary">
-      <a href="#">
-        <span class="pficon pficon-container-node"></span>
-        <span class="list-group-item-value">Storage</span>
-      </a>
-      <div id="storage-secondary" class="nav-pf-persistent-secondary">
-  <div class="persistent-secondary-header">
-    <a class="secondary-collapse-toggle-pf" href="#" data-toggle="collapse-secondary-nav"></a>
-    <span>Storage</span>
+      
+      <div id="-secondary" class="nav-pf-secondary-nav">
+  <div class="nav-item-pf-header">
+    <a class="secondary-collapse-toggle-pf" data-toggle="collapse-secondary-nav"></a>
+    <span>Ipsum</span>
   </div>
-  <h5>File</h5>
+  <ul class="list-group">
+    <li class="list-group-item active tertiary-nav-item-pf" data-target="#ipsum-intellegam-tertiary">
+      <a>
+        <span class="list-group-item-value">Intellegam</span>
+      </a>
+      
+      <div id="compute-containers-tertiary" class="nav-pf-tertiary-nav">
+  <div class="nav-item-pf-header">
+    <a class="tertiary-collapse-toggle-pf" data-toggle="collapse-tertiary-nav"></a>
+    <span>Intellegam</span>
+  </div>
   <ul class="list-group">
     <li class="list-group-item active">
-      <a href="#">
-        <span class="list-group-item-value">Volumes</span>
-        <div class="badge-container-pf">
-          <div class="badge">
-            <span class="pficon pficon-error-circle-o"></span>
-            <span>1</span>
-          </div>
-          <div class="badge">
-            <span class="pficon pficon-warning-triangle-o"></span>
-            <span>3</span>
-          </div>
-        </div>
+      <a>
+        <span id="compute-containers-users-nav-item" class="list-group-item-value">Recteque</span>
+        
       </a>
     </li>
     <li class="list-group-item">
-      <a href="#">
-        <span class="list-group-item-value">Bricks</span>
-        <div class="badge-container-pf">
-          <div class="badge">
-            <span class="pficon pficon-warning-triangle-o"></span>
-            <span>3</span>
-          </div>
-          <span class="badge">12</span>
-        </div>
+      <a>
+        <span id="compute-containers-groups-nav-item" class="list-group-item-value">Suavitate</span>
+        
       </a>
     </li>
     <li class="list-group-item">
-      <a href="#">
-        <span class="list-group-item-value">Quotas</span>
-        <div class="badge-container-pf">
-          <span class="badge">3</span>
-        </div>
-      </a>
-    </li>
-    <li class="list-group-item">
-      <a href="#">
-        <span class="list-group-item-value">Logical Volumes</span>
-        <div class="badge-container-pf">
-          <div class="badge">
-            <span class="pficon pficon-error-circle-o"></span>
-            <span>1</span>
-          </div>
-          <span class="badge">10</span>
-        </div>
-      </a>
-    </li>
-  </ul>
-  <h5>Object</h5>
-  <ul class="list-group">
-    <li class="list-group-item">
-      <a href="#">
-        <span class="list-group-item-value">Pools</span>
-        <div class="badge-container-pf">
-          <span class="badge">10</span>
-        </div>
-      </a>
-    </li>
-    <li class="list-group-item">
-      <a href="#">
-        <span class="list-group-item-value">OSDs</span>
-        <div class="badge-container-pf">
-          <div class="badge">
-            <span class="pficon pficon-error-circle-o"></span>
-            <span>1</span>
-          </div>
-          <div class="badge">
-            <span class="pficon pficon-warning-triangle-o"></span>
-            <span>3</span>
-          </div>
-        </div>
-      </a>
-    </li>
-  </ul>
-  <h5>Block</h5>
-  <ul class="list-group">
-    <li class="list-group-item">
-      <a href="#">
-        <span class="list-group-item-value">RBDs</span>
-        <div class="badge-container-pf">
-          <div class="badge">
-            <span class="pficon pficon-warning-triangle-o"></span>
-            <span>2</span>
-          </div>
-          <span class="badge">14</span>
-        </div>
-      </a>
-    </li>
-    <li class="list-group-item">
-      <a href="#">
-        <span class="list-group-item-value">Quotas</span>
-        <div class="badge-container-pf">
-          <span class="badge">0</span>
-        </div>
-      </a>
-    </li>
-    <li class="list-group-item">
-      <a href="#">
-        <span class="list-group-item-value">Snapshots</span>
-        <div class="badge-container-pf">
-          <div class="badge">
-            <span class="pficon pficon-warning-triangle-o"></span>
-            <span>3</span>
-          </div>
-          <span class="badge">9</span>
-        </div>
-      </a>
-    </li>
-    <li class="list-group-item">
-      <a href="#">
-        <span class="list-group-item-value">Storage Profiles</span>
-        <div class="badge-container-pf">
-          <span class="badge">7</span>
-        </div>
+      <a>
+        <span id="compute-containers-roles-nav-item" class="list-group-item-value">Vituperatoribus</span>
+        
       </a>
     </li>
   </ul>
 </div>
 
+      
     </li>
-    <li class="list-group-item persistent-secondary" data-target="#admin-secondary">
-      <a href="#">
-        <span class="fa fa-cog"></span>
-        <span class="list-group-item-value">Admin</span>
+    <li class="list-group-item tertiary-nav-item-pf" data-target="#ipsum-copiosae-tertiary">
+      <a>
+        <span class="list-group-item-value">Copiosae</span>
       </a>
-      <div id="admin-secondary" class="nav-pf-persistent-secondary">
-  <div class="persistent-secondary-header">
-    <a class="secondary-collapse-toggle-pf" href="#" data-toggle="collapse-secondary-nav"></a>
-    <span>Admin</span>
+      
+      <div id="compute-infrastructure-tertiary" class="nav-pf-tertiary-nav">
+  <div class="nav-item-pf-header">
+    <a class="tertiary-collapse-toggle-pf" data-toggle="collapse-tertiary-nav"></a>
+    <span>Copiosae</span>
   </div>
-  <h5>User Administration</h5>
-  <ul class="list-group">
-    <li class="list-group-item active">
-      <a href="#">
-        <span class="list-group-item-value">Users</span>
-        <div class="badge-container-pf">
-          <span class="badge">10</span>
-        </div>
-      </a>
-    </li>
-    <li class="list-group-item">
-      <a href="#">
-        <span class="list-group-item-value">Groups</span>
-        <div class="badge-container-pf">
-          <span class="badge">3</span>
-        </div>
-      </a>
-    </li>
-    <li class="list-group-item">
-      <a href="#">
-        <span class="list-group-item-value">Roles</span>
-        <div class="badge-container-pf">
-          <span class="badge">5</span>
-        </div>
-      </a>
-    </li>
-  </ul>
-  <h5>Storage</h5>
   <ul class="list-group">
     <li class="list-group-item">
-      <a href="#">
-        <span class="list-group-item-value">Local Storage</span>
+      <a>
+        <span class="list-group-item-value">Exerci</span>
+        
       </a>
     </li>
     <li class="list-group-item">
-      <a href="#">
-        <span class="list-group-item-value">History</span>
-        <div class="badge-container-pf">
-          <span class="badge">0</span>
-        </div>
-      </a>
-    </li>
-  </ul>
-
-  <h5>Preferences</h5>
-  <ul class="list-group">
-    <li class="list-group-item">
-      <a href="#">
-        <span class="list-group-item-value">Appearance</span>
+      <a>
+        <span class="list-group-item-value">Quaeque</span>
+        
       </a>
     </li>
     <li class="list-group-item">
-      <a href="#">
-        <span class="list-group-item-value">Notifications</span>
-      </a>
-    </li>
-    <li class="list-group-item">
-      <a href="#">
-        <span class="list-group-item-value">Sound</span>
+      <a>
+        <span class="list-group-item-value">Utroque</span>
+        
       </a>
     </li>
   </ul>
 </div>
 
+      
+    </li>
+    <li class="list-group-item tertiary-nav-item-pf" data-target="#ipsum-patrioque-tertiary">
+      <a>
+        <span class="list-group-item-value">Patrioque</span>
+      </a>
+      
+      <div id="compute-clouds-tertiary" class="nav-pf-tertiary-nav">
+  <div class="nav-item-pf-header">
+    <a class="tertiary-collapse-toggle-pf" data-toggle="collapse-tertiary-nav"></a>
+    <span>Patrioque</span>
+  </div>
+  <ul class="list-group">
+    <li class="list-group-item">
+      <a>
+        <span class="list-group-item-value">Novum</span>
+        
+      </a>
+    </li>
+    <li class="list-group-item">
+      <a>
+        <span class="list-group-item-value">Pericula</span>
+      </a>
+    </li>
+    <li class="list-group-item">
+      <a>
+        <span class="list-group-item-value">Gubergren</span>
+      </a>
     </li>
   </ul>
 </div>
-<div class="container-fluid container-cards-pf container-pf-nav-pf-vertical container-pf-nav-pf-vertical-with-secondary hidden-icons-pf">
+
+      
+    </li>
+    
+    <li class="list-group-item">
+      <a>
+        <span class="list-group-item-value">Accumsan</span>
+        
+      </a>
+    </li>
+    
+  </ul>
+</div>
+
+      
+    </li>
+    <li class="list-group-item secondary-nav-item-pf" data-target="#amet-secondary">
+      <a>
+        <span class="fa fa-paper-plane" data-toggle="tooltip" title="Amet"></span>
+        <span class="list-group-item-value">Amet</span>
+      </a>
+      
+      <div id="amet-secondary" class="nav-pf-secondary-nav">
+  <div class="nav-item-pf-header">
+    <a class="secondary-collapse-toggle-pf" data-toggle="collapse-secondary-nav"></a>
+    <span>Amet</span>
+  </div>
+  <ul class="list-group">
+    <li class="list-group-item tertiary-nav-item-pf" data-target="#amet-detracto-tertiary">
+      <a>
+        <span class="list-group-item-value">Detracto</span>
+        
+      </a>
+      
+      <div id="amet-detracto-tertiary" class="nav-pf-tertiary-nav">
+  <div class="nav-item-pf-header">
+    <a class="tertiary-collapse-toggle-pf" data-toggle="collapse-tertiary-nav"></a>
+    <span>Detracto</span>
+  </div>
+  <ul class="list-group">
+    <li class="list-group-item">
+      <a>
+        <span class="list-group-item-value">Delicatissimi</span>
+        
+      </a>
+    </li>
+    <li class="list-group-item">
+      <a>
+        <span class="list-group-item-value">Aliquam</span>
+        
+      </a>
+    </li>
+    <li class="list-group-item">
+      <a>
+        <span class="list-group-item-value">Principes</span>
+        
+      </a>
+    </li>
+  </ul>
+</div>
+
+      
+    </li>
+    <li class="list-group-item tertiary-nav-item-pf" data-target="#amet-mediocrem-tertiary">
+      <a>
+        <span class="list-group-item-value">Mediocrem</span>
+        
+      </a>
+      
+      <div id="amet-mediocrem-tertiary" class="nav-pf-tertiary-nav">
+  <div class="nav-item-pf-header">
+    <a class="tertiary-collapse-toggle-pf" data-toggle="collapse-tertiary-nav"></a>
+    <span>Mediocrem</span>
+  </div>
+  <ul class="list-group">
+    <li class="list-group-item">
+      <a>
+        <span class="list-group-item-value">Convenire</span>
+        
+      </a>
+    </li>
+    <li class="list-group-item">
+      <a>
+        <span class="list-group-item-value">Nonumy</span>
+        
+      </a>
+    </li>
+    <li class="list-group-item">
+      <a>
+        <span class="list-group-item-value">Deserunt</span>
+        
+      </a>
+    </li>
+  </ul>
+</div>
+
+      
+    </li>
+    <li class="list-group-item tertiary-nav-item-pf" data-target="#amet-corrumpit-tertiary">
+      <a>
+        <span class="list-group-item-value">Corrumpit</span>
+        
+      </a>
+      
+      <div id="amet-corrumpit-tertiary" class="nav-pf-tertiary-nav">
+  <div class="nav-item-pf-header">
+    <a class="tertiary-collapse-toggle-pf" data-toggle="collapse-tertiary-nav"></a>
+    <span>Corrumpit</span>
+  </div>
+  <ul class="list-group">
+    <li class="list-group-item">
+      <a>
+        <span class="list-group-item-value">Aeque</span>
+        
+      </a>
+    </li>
+    <li class="list-group-item">
+      <a>
+        <span class="list-group-item-value">Delenit</span>
+        
+      </a>
+    </li>
+    <li class="list-group-item">
+      <a>
+        <span class="list-group-item-value">Qualisque</span>
+        
+      </a>
+    </li>
+  </ul>
+</div>
+
+      
+    </li>
+    
+    <li class="list-group-item">
+      <a>
+        <span class="list-group-item-value">urbanitas</span>
+        
+      </a>
+    </li>
+    
+  </ul>
+</div>
+
+      
+    </li>
+    <li class="list-group-item">
+      <a>
+        <span class="fa fa-graduation-cap" data-toggle="tooltip" title="Adipscing"></span>
+        <span class="list-group-item-value">Adipscing</span>
+      </a>
+    </li>
+    <li class="list-group-item">
+      <a>
+        <span class="fa fa-gamepad" data-toggle="tooltip" title="Lorem"></span>
+        <span class="list-group-item-value">Lorem</span>
+      </a>
+    </li>
+  </ul>
+</div>
+<div class="container-fluid container-cards-pf container-pf-nav-pf-vertical container-pf-nav-pf-vertical-with-sub-menus   hidden-icons-pf">
         <div class="row row-cards-pf">
       <!-- Important:  if you need to nest additional .row within a .row.row-cards-pf, do *not* use .row-cards-pf on the nested .row  -->
         <div class="col-xs-12 col-sm-6 col-md-3">
@@ -952,9 +1012,6 @@
     $(".row-cards-pf > [class*='col'] > .card-pf > .card-pf-body").matchHeight();
     $(".row-cards-pf > [class*='col'] > .card-pf > .card-pf-footer").matchHeight();
     $(".row-cards-pf > [class*='col'] > .card-pf").matchHeight();
-
-    // initialize tooltips
-    $('[data-toggle="tooltip"]').tooltip();
 
     // Initialize the vertical navigation
     $().setupVerticalNavigation(true);

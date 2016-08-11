@@ -1,4 +1,4 @@
 module Patternfly
-  VERSION = '3.7.0'
-  PATTERNFLY_SHA = '1bcef08c25f021e58481847c805cba4886056b89'
+  VERSION = '3.8.0'
+  PATTERNFLY_SHA = '7452cdafa8203e9a45113defede29dc103ba055b'
 end
