@@ -28,7 +28,7 @@ env:
 matrix:
   fast_finish: true
   allow_failures:
-    - env: TOLERANCE=0.00
+    - env: BROWSER=firefox TOLERANCE=0.000000
 notifications:
   webhooks:
     urls:
