@@ -9,6 +9,7 @@ $patternfly-sass-asset-helper: false !default;
 @import "color-variables";
 
 $bootstrap-switch-handle-default-bg-color:                          $color-pf-black-100 !default;
+$bootstrap-treeview-highlight-color:                                $color-pf-blue-300 !default;
 $btn-default-bg-img-start:                                          $color-pf-black-100 !default;
 $btn-default-bg-img-stop:                                           $color-pf-black-200 !default;
 $btn-xs-font-weight:                                                400 !default;
@@ -25,7 +26,7 @@ $dropdown-divider-margin:                                           4px 1px !def
 $dropdown-link-active-border-color:                                 $color-pf-blue !default;
 $dropdown-link-hover-border-color:                                  $color-pf-blue-100 !default;
 $dropdown-link-focus-color:                                         $color-pf-white !default;
-$flyout-transition-pf:                                              all .2s cubic-bezier(.35,0,.25,1) !default;
+$flyout-transition-pf:                                              all 200ms cubic-bezier(.35, 0, .25, 1) !default;
 $font-family-monospace:                                             Menlo, Monaco, Consolas, monospace !default;
 $font-path:                                                         if($patternfly-sass-asset-helper, "patternfly", "../fonts/patternfly") !default;
 $footer-pf-bg-color:                                                $color-pf-black !default;
@@ -92,8 +93,8 @@ $navbar-pf-vertical-navbar-brand-padding:                           11px 0 12px 
 $navbar-pf-vertical-navbar-toggle-margin:                           13px 15px !default;
 $navbar-pf-vertical-navbar-toggle-icon-bar-hover-bg:                $color-pf-white !default;
 $navbar-pf-vertical-nav-item-iconic-padding:                        21px 12px !default;
-$nav-pf-container-transition-period:                                0.25s !default;
-$nav-pf-menu-transition-period:                                     0.1s !default;
+$nav-pf-container-transition-period:                                250ms !default;
+$nav-pf-menu-transition-period:                                     100ms !default;
 $nav-pf-vertical-active-color:                                      $color-pf-white !default;
 $nav-pf-vertical-active-before-color:                               $color-pf-blue-300 !default;
 $nav-pf-vertical-active-bg-color:                                   $color-pf-black-800 !default;
@@ -144,10 +145,11 @@ $nav-pf-vertical-width:                                             200px !defau
 $pagination-padding-small-vertical:                                 0 !default;
 $panel-default-border-color:                                        $color-pf-black-400 !default;
 $pficon-var-add-circle-o:                                           "\e61b" !default;
-$pficon-var-middleware:                                                 "\e917" !default;
+$pficon-var-middleware:                                             "\e917" !default;
 $pficon-var-blueprint:                                              "\e915" !default;
 $pficon-var-build:                                                  "\e902" !default;
 $pficon-var-builder-image:                                          "\e800" !default;
+$pficon-var-bundle:                                                 "\e918" !default;
 $pficon-var-close:                                                  "\e60b" !default;
 $pficon-var-cloud-security:                                         "\e903" !default;
 $pficon-var-cloud-tenant:                                           "\e904" !default;
@@ -382,8 +384,10 @@ $font-size-h5:                                                      ceil(($font-
 $font-size-large:                                                   ceil(($font-size-base * 1.1666)) !default; // ~14px
 $font-size-small:                                                   ceil(($font-size-base * .9166)) !default; // ~11px
 $input-color:                                                       $gray-dark !default;
+$input-color-placeholder:                                           #999;
 $nav-tabs-active-link-hover-color:                                  $link-color !default;
 $nav-tabs-justified-link-border-color:                              $nav-tabs-border-color !default;
+$nav-pf-vertical-badges-width:                                      ($nav-pf-vertical-width + 50px) !default;
 $padding-small-horizontal:                                          $padding-base-horizontal !default;
 $padding-small-vertical:                                            $padding-base-vertical !default;
 $panel-danger-border:                                               $brand-danger !default;
@@ -398,7 +402,6 @@ $panel-warning-heading-bg:                                          $brand-warni
 $state-warning-text:                                                $brand-warning !default;
 $state-danger-text:                                                 $brand-danger !default;
 // Reference variable declared in block above
-$nav-pf-vertical-icon-size:                                         ($font-size-base + 8) !default;
 $panel-danger-text:                                                 $panel-primary-text !default;
 $panel-info-text:                                                   $panel-primary-text !default;
 $panel-success-text:                                                $panel-primary-text !default;
@@ -413,6 +416,7 @@ $btn-primary-bg-img-start:                                          $brand-prima
 $btn-primary-bg-img-stop:                                           $btn-primary-bg !default;
 $dropdown-link-focus-bg:                                            $link-color !default;
 $line-height-computed:                                              floor(($font-size-base * $line-height-base)) !default;
+$nav-pf-vertical-icon-size:                                         ($font-size-base + 8) !default;
 $notification-badge-color:                                          $brand-danger !default;
 $progress-sm:                                                       ($line-height-computed - 6) !default;
 $progress-xs:                                                       ($line-height-computed - 14) !default;
