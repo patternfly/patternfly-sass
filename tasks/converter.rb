@@ -20,7 +20,8 @@ class Converter
     :replace_escaping,
     :convert_less_ampersand,
     :deinterpolate_vararg_mixins,
-    :replace_calculation_semantics
+    :replace_calculation_semantics,
+    :escape_variables_in_calc
   ]
   TOP = <<-VAR.gsub(/^\s*/, '')
     // PatternFly SASS
@@ -57,6 +58,18 @@ class Converter
     super(file, mixins)
   end
 
+  def replace_vars(less)
+    less = less.dup
+    # skip header comment
+    less =~ %r(\A/\*(.*?)\*/)m
+    from           = $~ ? $~.to_s.length : 0
+    less[from..-1] = less[from..-1].
+        gsub(/(?!@mixin|@media|@page|@supports|@keyframes|@font-face|@-\w)@/, '$').
+        # variables that would be ignored by gsub above: e.g. @page-header-border-color
+        gsub(/@(page[\w-]+)/, '$\1')
+    less
+  end
+
   def remove_button_variant(file)
     replace_rules(file, /.button-variant(.*?)/) { |_, _| "" }
   end
@@ -64,6 +77,14 @@ class Converter
   # SASS doesn't require escaping in calc()
   def remove_unnecessary_escaping(file)
     file.gsub(/calc\(\~\'([^\']+)\'\)/, 'calc(\1)').gsub(/calc\(\~\"([^\"]+)\"\)/, 'calc(\1)')
+  end
+
+  def escape_variables_in_calc(file)
+    file.scan(/calc\(.*\$.*\)/).uniq.each do |calc|
+      dest = calc.gsub(/(\$[a-zA-Z0-9_\-]+)/, '#{\1}')
+      file.gsub!(calc, dest)
+    end
+    file
   end
 
   # Override
