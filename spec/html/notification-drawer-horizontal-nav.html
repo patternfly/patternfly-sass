@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <!--[if IE 9]><html lang="en-us" class="ie9 layout-pf layout-pf-fixed"><![endif]-->
 <!--[if gt IE 9]><!-->
-<html lang="en-us" class="layout-pf">
-<!--<![endif]-->
+<html lang="en-us" class="layout-pf layout-pf-fixed">
+  <!--<![endif]-->
     <head>
     <title>Notification Drawer for Horizontal Navigation - PatternFly</title>
     <meta charset="UTF-8">
@@ -32,12 +32,14 @@
     <script src="//cdnjs.cloudflare.com/ajax/libs/d3/3.5.17/d3.min.js"></script>
     <script src="../../dist/js/patternfly.min.js"></script>
   </head>
-  <div class="toast-pf toast-pf-max-width toast-pf-top-right alert alert-warning alert-dismissable">
-    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">
-      <span class="pficon pficon-close"></span>
-    </button>
-    <span class="pficon pficon-warning-triangle-o"></span>
-    These examples are included for development testing purposes.  For official documentation, see <a href="https://www.patternfly.org" class="alert-link">https://www.patternfly.org</a> and <a href="http://getbootstrap.com" class="alert-link">http://getbootstrap.com</a>.
+  <div class="toast-notifications-list-pf">
+    <div class="toast-pf alert alert-warning alert-dismissable">
+      <button type="button" class="close" data-dismiss="alert" aria-hidden="true">
+        <span class="pficon pficon-close"></span>
+      </button>
+      <span class="pficon pficon-warning-triangle-o"></span>
+      These examples are included for development testing purposes.  For official documentation, see <a href="https://www.patternfly.org" class="alert-link">https://www.patternfly.org</a> and <a href="http://getbootstrap.com" class="alert-link">http://getbootstrap.com</a>.
+    </div>
   </div>
 
   <body class="cards-pf">
@@ -111,6 +113,7 @@
     </ul>
     <div class="drawer-pf hide drawer-pf-notifications-non-clickable">
   <div class="drawer-pf-title">
+    <a class="drawer-pf-toggle-expand"></a>
     <h3 class="text-center">Notifications Drawer</h3>
   </div>
   <div class="panel-group" id="notification-drawer-accordion">
@@ -126,11 +129,12 @@
       <div id="fixedCollapseOne" class="panel-collapse collapse in">
         <div class="panel-body">
           <div class="drawer-pf-notification unread">
+  
   <div class="dropdown pull-right dropdown-kebab-pf">
-  <button class="btn btn-link dropdown-toggle" type="button" id="dropdownKebabRight" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+  <button class="btn btn-link dropdown-toggle" type="button" id="dropdownKebabRight11" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
     <span class="fa fa-ellipsis-v"></span>
   </button>
-  <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownKebabRight">
+  <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownKebabRight11">
     <li><a href="#">Action</a></li>
     <li><a href="#">Another action</a></li>
     <li><a href="#">Something else here</a></li>
@@ -147,11 +151,12 @@
   </div>
 </div>
 <div class="drawer-pf-notification unread">
+  
   <div class="dropdown pull-right dropdown-kebab-pf">
-  <button class="btn btn-link dropdown-toggle" type="button" id="dropdownKebabRight" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+  <button class="btn btn-link dropdown-toggle" type="button" id="dropdownKebabRight21" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
     <span class="fa fa-ellipsis-v"></span>
   </button>
-  <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownKebabRight">
+  <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownKebabRight21">
     <li><a href="#">Action</a></li>
     <li><a href="#">Another action</a></li>
     <li><a href="#">Something else here</a></li>
@@ -168,11 +173,12 @@
   </div>
 </div>
 <div class="drawer-pf-notification">
+  
   <div class="dropdown pull-right dropdown-kebab-pf">
-  <button class="btn btn-link dropdown-toggle" type="button" id="dropdownKebabRight" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+  <button class="btn btn-link dropdown-toggle" type="button" id="dropdownKebabRight31" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
     <span class="fa fa-ellipsis-v"></span>
   </button>
-  <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownKebabRight">
+  <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownKebabRight31">
     <li><a href="#">Action</a></li>
     <li><a href="#">Another action</a></li>
     <li><a href="#">Something else here</a></li>
@@ -189,11 +195,12 @@
   </div>
 </div>
 <div class="drawer-pf-notification">
+  
   <div class="dropdown pull-right dropdown-kebab-pf">
-  <button class="btn btn-link dropdown-toggle" type="button" id="dropdownKebabRight" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+  <button class="btn btn-link dropdown-toggle" type="button" id="dropdownKebabRight41" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
     <span class="fa fa-ellipsis-v"></span>
   </button>
-  <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownKebabRight">
+  <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownKebabRight41">
     <li><a href="#">Action</a></li>
     <li><a href="#">Another action</a></li>
     <li><a href="#">Something else here</a></li>
@@ -228,11 +235,12 @@
       <div id="fixedCollapseTwo" class="panel-collapse collapse">
         <div class="panel-body">
           <div class="drawer-pf-notification unread">
+  
   <div class="dropdown pull-right dropdown-kebab-pf">
-  <button class="btn btn-link dropdown-toggle" type="button" id="dropdownKebabRight" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+  <button class="btn btn-link dropdown-toggle" type="button" id="dropdownKebabRight12" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
     <span class="fa fa-ellipsis-v"></span>
   </button>
-  <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownKebabRight">
+  <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownKebabRight12">
     <li><a href="#">Action</a></li>
     <li><a href="#">Another action</a></li>
     <li><a href="#">Something else here</a></li>
@@ -249,11 +257,12 @@
   </div>
 </div>
 <div class="drawer-pf-notification unread">
+  
   <div class="dropdown pull-right dropdown-kebab-pf">
-  <button class="btn btn-link dropdown-toggle" type="button" id="dropdownKebabRight" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+  <button class="btn btn-link dropdown-toggle" type="button" id="dropdownKebabRight22" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
     <span class="fa fa-ellipsis-v"></span>
   </button>
-  <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownKebabRight">
+  <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownKebabRight22">
     <li><a href="#">Action</a></li>
     <li><a href="#">Another action</a></li>
     <li><a href="#">Something else here</a></li>
@@ -270,11 +279,12 @@
   </div>
 </div>
 <div class="drawer-pf-notification">
+  
   <div class="dropdown pull-right dropdown-kebab-pf">
-  <button class="btn btn-link dropdown-toggle" type="button" id="dropdownKebabRight" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+  <button class="btn btn-link dropdown-toggle" type="button" id="dropdownKebabRight32" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
     <span class="fa fa-ellipsis-v"></span>
   </button>
-  <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownKebabRight">
+  <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownKebabRight32">
     <li><a href="#">Action</a></li>
     <li><a href="#">Another action</a></li>
     <li><a href="#">Something else here</a></li>
@@ -291,11 +301,12 @@
   </div>
 </div>
 <div class="drawer-pf-notification">
+  
   <div class="dropdown pull-right dropdown-kebab-pf">
-  <button class="btn btn-link dropdown-toggle" type="button" id="dropdownKebabRight" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+  <button class="btn btn-link dropdown-toggle" type="button" id="dropdownKebabRight42" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
     <span class="fa fa-ellipsis-v"></span>
   </button>
-  <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownKebabRight">
+  <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownKebabRight42">
     <li><a href="#">Action</a></li>
     <li><a href="#">Another action</a></li>
     <li><a href="#">Something else here</a></li>
@@ -313,11 +324,12 @@
 </div>
 
           <div class="drawer-pf-notification unread">
+  
   <div class="dropdown pull-right dropdown-kebab-pf">
-  <button class="btn btn-link dropdown-toggle" type="button" id="dropdownKebabRight" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+  <button class="btn btn-link dropdown-toggle" type="button" id="dropdownKebabRight13" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
     <span class="fa fa-ellipsis-v"></span>
   </button>
-  <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownKebabRight">
+  <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownKebabRight13">
     <li><a href="#">Action</a></li>
     <li><a href="#">Another action</a></li>
     <li><a href="#">Something else here</a></li>
@@ -334,11 +346,12 @@
   </div>
 </div>
 <div class="drawer-pf-notification unread">
+  
   <div class="dropdown pull-right dropdown-kebab-pf">
-  <button class="btn btn-link dropdown-toggle" type="button" id="dropdownKebabRight" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+  <button class="btn btn-link dropdown-toggle" type="button" id="dropdownKebabRight23" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
     <span class="fa fa-ellipsis-v"></span>
   </button>
-  <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownKebabRight">
+  <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownKebabRight23">
     <li><a href="#">Action</a></li>
     <li><a href="#">Another action</a></li>
     <li><a href="#">Something else here</a></li>
@@ -355,11 +368,12 @@
   </div>
 </div>
 <div class="drawer-pf-notification">
+  
   <div class="dropdown pull-right dropdown-kebab-pf">
-  <button class="btn btn-link dropdown-toggle" type="button" id="dropdownKebabRight" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+  <button class="btn btn-link dropdown-toggle" type="button" id="dropdownKebabRight33" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
     <span class="fa fa-ellipsis-v"></span>
   </button>
-  <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownKebabRight">
+  <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownKebabRight33">
     <li><a href="#">Action</a></li>
     <li><a href="#">Another action</a></li>
     <li><a href="#">Something else here</a></li>
@@ -376,11 +390,12 @@
   </div>
 </div>
 <div class="drawer-pf-notification">
+  
   <div class="dropdown pull-right dropdown-kebab-pf">
-  <button class="btn btn-link dropdown-toggle" type="button" id="dropdownKebabRight" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+  <button class="btn btn-link dropdown-toggle" type="button" id="dropdownKebabRight43" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
     <span class="fa fa-ellipsis-v"></span>
   </button>
-  <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownKebabRight">
+  <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownKebabRight43">
     <li><a href="#">Action</a></li>
     <li><a href="#">Another action</a></li>
     <li><a href="#">Something else here</a></li>
@@ -398,11 +413,12 @@
 </div>
 
           <div class="drawer-pf-notification unread">
+  
   <div class="dropdown pull-right dropdown-kebab-pf">
-  <button class="btn btn-link dropdown-toggle" type="button" id="dropdownKebabRight" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+  <button class="btn btn-link dropdown-toggle" type="button" id="dropdownKebabRight14" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
     <span class="fa fa-ellipsis-v"></span>
   </button>
-  <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownKebabRight">
+  <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownKebabRight14">
     <li><a href="#">Action</a></li>
     <li><a href="#">Another action</a></li>
     <li><a href="#">Something else here</a></li>
@@ -419,11 +435,12 @@
   </div>
 </div>
 <div class="drawer-pf-notification unread">
+  
   <div class="dropdown pull-right dropdown-kebab-pf">
-  <button class="btn btn-link dropdown-toggle" type="button" id="dropdownKebabRight" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+  <button class="btn btn-link dropdown-toggle" type="button" id="dropdownKebabRight24" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
     <span class="fa fa-ellipsis-v"></span>
   </button>
-  <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownKebabRight">
+  <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownKebabRight24">
     <li><a href="#">Action</a></li>
     <li><a href="#">Another action</a></li>
     <li><a href="#">Something else here</a></li>
@@ -440,11 +457,12 @@
   </div>
 </div>
 <div class="drawer-pf-notification">
+  
   <div class="dropdown pull-right dropdown-kebab-pf">
-  <button class="btn btn-link dropdown-toggle" type="button" id="dropdownKebabRight" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+  <button class="btn btn-link dropdown-toggle" type="button" id="dropdownKebabRight34" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
     <span class="fa fa-ellipsis-v"></span>
   </button>
-  <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownKebabRight">
+  <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownKebabRight34">
     <li><a href="#">Action</a></li>
     <li><a href="#">Another action</a></li>
     <li><a href="#">Something else here</a></li>
@@ -461,11 +479,12 @@
   </div>
 </div>
 <div class="drawer-pf-notification">
+  
   <div class="dropdown pull-right dropdown-kebab-pf">
-  <button class="btn btn-link dropdown-toggle" type="button" id="dropdownKebabRight" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+  <button class="btn btn-link dropdown-toggle" type="button" id="dropdownKebabRight44" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
     <span class="fa fa-ellipsis-v"></span>
   </button>
-  <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownKebabRight">
+  <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownKebabRight44">
     <li><a href="#">Action</a></li>
     <li><a href="#">Another action</a></li>
     <li><a href="#">Something else here</a></li>
@@ -503,11 +522,12 @@
       <div id="fixedCollapseThree" class="panel-collapse collapse">
         <div class="panel-body">
           <div class="drawer-pf-notification unread">
+  
   <div class="dropdown pull-right dropdown-kebab-pf">
-  <button class="btn btn-link dropdown-toggle" type="button" id="dropdownKebabRight" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+  <button class="btn btn-link dropdown-toggle" type="button" id="dropdownKebabRight15" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
     <span class="fa fa-ellipsis-v"></span>
   </button>
-  <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownKebabRight">
+  <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownKebabRight15">
     <li><a href="#">Action</a></li>
     <li><a href="#">Another action</a></li>
     <li><a href="#">Something else here</a></li>
@@ -524,11 +544,12 @@
   </div>
 </div>
 <div class="drawer-pf-notification unread">
+  
   <div class="dropdown pull-right dropdown-kebab-pf">
-  <button class="btn btn-link dropdown-toggle" type="button" id="dropdownKebabRight" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+  <button class="btn btn-link dropdown-toggle" type="button" id="dropdownKebabRight25" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
     <span class="fa fa-ellipsis-v"></span>
   </button>
-  <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownKebabRight">
+  <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownKebabRight25">
     <li><a href="#">Action</a></li>
     <li><a href="#">Another action</a></li>
     <li><a href="#">Something else here</a></li>
@@ -545,11 +566,12 @@
   </div>
 </div>
 <div class="drawer-pf-notification">
+  
   <div class="dropdown pull-right dropdown-kebab-pf">
-  <button class="btn btn-link dropdown-toggle" type="button" id="dropdownKebabRight" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+  <button class="btn btn-link dropdown-toggle" type="button" id="dropdownKebabRight35" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
     <span class="fa fa-ellipsis-v"></span>
   </button>
-  <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownKebabRight">
+  <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownKebabRight35">
     <li><a href="#">Action</a></li>
     <li><a href="#">Another action</a></li>
     <li><a href="#">Something else here</a></li>
@@ -566,11 +588,12 @@
   </div>
 </div>
 <div class="drawer-pf-notification">
+  
   <div class="dropdown pull-right dropdown-kebab-pf">
-  <button class="btn btn-link dropdown-toggle" type="button" id="dropdownKebabRight" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+  <button class="btn btn-link dropdown-toggle" type="button" id="dropdownKebabRight45" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
     <span class="fa fa-ellipsis-v"></span>
   </button>
-  <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownKebabRight">
+  <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownKebabRight45">
     <li><a href="#">Action</a></li>
     <li><a href="#">Another action</a></li>
     <li><a href="#">Something else here</a></li>
@@ -588,11 +611,12 @@
 </div>
 
           <div class="drawer-pf-notification unread">
+  
   <div class="dropdown pull-right dropdown-kebab-pf">
-  <button class="btn btn-link dropdown-toggle" type="button" id="dropdownKebabRight" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+  <button class="btn btn-link dropdown-toggle" type="button" id="dropdownKebabRight16" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
     <span class="fa fa-ellipsis-v"></span>
   </button>
-  <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownKebabRight">
+  <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownKebabRight16">
     <li><a href="#">Action</a></li>
     <li><a href="#">Another action</a></li>
     <li><a href="#">Something else here</a></li>
@@ -609,11 +633,12 @@
   </div>
 </div>
 <div class="drawer-pf-notification unread">
+  
   <div class="dropdown pull-right dropdown-kebab-pf">
-  <button class="btn btn-link dropdown-toggle" type="button" id="dropdownKebabRight" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+  <button class="btn btn-link dropdown-toggle" type="button" id="dropdownKebabRight26" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
     <span class="fa fa-ellipsis-v"></span>
   </button>
-  <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownKebabRight">
+  <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownKebabRight26">
     <li><a href="#">Action</a></li>
     <li><a href="#">Another action</a></li>
     <li><a href="#">Something else here</a></li>
@@ -630,11 +655,12 @@
   </div>
 </div>
 <div class="drawer-pf-notification">
+  
   <div class="dropdown pull-right dropdown-kebab-pf">
-  <button class="btn btn-link dropdown-toggle" type="button" id="dropdownKebabRight" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+  <button class="btn btn-link dropdown-toggle" type="button" id="dropdownKebabRight36" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
     <span class="fa fa-ellipsis-v"></span>
   </button>
-  <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownKebabRight">
+  <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownKebabRight36">
     <li><a href="#">Action</a></li>
     <li><a href="#">Another action</a></li>
     <li><a href="#">Something else here</a></li>
@@ -651,11 +677,12 @@
   </div>
 </div>
 <div class="drawer-pf-notification">
+  
   <div class="dropdown pull-right dropdown-kebab-pf">
-  <button class="btn btn-link dropdown-toggle" type="button" id="dropdownKebabRight" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+  <button class="btn btn-link dropdown-toggle" type="button" id="dropdownKebabRight46" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
     <span class="fa fa-ellipsis-v"></span>
   </button>
-  <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownKebabRight">
+  <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownKebabRight46">
     <li><a href="#">Action</a></li>
     <li><a href="#">Another action</a></li>
     <li><a href="#">Something else here</a></li>
@@ -673,11 +700,12 @@
 </div>
 
           <div class="drawer-pf-notification unread">
+  
   <div class="dropdown pull-right dropdown-kebab-pf">
-  <button class="btn btn-link dropdown-toggle" type="button" id="dropdownKebabRight" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+  <button class="btn btn-link dropdown-toggle" type="button" id="dropdownKebabRight17" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
     <span class="fa fa-ellipsis-v"></span>
   </button>
-  <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownKebabRight">
+  <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownKebabRight17">
     <li><a href="#">Action</a></li>
     <li><a href="#">Another action</a></li>
     <li><a href="#">Something else here</a></li>
@@ -694,11 +722,12 @@
   </div>
 </div>
 <div class="drawer-pf-notification unread">
+  
   <div class="dropdown pull-right dropdown-kebab-pf">
-  <button class="btn btn-link dropdown-toggle" type="button" id="dropdownKebabRight" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+  <button class="btn btn-link dropdown-toggle" type="button" id="dropdownKebabRight27" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
     <span class="fa fa-ellipsis-v"></span>
   </button>
-  <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownKebabRight">
+  <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownKebabRight27">
     <li><a href="#">Action</a></li>
     <li><a href="#">Another action</a></li>
     <li><a href="#">Something else here</a></li>
@@ -715,11 +744,12 @@
   </div>
 </div>
 <div class="drawer-pf-notification">
+  
   <div class="dropdown pull-right dropdown-kebab-pf">
-  <button class="btn btn-link dropdown-toggle" type="button" id="dropdownKebabRight" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+  <button class="btn btn-link dropdown-toggle" type="button" id="dropdownKebabRight37" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
     <span class="fa fa-ellipsis-v"></span>
   </button>
-  <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownKebabRight">
+  <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownKebabRight37">
     <li><a href="#">Action</a></li>
     <li><a href="#">Another action</a></li>
     <li><a href="#">Something else here</a></li>
@@ -736,11 +766,12 @@
   </div>
 </div>
 <div class="drawer-pf-notification">
+  
   <div class="dropdown pull-right dropdown-kebab-pf">
-  <button class="btn btn-link dropdown-toggle" type="button" id="dropdownKebabRight" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+  <button class="btn btn-link dropdown-toggle" type="button" id="dropdownKebabRight47" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
     <span class="fa fa-ellipsis-v"></span>
   </button>
-  <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownKebabRight">
+  <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownKebabRight47">
     <li><a href="#">Action</a></li>
     <li><a href="#">Another action</a></li>
     <li><a href="#">Something else here</a></li>
@@ -787,6 +818,19 @@
         $drawer.addClass('hide');
       }
     });
+    $('.drawer-pf-toggle-expand').click(function() {
+      var $drawer = $('.drawer-pf');
+      var $drawerNotifications = $drawer.find('.drawer-pf-notification');
+
+      if ($drawer.hasClass('drawer-pf-expanded')) {
+        $drawer.removeClass('drawer-pf-expanded');
+        $drawerNotifications.removeClass('expanded-notification');
+      } else {
+        $drawer.addClass('drawer-pf-expanded');
+        $drawerNotifications.addClass('expanded-notification');
+      }
+    });
+
     // Mark All Read
     $('.panel-collapse').each(function (index, panel) {
       var $panel = $(panel);
@@ -799,6 +843,7 @@
     $('#notification-drawer-accordion').initCollapseHeights('.panel-body');
   });
 </script>
+
     <ul class="nav navbar-nav navbar-primary">
       <li>
         <a href="#">First Link</a>

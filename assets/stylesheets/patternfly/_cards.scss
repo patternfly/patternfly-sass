@@ -65,7 +65,7 @@
 }
 
 .card-pf-body {
-  margin: ($grid-gutter-width / 2) 0;
+  margin: ($grid-gutter-width / 2) 0 0;
   padding: 0 0 ($grid-gutter-width / 2);
   .card-pf-aggregate-status & {
     margin-top: ($grid-gutter-width / 4);
@@ -141,11 +141,11 @@
   font-size: $font-size-h3;
   margin-top: $line-height-computed;
   margin-bottom: ($line-height-computed / 2);
-  [class^='col'] & {
+  [class^="col"] & {
     margin-top: 0;
   }
   @media (max-width: $screen-xs-max) {
-    .card-pf-body [class^='col'] + [class^='col'] > & {
+    .card-pf-body [class^="col"] + [class^="col"] > & {
       margin-top: ($grid-gutter-width);
     }
   }
@@ -202,10 +202,8 @@
   width: 100%;
   .card-pf-utilization-card-details-count,
   .card-pf-utilization-card-details-description {
-    display: table-cell;
     float: left;
     line-height: 1;
-    vertical-align: middle;
   }
   .card-pf-utilization-card-details-count {
     font-size: ($font-size-base * 2 + 2); // 26px
@@ -224,6 +222,10 @@
 
 .cards-pf {
   background: $card-pf-container-bg-color;
+  .row-cards-pf {
+    padding: 0 20px;
+    &:first-child { padding-top: 20px; }
+  }
 }
 
 .container-cards-pf {

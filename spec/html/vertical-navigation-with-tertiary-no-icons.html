@@ -32,12 +32,14 @@
     <script src="//cdnjs.cloudflare.com/ajax/libs/d3/3.5.17/d3.min.js"></script>
     <script src="../../dist/js/patternfly.min.js"></script>
   </head>
-  <div class="toast-pf toast-pf-max-width toast-pf-top-right alert alert-warning alert-dismissable">
-    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">
-      <span class="pficon pficon-close"></span>
-    </button>
-    <span class="pficon pficon-warning-triangle-o"></span>
-    These examples are included for development testing purposes.  For official documentation, see <a href="https://www.patternfly.org" class="alert-link">https://www.patternfly.org</a> and <a href="http://getbootstrap.com" class="alert-link">http://getbootstrap.com</a>.
+  <div class="toast-notifications-list-pf">
+    <div class="toast-pf alert alert-warning alert-dismissable">
+      <button type="button" class="close" data-dismiss="alert" aria-hidden="true">
+        <span class="pficon pficon-close"></span>
+      </button>
+      <span class="pficon pficon-warning-triangle-o"></span>
+      These examples are included for development testing purposes.  For official documentation, see <a href="https://www.patternfly.org" class="alert-link">https://www.patternfly.org</a> and <a href="http://getbootstrap.com" class="alert-link">http://getbootstrap.com</a>.
+    </div>
   </div>
 
   <body class="cards-pf">
@@ -108,7 +110,8 @@
      nav-pf-vertical-with-sub-menus hide-nav-pf
      
      
-     hidden-icons-pf">
+     hidden-icons-pf
+     ">
   <ul class="list-group">
     <li class="list-group-item">
       <a>
@@ -120,6 +123,7 @@
       <a>
         <span class="fa fa-shield" data-toggle="tooltip" title="Dolor"></span>
         <span class="list-group-item-value">Dolor</span>
+        
       </a>
     </li>
     <li class="list-group-item active secondary-nav-item-pf" data-target="#ipsum-secondary">
@@ -391,8 +395,12 @@
     </li>
   </ul>
 </div>
-<div class="container-fluid container-cards-pf container-pf-nav-pf-vertical container-pf-nav-pf-vertical-with-sub-menus   hidden-icons-pf">
-        <div class="row row-cards-pf">
+<div class="container-fluid container-cards-pf container-pf-nav-pf-vertical
+     
+     
+     hidden-icons-pf">
+
+      <div class="row row-cards-pf">
       <!-- Important:  if you need to nest additional .row within a .row.row-cards-pf, do *not* use .row-cards-pf on the nested .row  -->
         <div class="col-xs-12 col-sm-6 col-md-3">
 <div class="card-pf card-pf-accented card-pf-aggregate-status">

@@ -4,7 +4,7 @@
 <html lang="en-us">
 <!--<![endif]-->
   <head>
-    <title>Toolbar - PatternFly</title>
+    <title>Card View - Single Select - PatternFly</title>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=Edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -27,20 +27,31 @@
     <link rel="stylesheet" href="../../dist/css/patternfly-additions.min.css" >
     <script src="//code.jquery.com/jquery-2.1.4.min.js"></script>
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery.matchHeight/0.7.0/jquery.matchHeight-min.js"></script>
     <script src="../../dist/js/patternfly.min.js"></script>
   </head>
+  <div class="toast-notifications-list-pf">
+    <div class="toast-pf alert alert-warning alert-dismissable">
+      <button type="button" class="close" data-dismiss="alert" aria-hidden="true">
+        <span class="pficon pficon-close"></span>
+      </button>
+      <span class="pficon pficon-warning-triangle-o"></span>
+      These examples are included for development testing purposes.  For official documentation, see <a href="https://www.patternfly.org" class="alert-link">https://www.patternfly.org</a> and <a href="http://getbootstrap.com" class="alert-link">http://getbootstrap.com</a>.
+    </div>
+  </div>
 
-  <body>
-    <div class="container">
-      <div class="page-header">
-        <h1>Toolbar</h1>
-      </div>
-      <div class="alert alert-warning">
-        <span class="pficon pficon-warning-triangle-o"></span>
-        These examples are included for development testing purposes.  For official documentation, see <a href="https://www.patternfly.org" class="alert-link">https://www.patternfly.org</a> and <a href="http://getbootstrap.com" class="alert-link">http://getbootstrap.com</a>.
-      </div>
-      <hr>
-      <h2>Toolbar with Horizontal Navigation</h2>
+<div class="toast-pf toast-pf-max-width toast-pf-top-right alert alert-success alert-dismissable">
+  <button type="button" class="close" data-dismiss="alert" aria-hidden="true">
+    <span class="pficon pficon-close"></span>
+  </button>
+  <div class="pull-right toast-pf-action">
+    <a href="#">Start Server</a>
+  </div>
+  <span class="pficon pficon-ok"></span>
+  <strong>server_abc</strong> has been added to main server group.
+</div>
+
+  <body class="cards-pf">
     <nav class="navbar navbar-default navbar-pf" role="navigation">
       <div class="navbar-header">
         <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse-1">
@@ -126,8 +137,8 @@
           <li>
             <a href="card-view-multi-select.html">Card View - Multi Select</a>
           </li>
-          <li>
-            <a href="card-view-single-select.html">Card View - Single Select</a>
+          <li class="active">
+            <a href="card-view-single-select.html" class="active">Card View - Single Select</a>
           </li>
           <li>
             <a href="cards.html">Cards</a>
@@ -261,6 +272,174 @@
         });
       })(jQuery);
     </script>
-    </div><!-- /container -->
+<div class="container-fluid container-cards-pf">
+  <div class="row row-cards-pf">
+    <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
+<div class="card-pf card-pf-view card-pf-view-select card-pf-view-single-select">
+  <div class="card-pf-body">
+    <div class="card-pf-top-element">
+      <span class="fa fa-birthday-cake card-pf-icon-circle"></span>
+    </div>
+    <h2 class="card-pf-title text-center">
+      Cake Service
+    </h2>
+    <div class="card-pf-items text-center">
+      <div class="card-pf-item">
+        <span class="pficon pficon-screen"></span>
+        <span class="card-pf-item-text">8</span>
+      </div>
+      <div class="card-pf-item">
+        <span class="fa fa-check"></span>
+      </div>
+    </div>
+    <p class="card-pf-info text-center"><strong>Created On</strong> 2015-03-01 02:00 AM <br/> Never Expires</p>
+  </div>
+  <div class="card-pf-view-checkbox">
+    <input type="checkbox">
+  </div>
+</div>
+    </div>
+    <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
+<div class="card-pf card-pf-view card-pf-view-select card-pf-view-single-select">
+  <div class="card-pf-body">
+    <div class="card-pf-top-element">
+      <span class="fa fa-birthday-cake card-pf-icon-circle"></span>
+    </div>
+    <h2 class="card-pf-title text-center">
+      Cake Service
+    </h2>
+    <div class="card-pf-items text-center">
+      <div class="card-pf-item">
+        <span class="pficon pficon-screen"></span>
+        <span class="card-pf-item-text">8</span>
+      </div>
+      <div class="card-pf-item">
+        <span class="fa fa-check"></span>
+      </div>
+    </div>
+    <p class="card-pf-info text-center"><strong>Created On</strong> 2015-03-01 02:00 AM <br/> Never Expires</p>
+  </div>
+  <div class="card-pf-view-checkbox">
+    <input type="checkbox">
+  </div>
+</div>
+    </div>
+    <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
+<div class="card-pf card-pf-view card-pf-view-select card-pf-view-single-select">
+  <div class="card-pf-body">
+    <div class="card-pf-top-element">
+      <span class="fa fa-birthday-cake card-pf-icon-circle"></span>
+    </div>
+    <h2 class="card-pf-title text-center">
+      Cake Service
+    </h2>
+    <div class="card-pf-items text-center">
+      <div class="card-pf-item">
+        <span class="pficon pficon-screen"></span>
+        <span class="card-pf-item-text">8</span>
+      </div>
+      <div class="card-pf-item">
+        <span class="fa fa-check"></span>
+      </div>
+    </div>
+    <p class="card-pf-info text-center"><strong>Created On</strong> 2015-03-01 02:00 AM <br/> Never Expires</p>
+  </div>
+  <div class="card-pf-view-checkbox">
+    <input type="checkbox">
+  </div>
+</div>
+    </div>
+    <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
+<div class="card-pf card-pf-view card-pf-view-select card-pf-view-single-select">
+  <div class="card-pf-body">
+    <div class="card-pf-top-element">
+      <span class="fa fa-birthday-cake card-pf-icon-circle"></span>
+    </div>
+    <h2 class="card-pf-title text-center">
+      Cake Service
+    </h2>
+    <div class="card-pf-items text-center">
+      <div class="card-pf-item">
+        <span class="pficon pficon-screen"></span>
+        <span class="card-pf-item-text">8</span>
+      </div>
+      <div class="card-pf-item">
+        <span class="fa fa-check"></span>
+      </div>
+    </div>
+    <p class="card-pf-info text-center"><strong>Created On</strong> 2015-03-01 02:00 AM <br/> Never Expires</p>
+  </div>
+  <div class="card-pf-view-checkbox">
+    <input type="checkbox">
+  </div>
+</div>
+    </div>
+    <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
+<div class="card-pf card-pf-view card-pf-view-select card-pf-view-single-select">
+  <div class="card-pf-body">
+    <div class="card-pf-top-element">
+      <span class="fa fa-birthday-cake card-pf-icon-circle"></span>
+    </div>
+    <h2 class="card-pf-title text-center">
+      Cake Service
+    </h2>
+    <div class="card-pf-items text-center">
+      <div class="card-pf-item">
+        <span class="pficon pficon-screen"></span>
+        <span class="card-pf-item-text">8</span>
+      </div>
+      <div class="card-pf-item">
+        <span class="fa fa-check"></span>
+      </div>
+    </div>
+    <p class="card-pf-info text-center"><strong>Created On</strong> 2015-03-01 02:00 AM <br/> Never Expires</p>
+  </div>
+  <div class="card-pf-view-checkbox">
+    <input type="checkbox">
+  </div>
+</div>
+    </div>
+    <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
+<div class="card-pf card-pf-view card-pf-view-select card-pf-view-single-select">
+  <div class="card-pf-body">
+    <div class="card-pf-top-element">
+      <span class="fa fa-birthday-cake card-pf-icon-circle"></span>
+    </div>
+    <h2 class="card-pf-title text-center">
+      Cake Service
+    </h2>
+    <div class="card-pf-items text-center">
+      <div class="card-pf-item">
+        <span class="pficon pficon-screen"></span>
+        <span class="card-pf-item-text">8</span>
+      </div>
+      <div class="card-pf-item">
+        <span class="fa fa-check"></span>
+      </div>
+    </div>
+    <p class="card-pf-info text-center"><strong>Created On</strong> 2015-03-01 02:00 AM <br/> Never Expires</p>
+  </div>
+  <div class="card-pf-view-checkbox">
+    <input type="checkbox">
+  </div>
+</div>
+    </div>
+  </div>
+</div>
+<script>
+  $(function() {
+    // matchHeight the contents of each .card-pf and then the .card-pf itself
+    $(".row-cards-pf > [class*='col'] > .card-pf > .card-pf-body").matchHeight();
+  });
+  $(document).ready(function() {
+    // Card Single Select
+    $('.card-pf-view-single-select').click(function() {
+      if ($(this).hasClass('active'))
+      { $(this).removeClass('active'); }
+      else
+      { $('.card-pf-view-single-select').removeClass('active'); $(this).addClass('active'); }
+    });
+  });
+</script>
   </body>
 </html>
