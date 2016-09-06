@@ -1,7 +1,6 @@
 BOOTSTRAP_GEM_ROOT = Gem::Specification.find_by_name("bootstrap-sass").gem_dir
 require "#{BOOTSTRAP_GEM_ROOT}/tasks/converter/less_conversion"
 require 'rugged'
-require 'jekyll'
 
 class Converter
   include Converter::LessConversion
@@ -40,7 +39,7 @@ class Converter
 
   def convert
     checkout_upstream
-    build_tests
+    build_less
     copy_non_less
     process_stylesheets
     store_version
@@ -130,32 +129,32 @@ class Converter
     file = replace_all(file, %r{@import\s+"variables";}, "")
     file = replace_all(file, /@import "([^\.]{2})/, '@import "patternfly/\1')
 
-    file = replace_all(file, "@import \"patternfly/lib/bootstrap/bootstrap\";", fetch_bootstrap_top)
-    file = replace_all(file, "@import \"patternfly/lib/bootstrap/variables\";\n", '')
-    file = replace_all(file, "@import \"patternfly/lib/bootstrap/mixins\";\n", '')
-    file = replace_all(file, "@import \"patternfly/lib/font-awesome/variables\";\n", '')
-    file = replace_all(file, 'patternfly/lib/font-awesome/font-awesome', 'font-awesome')
+    file = replace_all(file, "@import \"patternfly/bootstrap/less/bootstrap\";", fetch_bootstrap_top)
+    file = replace_all(file, "@import \"patternfly/bootstrap/less/variables\";\n", '')
+    file = replace_all(file, "@import \"patternfly/bootstrap/less/mixins\";\n", '')
+    file = replace_all(file, "@import \"patternfly/font-awesome/less/variables\";\n", '')
+    file = replace_all(file, 'patternfly/font-awesome/less/font-awesome', 'font-awesome')
 
     bower_contrib('bootstrap-combobox/css/bootstrap-combobox.css', 'bootstrap-combobox.scss', false)
-    file = replace_all(file, 'patternfly/lib/bootstrap-combobox/combobox', 'patternfly/lib/bootstrap-combobox')
+    file = replace_all(file, 'patternfly//patternfly-bootstrap-combobox/less/combobox', 'patternfly/lib/bootstrap-combobox')
 
     bower_contrib('bootstrap-select/dist/css/bootstrap-select.css', 'bootstrap-select.scss', false)
-    file = replace_all(file, 'patternfly/lib/bootstrap-select/bootstrap-select', 'patternfly/lib/bootstrap-select')
+    file = replace_all(file, 'patternfly/bootstrap-select/less/bootstrap-select', 'patternfly/lib/bootstrap-select')
 
     bower_contrib('bootstrap-touchspin/dist/jquery.bootstrap-touchspin.css', 'bootstrap-touchspin.scss', false)
-    file = replace_all(file, 'patternfly/lib/bootstrap-touchspin/jquery.bootstrap-touchspin.css', 'patternfly/lib/bootstrap-touchspin')
+    file = replace_all(file, 'patternfly/bootstrap-touchspin/dist/jquery.bootstrap-touchspin.css', 'patternfly/lib/bootstrap-touchspin')
 
     bower_contrib('c3/c3.css', 'c3.scss', false)
-    file = replace_all(file, 'patternfly/lib/c3/c3.css', 'patternfly/lib/c3')
+    file = replace_all(file, 'patternfly/c3/c3.css', 'patternfly/lib/c3')
 
     bower_contrib('bootstrap-datepicker/dist/css/bootstrap-datepicker3.css', 'bootstrap-datepicker.scss', false)
-    file = replace_all(file, 'patternfly/lib/bootstrap-datepicker/datepicker3', 'patternfly/lib/bootstrap-datepicker')
+    file = replace_all(file, 'patternfly/bootstrap-datepicker/less/datepicker3', 'patternfly/lib/bootstrap-datepicker')
 
     bower_contrib('bootstrap-switch/src/less/bootstrap3/bootstrap-switch.less', 'bootstrap-switch.scss')
-    file = replace_all(file, 'patternfly/lib/bootstrap-switch/bootstrap-switch', 'patternfly/lib/bootstrap-switch')
+    file = replace_all(file, 'patternfly/bootstrap-switch/src/less/bootstrap3/bootstrap-switch', 'patternfly/lib/bootstrap-switch')
 
     bower_contrib('eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.css', 'bootstrap-datetimepicker.scss', false)
-    file = replace_all(file, 'patternfly/lib/eonasdan-bootstrap-datetimepicker/bootstrap-datetimepicker-build', 'patternfly/lib/bootstrap-datetimepicker')
+    file = replace_all(file, 'patternfly/eonasdan-bootstrap-datetimepicker/src/less/bootstrap-datetimepicker-build', 'patternfly/lib/bootstrap-datetimepicker')
 
     TOP + remove_comments_and_whitespace(file)
   end
@@ -171,8 +170,8 @@ class Converter
 
   def shared_mixins
     @shared_mixins ||= begin
-      mixins = retrieve_files(File.join(@source, 'less', 'lib', 'bootstrap', 'mixins'), /\.less$/)
-      mixins.unshift File.join(@source, 'less', 'mixins.less')
+      mixins = retrieve_files(File.join('bower_components', 'bootstrap', 'less', 'mixins'), /\.less$/)
+      mixins.unshift File.join(@source, 'src', 'less', 'mixins.less')
       read_mixins(mixins.map { |f| File.read(f) }.join("\n"), :nested => NESTED_MIXINS)
     end
   end
@@ -211,14 +210,11 @@ class Converter
     less_to_sass('patternfly.less', top_level_files.map { |f| File.read(f) }.join("\n"))
   end
 
-  def build_tests
-    tsrc = File.join(@source, 'tests', 'pages')
-    conf = Jekyll.configuration(
-      'config'      => File.join(tsrc, '_config.yml'),
-      'source'      => tsrc,
-      'destination' => TEST_DIR
-    )
-    Jekyll::Site.new(conf).process
+  def build_less
+    Dir.chdir(@source) do
+      system('npm install')
+      system('grunt build')
+    end
   end
 
   def copy_non_less
@@ -250,8 +246,8 @@ class Converter
     @sha = repo.last_commit.oid
 
     FileUtils.cp( # Mixins correction
-      File.join(@source, 'less', 'mixins.less'),
-      File.join(@source, 'less', 'mixin_overrides.less')
+      File.join(@source, 'src', 'less', 'mixins.less'),
+      File.join(@source, 'src', 'less', 'mixin_overrides.less')
     )
   end
 
@@ -320,16 +316,22 @@ class Converter
         :select      => /css/,
         :reject      => /styles(-additions)?(\.min)?\.css/,
         :destination => File.join(TEST_DIR, 'dist', 'css')
+      },
+      {
+        :source      => File.join(@source, 'dist', 'tests'),
+        :select      => /.*/,
+        :reject      => nil,
+        :destination => TEST_DIR
       }
     ]
   end
 
   def patternfly_less_files
-    retrieve_files(File.join(@source, 'less'), /\.less$/, /lib|patternfly/)
+    retrieve_files(File.join(@source, 'src', 'less'), /\.less$/, /lib|patternfly/)
   end
 
   def top_level_files
-    retrieve_files(File.join(@source, 'less'), /patternfly(\-additions)?\.less$/).reverse
+    retrieve_files(File.join(@source, 'src', 'less'), /patternfly(\-additions)?\.less$/).reverse
   end
 
   def store_version
