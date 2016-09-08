@@ -20,7 +20,7 @@
   "ignore": [
     "**/.*",
     "node_modules",
-    "lib",
+    "/lib",
     "tasks",
     "pkg",
     "bower_components",
