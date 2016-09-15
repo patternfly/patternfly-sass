@@ -384,7 +384,6 @@ $font-size-h5:                                                      ceil(($font-
 $font-size-large:                                                   ceil(($font-size-base * 1.1666)) !default; // ~14px
 $font-size-small:                                                   ceil(($font-size-base * .9166)) !default; // ~11px
 $input-color:                                                       $gray-dark !default;
-$input-color-placeholder:                                           #999;
 $nav-tabs-active-link-hover-color:                                  $link-color !default;
 $nav-tabs-justified-link-border-color:                              $nav-tabs-border-color !default;
 $nav-pf-vertical-badges-width:                                      ($nav-pf-vertical-width + 50px) !default;

@@ -312,16 +312,16 @@ class Converter
         :destination => File.join(@destination, 'javascripts')
       },
       {
-        :source      => File.join(@source, 'dist', 'css'),
-        :select      => /css/,
-        :reject      => /styles(-additions)?(\.min)?\.css/,
-        :destination => File.join(TEST_DIR, 'dist', 'css')
-      },
-      {
         :source      => File.join(@source, 'dist', 'tests'),
         :select      => /.*/,
         :reject      => nil,
         :destination => TEST_DIR
+      },
+      {
+        :source      => File.join(@source, 'dist', 'css'),
+        :select      => /css/,
+        :reject      => /styles(-additions)?(\.min)?\.css/,
+        :destination => File.join(TEST_DIR, 'dist', 'css')
       }
     ]
   end
