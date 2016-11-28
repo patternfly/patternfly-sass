@@ -1,6 +1,6 @@
 {
   "name": "patternfly-sass",
-  "version": "3.14.0",
+  "version": "3.15.0",
   "license": "Apache-2.0",
   "homepage": "https://www.patternfly.org",
   "authors": [
@@ -29,7 +29,6 @@
   ],
   "dependencies": {
     "bootstrap-sass": "~3.3.7",
-    "bootstrap-combobox": "~1.1.7",
     "bootstrap-datepicker": "~1.6.4",
     "bootstrap-select": "~1.10.0",
     "bootstrap-switch": "~3.3.2",
@@ -45,6 +44,7 @@
     "matchHeight": "~0.7.0",
     "eonasdan-bootstrap-datetimepicker": "~4.17.37",
     "moment": "~2.14.1",
+    "patternfly-bootstrap-combobox": "~1.1.7",
     "patternfly-bootstrap-treeview": "~2.1.0"
   }
 }

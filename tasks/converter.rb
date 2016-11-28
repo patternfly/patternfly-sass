@@ -135,8 +135,8 @@ class Converter
     file = replace_all(file, "@import \"patternfly/font-awesome/less/variables\";\n", '')
     file = replace_all(file, 'patternfly/font-awesome/less/font-awesome', 'font-awesome')
 
-    bower_contrib('bootstrap-combobox/css/bootstrap-combobox.css', 'bootstrap-combobox.scss', false)
-    file = replace_all(file, 'patternfly//patternfly-bootstrap-combobox/less/combobox', 'patternfly/lib/bootstrap-combobox')
+    bower_contrib('patternfly-bootstrap-combobox/css/bootstrap-combobox.css', 'patternfly-bootstrap-combobox.scss', false)
+    file = replace_all(file, 'patternfly//patternfly-bootstrap-combobox/less/combobox', 'patternfly/lib/patternfly-bootstrap-combobox')
 
     bower_contrib('bootstrap-select/dist/css/bootstrap-select.css', 'bootstrap-select.scss', false)
     file = replace_all(file, 'patternfly/bootstrap-select/less/bootstrap-select', 'patternfly/lib/bootstrap-select')
