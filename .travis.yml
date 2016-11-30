@@ -1,9 +1,16 @@
+sudo: false
+dist: trusty
+addons:
+  apt:
+    sources:
+    - google-chrome
+    packages:
+    - google-chrome-stable
 language: ruby
 cache:
   bundler: true
   directories:
     - bower_components
-sudo: false
 rvm:
   - 2.3.0
 before_script:
@@ -14,6 +21,8 @@ before_script:
   - "export DISPLAY=:99.0"
   - "sh -e /etc/init.d/xvfb start"
   - sleep 5 # give xvfb some time to start
+  - "wget https://chromedriver.storage.googleapis.com/2.25/chromedriver_linux64.zip"
+  - "unzip chromedriver_linux64.zip -d chromedriver"
 script:
   - bundle exec rake spec
 after_failure:
@@ -23,12 +32,15 @@ after_script:
   - sleep 2
 env:
   matrix:
+    - "BROWSER=chrome TOLERANCE=0.000001"
     - "BROWSER=firefox TOLERANCE=0.000001"
+    - "BROWSER=chrome TOLERANCE=0.000000"
     - "BROWSER=firefox TOLERANCE=0.000000"
 matrix:
   fast_finish: true
   allow_failures:
     - env: BROWSER=firefox TOLERANCE=0.000000
+    - env: BROWSER=chrome TOLERANCE=0.000000
 notifications:
   webhooks:
     urls:

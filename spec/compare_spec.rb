@@ -9,7 +9,10 @@ RSpec.describe "compare SASS with LESS screenshots" do
   TOLERANCE = ENV['TOLERANCE'].to_f || 0.00
   BROWSER = (ENV['BROWSER'] || :chrome).to_sym
 
-  before(:all) { @browser = Selenium::WebDriver.for(BROWSER) }
+  before(:all) do
+    Selenium::WebDriver::Chrome.driver_path = 'chromedriver/chromedriver' if ENV['CI'] && ENV['BROWSER'] == 'chrome'
+    @browser = Selenium::WebDriver.for(BROWSER)
+  end
 
   puts "Starting tests with TOLERANCE=#{TOLERANCE}"
   html = File.read('spec/html/index.html')
