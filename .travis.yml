@@ -41,6 +41,7 @@ matrix:
   allow_failures:
     - env: BROWSER=firefox TOLERANCE=0.000000
     - env: BROWSER=chrome TOLERANCE=0.000000
+    - env: BROWSER=chrome TOLERANCE=0.000001
 notifications:
   webhooks:
     urls:
