@@ -171,9 +171,9 @@
             }
 
             iNewStart = oSettings._iDisplayLength * (this.value - 1);
-            if (iNewStart >= oSettings.fnRecordsDisplay()) {
+            if (iNewStart >= oSettings.fnRecordsDisplay() || iNewStart < 0) {
               /* Display overrun */
-              oSettings._iDisplayStart = (Math.ceil((oSettings.fnRecordsDisplay() - 1) /
+              oSettings._iDisplayStart = (Math.ceil(oSettings.fnRecordsDisplay() /
                 oSettings._iDisplayLength) - 1) * oSettings._iDisplayLength;
               fnDraw(oSettings);
               return;
@@ -602,6 +602,7 @@
     var navElement = $('.nav-pf-vertical'),
       bodyContentElement = $('.container-pf-nav-pf-vertical'),
       toggleNavBarButton = $('.navbar-toggle'),
+      handleResize = true,
       explicitCollapse = false,
       subDesktop = false,
       hoverDelay = 500,
@@ -638,30 +639,12 @@
         });
       },
 
-      setPrimaryActiveItem = function (item) {
-        // Make the clicked on item active
-        $(document).find('.nav-pf-vertical > .list-group > .list-group-item.active').each(function (index, element) {
-          $(element).removeClass('active');
-        });
-        item.addClass('active');
-      },
+      setActiveItem = function (item) {
+        // remove all .active
+        $('.nav-pf-vertical .list-group-item.active').removeClass('active');
 
-      setSecondaryActiveItem = function (item, $primaryParent) {
-        $(document).find('.nav-pf-secondary-nav > .list-group > .list-group-item.active').each(function (index, element) {
-          $(element).removeClass('active');
-        });
-        item.addClass('active');
-
-        setPrimaryActiveItem($primaryParent);
-      },
-
-      setTertiaryActiveItem = function (item, $secondaryParent, $primaryParent) {
-        $(document).find('.nav-pf-tertiary-nav > .list-group > .list-group-item.active').each(function (index, element) {
-          $(element).removeClass('active');
-        });
-        item.addClass('active');
-
-        setSecondaryActiveItem($secondaryParent, $primaryParent);
+        // add .active to item and its parents
+        item.addClass('active').parents('.list-group-item').addClass('active');
       },
 
       updateSecondaryMenuDisplayAfterSelection = function () {
@@ -740,32 +723,42 @@
         }
       },
 
+      enterMobileState = function () {
+        if (!navElement.hasClass('hidden')) {
+          //Set the nav to being hidden
+          navElement.addClass('hidden');
+          navElement.removeClass('collapsed');
+
+          //Set the body class to the correct state
+          bodyContentElement.removeClass('collapsed-nav');
+          bodyContentElement.addClass('hidden-nav');
+
+          // Reset the collapsed states
+          updateSecondaryCollapsedState(false);
+          updateTertiaryCollapsedState(false);
+
+          explicitCollapse = false;
+        }
+      },
+
+      exitMobileState = function () {
+        // Always remove the hidden & peek class
+        navElement.removeClass('hidden show-mobile-nav');
+
+        // Set the body class back to the default
+        bodyContentElement.removeClass('hidden-nav');
+      },
+
       checkNavState = function () {
         var width = $(window).width(), makeSecondaryVisible;
-
+        if (!handleResize) {
+          return;
+        }
         // Check to see if we need to enter/exit the mobile state
-        if (width < $.pfBreakpoints.tablet) {
-          if (!navElement.hasClass('hidden')) {
-            //Set the nav to being hidden
-            navElement.addClass('hidden');
-            navElement.removeClass('collapsed');
-
-            //Set the body class to the correct state
-            bodyContentElement.removeClass('collapsed-nav');
-            bodyContentElement.addClass('hidden-nav');
-
-            // Reset the collapsed states
-            updateSecondaryCollapsedState(false);
-            updateTertiaryCollapsedState(false);
-
-            explicitCollapse = false;
-          }
+        if (width < $.pfBreakpoints.tablet && !explicitCollapse) {
+          enterMobileState();
         } else if (navElement.hasClass('hidden')) {
-          // Always remove the hidden & peek class
-          navElement.removeClass('hidden show-mobile-nav');
-
-          // Set the body class back to the default
-          bodyContentElement.removeClass('hidden-nav');
+          exitMobileState();
         }
 
         // Check to see if we need to enter/exit the sub desktop state
@@ -861,43 +854,45 @@
       },
 
       bindMenuItemsBehavior = function (handleSelection) {
-        $(document).find('.nav-pf-vertical > .list-group > .list-group-item').each(function (index, primaryItem) {
-          var $primaryItem = $(primaryItem);
+        $(document).find('.nav-pf-vertical .list-group-item').each(function (index, item) {
+          var onClickFn,
+            $item = $(item),
+            $nav = $item.closest('[class*="nav-pf-"]');
 
-          // Set main nav active item on click or show secondary nav if it has a secondary nav bar and we are in the mobile state
-          $primaryItem.on('click.pf.secondarynav.data-api', function (event) {
-            var $this = $(this), $secondaryItem, tertiaryItem;
+          if ($nav.hasClass('nav-pf-vertical')) {
+            // Set main nav active item on click or show secondary nav if it has a secondary nav bar and we are in the mobile state
+            onClickFn = function (event) {
+              var $this = $(this), $secondaryItem, $tertiaryItem, $activeItem;
 
-            if (!$this.hasClass('secondary-nav-item-pf')) {
-              hideSecondaryMenu();
-              if (inMobileState()) {
-                updateMobileMenu();
-                navElement.removeClass('show-mobile-nav');
-              }
-              if (handleSelection) {
-                setPrimaryActiveItem($this);
-                // Don't process the click on the item
+              if (!$this.hasClass('secondary-nav-item-pf')) {
+                hideSecondaryMenu();
+                if (inMobileState()) {
+                  updateMobileMenu();
+                  navElement.removeClass('show-mobile-nav');
+                }
+                if (handleSelection) {
+                  setActiveItem($this);
+                  // Don't process the click on the item
+                  event.stopImmediatePropagation();
+                }
+              } else if (inMobileState()) {
+                updateMobileMenu($this);
+              } else if (handleSelection) {
+                $activeItem = $secondaryItem = $item.find('.nav-pf-secondary-nav > .list-group > .list-group-item').eq(0);
+
+                if ($secondaryItem.hasClass('tertiary-nav-item-pf')) {
+                  $activeItem = $secondaryItem.find('.nav-pf-tertiary-nav > .list-group > .list-group-item').eq(0);
+                }
+
+                setActiveItem($activeItem);
                 event.stopImmediatePropagation();
               }
-            } else if (inMobileState()) {
-              updateMobileMenu($this);
-            } else if (handleSelection) {
-              $secondaryItem = $($primaryItem.find('.nav-pf-secondary-nav > .list-group > .list-group-item')[0]);
-              if ($secondaryItem.hasClass('tertiary-nav-item-pf')) {
-                tertiaryItem = $secondaryItem.find('.nav-pf-tertiary-nav > .list-group > .list-group-item')[0];
-                setTertiaryActiveItem($(tertiaryItem), $secondaryItem, $primaryItem);
-              } else {
-                setSecondaryActiveItem($secondaryItem, $this);
-              }
-              event.stopImmediatePropagation();
-            }
-          });
+            };
 
-          $primaryItem.find('.nav-pf-secondary-nav > .list-group > .list-group-item').each(function (index, secondaryItem) {
-            var $secondaryItem = $(secondaryItem);
+          } else if ($nav.hasClass('nav-pf-secondary-nav')) {
             // Set secondary nav active item on click or show tertiary nav if it has a tertiary nav bar and we are in the mobile state
-            $secondaryItem.on('click.pf.secondarynav.data-api', function (event) {
-              var $this = $(this), tertiaryItem;
+            onClickFn = function (event) {
+              var $this = $(this), $tertiaryItem, $primaryItem;
               if (!$this.hasClass('tertiary-nav-item-pf')) {
                 if (inMobileState()) {
                   updateMobileMenu();
@@ -905,37 +900,39 @@
                 }
                 updateSecondaryMenuDisplayAfterSelection();
                 if (handleSelection) {
-                  setSecondaryActiveItem($secondaryItem, $primaryItem);
+                  setActiveItem($item);
                   // Don't process the click on the item
                   event.stopImmediatePropagation();
                 }
               } else if (inMobileState()) {
+                $primaryItem = $item.parents('.list-group-item');
                 updateMobileMenu($this, $primaryItem);
                 event.stopImmediatePropagation();
               } else if (handleSelection) {
-                tertiaryItem = $secondaryItem.find('.nav-pf-tertiary-nav > .list-group > .list-group-item')[0];
-                setTertiaryActiveItem($(tertiaryItem), $secondaryItem, $primaryItem);
+                $tertiaryItem = $item.find('.nav-pf-tertiary-nav > .list-group > .list-group-item').eq(0);
+                setActiveItem($tertiaryItem);
                 event.stopImmediatePropagation();
               }
-            });
+            };
 
-            $secondaryItem.find('.nav-pf-tertiary-nav > .list-group > .list-group-item').each(function (index, tertiaryItem) {
-              var $tertiaryItem = $(tertiaryItem);
-              // Set tertiary nav active item on click
-              $tertiaryItem.on('click.pf.secondarynav.data-api', function (event) {
-                if (inMobileState()) {
-                  updateMobileMenu();
-                  navElement.removeClass('show-mobile-nav');
-                }
-                updateSecondaryMenuDisplayAfterSelection();
-                if (handleSelection) {
-                  setTertiaryActiveItem($tertiaryItem, $secondaryItem, $primaryItem);
-                  // Don't process the click on the item
-                  event.stopImmediatePropagation();
-                }
-              });
-            });
-          });
+          } else if ($nav.hasClass('nav-pf-tertiary-nav')) {
+            // Set tertiary nav active item on click
+            onClickFn = function (event) {
+              if (inMobileState()) {
+                updateMobileMenu();
+                navElement.removeClass('show-mobile-nav');
+              }
+              updateSecondaryMenuDisplayAfterSelection();
+              if (handleSelection) {
+                setActiveItem($item);
+                // Don't process the click on the item
+                event.stopImmediatePropagation();
+              }
+            };
+          }
+
+          // register event handler
+          $item.on('click.pf.secondarynav.data-api', onClickFn);
         });
 
         $(document).find('.secondary-nav-item-pf').each(function (index, secondaryItem) {
@@ -1117,15 +1114,31 @@
         navElement.removeClass('hide-nav-pf');
         bodyContentElement.removeClass('hide-nav-pf');
         forceResize(250);
+      },
+      self = {
+        hideMenu: function () {
+          handleResize = false;
+          enterMobileState();
+        },
+        showMenu: function () {
+          handleResize = true;
+          exitMobileState();
+        },
+        isVisible: function () {
+          return handleResize;
+        }
       };
 
-    //Listen for the window resize event and collapse/hide as needed
-    $(window).on('resize', function () {
-      checkNavState();
-      enableTransitions();
-    });
+    if (!$.fn.setupVerticalNavigation.self) {
+      $.fn.setupVerticalNavigation.self = self;
+      //Listen for the window resize event and collapse/hide as needed
+      $(window).on('resize', function () {
+        checkNavState();
+        enableTransitions();
+      });
 
-    init(handleItemSelections);
+      init(handleItemSelections);
+    }
+    return $.fn.setupVerticalNavigation.self;
   };
 }(jQuery));
-
