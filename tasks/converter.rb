@@ -201,7 +201,7 @@ class Converter
       end
     end
 
-    File.open(File.join(save_to, '..', '_patternfly.scss'), 'w') do |f|
+    File.open(File.join(save_to, '..', 'patternfly.scss'), 'w') do |f|
       f.write(generate_top_level)
     end
   end

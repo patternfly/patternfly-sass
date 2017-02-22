@@ -70,8 +70,8 @@ patternfly-sass is no longer compatible with Rails 3.
 By default all of PatternFly is imported.
 
 You can also import components explicitly. To start with a full list of modules copy
-[`_patternfly.scss`](assets/stylesheets/_patternfly.scss) file into your assets as `_patternfly-custom.scss`.
-Then comment out components you do not want from `_patternfly-custom`.
+[`patternfly.scss`](assets/stylesheets/patternfly.scss) file into your assets as `patternfly-custom.scss`.
+Then comment out components you do not want from `patternfly-custom`.
 In the application Sass file, replace `@import 'patternfly'` with:
 
 ```scss
