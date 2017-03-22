@@ -88,13 +88,10 @@
 
 // Placeholder text
 @mixin placeholder($color: $input-color-placeholder) {
-  &::placeholder               { color: $color; }
-  &:-ms-input-placeholder      { color: $color; } // Internet Explorer 10+
-  &::-webkit-input-placeholder { color: $color; } // Safari and Chrome
-  &::-moz-placeholder {
-    color: $color;
-    opacity: 1; // Override Firefox's unusual default opacity; see https://github.com/twbs/bootstrap/pull/11526
-  }
+  &:-moz-placeholder            { color: $color; font-style: italic; } // Firefox 4-18
+  &::-moz-placeholder           { color: $color; font-style: italic; opacity: 1; } // Firefox 19+
+  &:-ms-input-placeholder       { color: $color; font-style: italic; } // Internet Explorer 10+
+  &::-webkit-input-placeholder  { color: $color; font-style: italic; } // Safari and Chrome
 }
 
 // PatternFly-specific
