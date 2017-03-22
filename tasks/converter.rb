@@ -226,7 +226,7 @@ class Converter
     end
   end
 
-  def retrieve_files(folder, select=/.*/, reject=nil)
+  def retrieve_files(folder, select=%r{.*}, reject=nil)
     Dir["#{folder}/**/*"].reject { |f| File.directory?(f) || f !~ select || f =~ reject }
   end
 
@@ -270,8 +270,11 @@ class Converter
   def less_to_sass(file, input)
     transforms = TRANSFORMATIONS.dup
     case file
-    when 'fonts.less', 'icons.less'
+    when 'fonts.less'
       transforms << :fix_font_paths
+    when 'icons.less'
+      transforms << :fix_font_paths
+      transforms.delete(:replace_spin)
     when 'mixins.less',
       transforms << :flatten_mixins
       transforms << :fix_dropdown_toggle
