@@ -1,6 +1,3 @@
-require 'bootstrap-sass'
-require 'font-awesome-sass'
-
 module Patternfly
   module Rails
     class Engine < ::Rails::Engine

@@ -74,6 +74,9 @@ module Patternfly
     end
 
     def register_rails_engine
+      require 'bootstrap-sass'
+      require 'font-awesome-sass'
+
       require 'patternfly-sass/engine'
     end
 
