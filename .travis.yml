@@ -24,7 +24,7 @@ before_script:
   - "wget https://chromedriver.storage.googleapis.com/2.25/chromedriver_linux64.zip"
   - "unzip chromedriver_linux64.zip -d chromedriver"
 script:
-  - bundle exec rake spec
+  - bundle exec rspec
 after_failure:
   - bundle exec rake upload
 after_script:
