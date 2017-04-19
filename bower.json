@@ -14,7 +14,7 @@
   },
   "moduleType": "globals",
   "main": [
-    "assets/stylesheets/_patternfly.scss",
+    "assets/stylesheets/patternfly.scss",
     "assets/javascripts/patternfly.js"
   ],
   "ignore": [

@@ -31,7 +31,7 @@ task :compile do
 
   %w(patternfly.css patternfly.min.css).each do |out|
     style = (out == "patternfly.min.css") ? :compressed : :nested
-    src_path = File.join(path, '_patternfly.scss')
+    src_path = File.join(path, 'patternfly.scss')
     dst_path = File.join('tmp', out)
     engine = Sass::Engine.for_file(src_path, :syntax => :scss, :load_paths => [path], :style => style)
     css = engine.render
