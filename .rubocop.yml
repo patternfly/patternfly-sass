@@ -48,9 +48,7 @@ StringLiterals:
   # While this gives a marginal parse time speedup, it makes working with
   # strings annoying.
   Enabled: false
-TrailingComma:
+TrailingCommaInLiteral:
   Enabled: true
-UnneededPercentX:
-  Enabled: false
 WhileUntilModifier:
   Enabled: false
