@@ -1,6 +1,7 @@
 BOOTSTRAP_GEM_ROOT = Gem::Specification.find_by_name("bootstrap-sass").gem_dir
 require "#{BOOTSTRAP_GEM_ROOT}/tasks/converter/less_conversion"
 require 'rugged'
+require 'strscan'
 
 class Converter
   include Converter::LessConversion
