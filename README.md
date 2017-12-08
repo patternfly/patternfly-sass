@@ -1,5 +1,8 @@
 #patternfly-sass
 
+### The project is no longer maintained as the original [patternfly](https://github.com/patternfly/patternfly) now natively supports sass!
+#### For compatibility the rubygem's name is not changing and it will be still released as [`patternfly-sass`](https://rubygems.org/gems/patternfly-sass).
+
 [![Gem Version](https://badge.fury.io/rb/patternfly-sass.svg)](http://badge.fury.io/rb/patternfly-sass)
 [![Dependency Status](https://gemnasium.com/patternfly/patternfly-sass.svg)](https://gemnasium.com/patternfly/patternfly-sass)
 [![Build Status](https://travis-ci.org/patternfly/patternfly-sass.svg)](https://travis-ci.org/patternfly/patternfly-sass)
